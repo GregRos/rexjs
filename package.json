@@ -1,0 +1,33 @@
+{
+  "name": "rexjs",
+  "version": "0.1.0",
+  "description": "A library for smart variables and change notification.",
+  "main": "dist/index.js",
+  "dependencies": {
+    "core-js": "^2.4.1",
+    "lodash": "^4.16.2"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-typescript": "^3.0.2",
+    "jasmine": "^2.5.2",
+    "jasmine-spec-reporter": "^2.7.0",
+    "merge2": "^1.0.2",
+    "typescript": "^2.0.3"
+  },
+  "scripts": {
+    "test": "node %NODE_DEBUG_OPTION% ./jrunner.js"
+  },
+  "keywords": [
+    "rexjs",
+    "reactive",
+    "binding",
+    "change",
+    "notification",
+    "event",
+    "events"
+  ],
+  "author": "Greg Ros",
+  "license": "MIT"
+}

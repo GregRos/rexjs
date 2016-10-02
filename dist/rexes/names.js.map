@@ -1,0 +1,1 @@
+{"version":3,"sources":["rexes/names.ts"],"names":[],"mappings":"AAAA;;GAEG;;AAEU,WAAG,GAAG,KAAK,CAAC;AACZ,eAAO,GAAG,SAAS,CAAC;AACpB,cAAM,GAAG,QAAQ,CAAC","file":"rexes/names.js","sourcesContent":["/**\r\n * Created by Greg on 01/10/2016.\r\n */\r\n\r\nexport const Var = \"Var\";\r\nexport const Convert = \"Convert\";\r\nexport const Member = \"Member\";"],"sourceRoot":"/src"}

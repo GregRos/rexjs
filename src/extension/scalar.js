@@ -6,7 +6,7 @@ var _ = require('lodash');
 var scalar_1 = require('../rexes/scalar');
 var convert_1 = require("../rexes/scalar/convert");
 var RexScalarExtensions = {
-    convert: function (arg1, arg2) {
+    convert_: function (arg1, arg2) {
         if (_.isFunction(arg1) || _.isFunction(arg2)) {
             return new convert_1.RexConvert(this, { to: arg1, from: arg2 });
         }
@@ -17,23 +17,23 @@ var RexScalarExtensions = {
             return new convert_1.RexConvert(this, arg1);
         }
     },
-    rectify: function (to, rectify) {
+    rectify_: function (to, rectify) {
         var _this = this;
-        return this.convert(to, function (to) {
+        return this.convert_(to, function (to) {
             var clone = _.cloneDeep(_this.value);
             rectify(to, clone);
             return clone;
+        });
+    },
+    member_: function (memberName) {
+        return this.rectify_(function (from) { return from[memberName]; }, function (to, from) {
+            from[memberName] = to;
         });
     },
     mutate: function (mutation) {
         var copy = _.cloneDeep(this.value);
         mutation(copy);
         this.value = copy;
-    },
-    member: function (memberName) {
-        return this.rectify(function (from) { return from[memberName]; }, function (to, from) {
-            from[memberName] = to;
-        });
     },
     reduce: function (reducer) {
         this.value = reducer(this.value);

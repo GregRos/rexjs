@@ -4,9 +4,9 @@
 import { RexScalar } from './';
 import { IRexInfo } from "../definitions";
 export declare class RexVar<T> extends RexScalar<T> {
-    canRead: boolean;
-    canWrite: boolean;
-    _value: T;
+    private canRead;
+    private canWrite;
+    private _value;
     constructor(initial: T, canRead?: boolean, canWrite?: boolean);
     info: IRexInfo;
     value: T;

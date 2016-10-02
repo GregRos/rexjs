@@ -2,23 +2,43 @@
  * Created by Greg on 01/10/2016.
  */
 import _ = require('lodash');
-import {ARexEvent, DisposalToken} from './interfaces';
-export class RexEvent<T> extends ARexEvent<T> {
+import {DisposalToken} from './interfaces';
+/**
+ * An event primitive used in the rexjs library. Allows the ability to subscribe to notifications.
+ *
+ */
+export class RexEvent<TParam> {
 
+	/**
+	 * Constructs a new instance of the @RexEvent.
+	 * @constructor
+	 * @param _name A human-readable name for the event. Optional.
+	 */
 	constructor(private _name : string = "event") {
-		super();
+
 	}
 
+	/**
+	 * Returns the human-readable name for the event.
+	 * @returns {string}
+	 */
 	get name() {
 		return this._name;
 	}
 
 	private _invocationList = [];
 
-	on<S extends T>(handler : ((arg : T) => void) | RexEvent<S>) : DisposalToken {
+	/**
+	 * Attaches a handler to this event or subscribes to it. When the event will fire it will also fire the handler.
+	 * If the handler is a function, it's called, and if it's an event, it's fired.
+	 * @param handler The handler, which can be another event or a function.
+	 * @returns {DisposalToken} A token that supports a close() method, upon which this subscription is cancelled.
+	 */
+	fires<S extends TParam>(handler : ((arg : TParam) => void) | RexEvent<S>) : DisposalToken {
 		if (handler instanceof RexEvent) {
-			this._invocationList.push(handler.invoke.bind(handler));
-			return new DisposalToken(() => _.remove(this._invocationList, x => x === handler.invoke));
+			let myBound = handler.fire.bind(handler);
+			this._invocationList.push(myBound);
+			return new DisposalToken(() => _.remove(this._invocationList, x => x === myBound));
 		} else if (_.isFunction(handler)) {
 			this._invocationList.push(handler);
 			return new DisposalToken(() => _.remove(this._invocationList, x => x === handler));
@@ -27,10 +47,17 @@ export class RexEvent<T> extends ARexEvent<T> {
 		}
 	}
 
-	invoke(arg : T) {
+	/**
+	 * Fires the event. This method's visibility is not restricted, but it should be used carefully.
+	 * @param arg The argument with which the event is raised.
+	 */
+	fire(arg : TParam) {
 		this._invocationList.forEach(f => f(arg));
 	}
 
+	/**
+	 * Clears the event's subscription list. Use this method carefully.
+	 */
 	clear() {
 		this._invocationList = [];
 	}

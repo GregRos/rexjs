@@ -21,7 +21,7 @@ var Rex = (function () {
     });
     Rex.prototype.close = function () {
         this.changed.clear();
-        this.closing.invoke(undefined);
+        this.closing.fire(undefined);
         this.closing.clear();
         this._isClosed = true;
     };

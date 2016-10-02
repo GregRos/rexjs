@@ -17,6 +17,13 @@ describe("disposal token", () => {
 		expect(tally).toBe("a");
 	});
 
+	it("disposes twice, 2nd time is harmless", () => {
+		let token = new DisposalToken(() => tally += "a");
+		token.close();
+		token.close();
+		expect(tally).toBe("a");
+	})
+
 	it("merges", () => {
 		let tokens : DisposalToken[] = [] ;
 

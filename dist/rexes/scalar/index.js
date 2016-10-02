@@ -10,6 +10,14 @@ var RexScalar = (function (_super) {
     function RexScalar() {
         _super.apply(this, arguments);
     }
+    RexScalar.prototype.notifyChange = function (prevValue) {
+        this.changed.fire({
+            get value() {
+                return this.value;
+            },
+            oldValue: prevValue
+        });
+    };
     return RexScalar;
 }(base_1.Rex));
 exports.RexScalar = RexScalar;

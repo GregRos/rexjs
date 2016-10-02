@@ -1,7 +1,6 @@
 "use strict";
 var events_1 = require('./events');
 exports.RexEvent = events_1.RexEvent;
-exports.ARexEvent = events_1.ARexEvent;
 exports.DisposalToken = events_1.DisposalToken;
 var rexes_1 = require('./rexes');
 exports.RexScalar = rexes_1.RexScalar;

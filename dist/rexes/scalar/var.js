@@ -27,17 +27,19 @@ var RexVar = (function (_super) {
     }
     Object.defineProperty(RexVar.prototype, "value", {
         get: function () {
+            this.makeSureNotClosed();
             if (!this.canRead) {
                 throw errors_1.Errors.cannotRead(this.meta.name);
             }
             return this._value;
         },
         set: function (val) {
+            this.makeSureNotClosed();
             if (!this.canWrite) {
                 throw errors_1.Errors.cannotWrite(this.meta.name);
             }
             this._value = val;
-            this.changed.invoke(null);
+            this.changed.fire(null);
         },
         enumerable: true,
         configurable: true

@@ -29,13 +29,13 @@ let baseTests = (ctor : <T>(init : T) => RexScalar<T>) => {
 		});
 
 		it("notifies change", () => {
-			Var.changed.on(x => tally += "a");
+			Var.changed.fires(x => tally += "a");
 			Var.value = 1;
 			expect(tally).toBe("a");
 		});
 
 		it("notifies close", () => {
-			Var.closing.on(x => tally += "closing");
+			Var.closing.fires(x => tally += "closing");
 			Var.close();
 			expect(tally).toBe("closing");
 		});
@@ -44,7 +44,7 @@ let baseTests = (ctor : <T>(init : T) => RexScalar<T>) => {
 			beforeEach(() => Var.close());
 			it("is closed", () =>
 				expect(Var.isClosed).toBe(true));
-
+			it("can close again", () => Var.close());
 			it("throws on read", () => throwsClosed(() => Var.value));
 			it("throws on write", () => throwsClosed(() => Var.value = 1));
 			it("can access passive props", () => {
@@ -61,7 +61,7 @@ let baseTests = (ctor : <T>(init : T) => RexScalar<T>) => {
 			});
 
 			it("mutate", () => {
-				let cToken = oVar.changed.on(x => tally += "a");
+				let cToken = oVar.changed.fires(x => tally += "a");
 				let original = oVar.value;
 				oVar.mutate(o => o.a = 2);
 				expect(tally).toBe("a");
@@ -85,19 +85,19 @@ describe("scalars", () => {
 	});
 
 	describe("convert", () => {
-		baseTests(x => Rexs.var_(x).convert(x => x, x => x));
+		baseTests(x => Rexs.var_(x).convert_(x => x, x => x));
 		let link1 = Rexs.var_(1);
-		let link2 = link1.convert(x => x * 2, x => x / 2);
+		let link2 = link1.convert_(x => x * 2, x => x / 2);
 		let tally = "";
 		beforeEach(() => {
 			link1 = Rexs.var_(1);
-			link2 = link1.convert(x => x * 2, x => x / 2);
+			link2 = link1.convert_(x => x * 2, x => x / 2);
 			tally = "";
 		});
 
 		describe("consistency tests", () => {
 			it("notifies change in link1", () => {
-				link2.changed.on(x => {
+				link2.changed.fires(x => {
 					tally += "a";
 				});
 				link1.value = 2;
@@ -106,7 +106,7 @@ describe("scalars", () => {
 			});
 
 			it("sends change back to link1", () => {
-				link1.changed.on(x => {
+				link1.changed.fires(x => {
 					tally += "a";
 				});
 				link2.value = 4;
@@ -115,7 +115,7 @@ describe("scalars", () => {
 			});
 
 			it("closes when link1 is closed", () => {
-				link2.closing.on(() => tally += "a");
+				link2.closing.fires(() => tally += "a");
 				link1.close();
 				expect(link2.isClosed).toBe(true);
 				expect(tally).toBe("a");
@@ -134,9 +134,9 @@ describe("scalars", () => {
 			});
 
 			describe("3 links", () => {
-				let link3 = link2.convert(x => x * 2, x => x / 2);
+				let link3 = link2.convert_(x => x * 2, x => x / 2);
 				beforeEach(() => {
-					link3 = link2.convert(x => x * 2, x => x / 2);
+					link3 = link2.convert_(x => x * 2, x => x / 2);
 				});
 
 				it("update propogates", () => {
@@ -152,6 +152,8 @@ describe("scalars", () => {
 					link2.close();
 					expect(link1.isClosed).toBe(false);
 					expect(link3.isClosed).toBe(true);
+					link1.value = 5;
+					expect(link1.value).toBe(5);
 				});
 			})
 		});

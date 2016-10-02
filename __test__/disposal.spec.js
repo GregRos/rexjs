@@ -15,6 +15,12 @@ describe("disposal token", function () {
         token.close();
         expect(tally).toBe("a");
     });
+    it("disposes twice, 2nd time is harmless", function () {
+        var token = new src_1.DisposalToken(function () { return tally += "a"; });
+        token.close();
+        token.close();
+        expect(tally).toBe("a");
+    });
     it("merges", function () {
         var tokens = [];
         var _loop_1 = function(i) {

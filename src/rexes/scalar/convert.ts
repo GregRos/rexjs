@@ -25,9 +25,9 @@ export class RexConvert<TFrom, TTo> extends RexScalar<TTo> {
 	constructor(private parent : RexScalar<TFrom>, private conversion : Conversion<TFrom, TTo>) {
 		super();
 		this.depends.source = parent;
-		this._subToken = parent.changed.on(() => this.changed.invoke(undefined));
-		let parentClose = parent.closing.on(() => this.close());
-		let selfChange =this.changed.on(() => this._last = undefined);
+		this._subToken = parent.changed.fires(() => this.changed.fire(undefined));
+		let parentClose = parent.closing.fires(() => this.close());
+		let selfChange = this.changed.fires(() => this._last = undefined);
 		this._subToken = this._subToken.and(parentClose, selfChange)
 	}
 

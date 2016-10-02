@@ -34,7 +34,7 @@ export class RexVar<T> extends RexScalar<T> {
 			throw Errors.cannotWrite(this.meta.name);
 		}
 		this._value = val;
-		this.changed.invoke(null);
+		this.changed.fire(null);
 	}
 }
 

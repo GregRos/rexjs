@@ -39,7 +39,7 @@ var RexVar = (function (_super) {
                 throw errors_1.Errors.cannotWrite(this.meta.name);
             }
             this._value = val;
-            this.changed.invoke(null);
+            this.changed.fire(null);
         },
         enumerable: true,
         configurable: true

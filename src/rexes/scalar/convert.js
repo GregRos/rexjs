@@ -20,9 +20,9 @@ var RexConvert = (function (_super) {
             functional: true
         };
         this.depends.source = parent;
-        this._subToken = parent.changed.on(function () { return _this.changed.invoke(undefined); });
-        var parentClose = parent.closing.on(function () { return _this.close(); });
-        var selfChange = this.changed.on(function () { return _this._last = undefined; });
+        this._subToken = parent.changed.fires(function () { return _this.changed.fire(undefined); });
+        var parentClose = parent.closing.fires(function () { return _this.close(); });
+        var selfChange = this.changed.fires(function () { return _this._last = undefined; });
         this._subToken = this._subToken.and(parentClose, selfChange);
     }
     Object.defineProperty(RexConvert.prototype, "value", {

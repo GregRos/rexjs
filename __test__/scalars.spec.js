@@ -24,12 +24,12 @@ var baseTests = function (ctor) {
             expect(Var.value).toBe(1);
         });
         it("notifies change", function () {
-            Var.changed.on(function (x) { return tally += "a"; });
+            Var.changed.fires(function (x) { return tally += "a"; });
             Var.value = 1;
             expect(tally).toBe("a");
         });
         it("notifies close", function () {
-            Var.closing.on(function (x) { return tally += "closing"; });
+            Var.closing.fires(function (x) { return tally += "closing"; });
             Var.close();
             expect(tally).toBe("closing");
         });
@@ -38,6 +38,7 @@ var baseTests = function (ctor) {
             it("is closed", function () {
                 return expect(Var.isClosed).toBe(true);
             });
+            it("can close again", function () { return Var.close(); });
             it("throws on read", function () { return throwsClosed(function () { return Var.value; }); });
             it("throws on write", function () { return throwsClosed(function () { return Var.value = 1; }); });
             it("can access passive props", function () {
@@ -52,7 +53,7 @@ var baseTests = function (ctor) {
                 oVar = ctor({ a: 1 });
             });
             it("mutate", function () {
-                var cToken = oVar.changed.on(function (x) { return tally += "a"; });
+                var cToken = oVar.changed.fires(function (x) { return tally += "a"; });
                 var original = oVar.value;
                 oVar.mutate(function (o) { return o.a = 2; });
                 expect(tally).toBe("a");
@@ -75,18 +76,18 @@ describe("scalars", function () {
         baseTests(src_1.Rexs.var_);
     });
     describe("convert", function () {
-        baseTests(function (x) { return src_1.Rexs.var_(x).convert(function (x) { return x; }, function (x) { return x; }); });
+        baseTests(function (x) { return src_1.Rexs.var_(x).convert_(function (x) { return x; }, function (x) { return x; }); });
         var link1 = src_1.Rexs.var_(1);
-        var link2 = link1.convert(function (x) { return x * 2; }, function (x) { return x / 2; });
+        var link2 = link1.convert_(function (x) { return x * 2; }, function (x) { return x / 2; });
         var tally = "";
         beforeEach(function () {
             link1 = src_1.Rexs.var_(1);
-            link2 = link1.convert(function (x) { return x * 2; }, function (x) { return x / 2; });
+            link2 = link1.convert_(function (x) { return x * 2; }, function (x) { return x / 2; });
             tally = "";
         });
         describe("consistency tests", function () {
             it("notifies change in link1", function () {
-                link2.changed.on(function (x) {
+                link2.changed.fires(function (x) {
                     tally += "a";
                 });
                 link1.value = 2;
@@ -94,7 +95,7 @@ describe("scalars", function () {
                 expect(tally).toBe("a");
             });
             it("sends change back to link1", function () {
-                link1.changed.on(function (x) {
+                link1.changed.fires(function (x) {
                     tally += "a";
                 });
                 link2.value = 4;
@@ -102,7 +103,7 @@ describe("scalars", function () {
                 expect(link1.value).toBe(2);
             });
             it("closes when link1 is closed", function () {
-                link2.closing.on(function () { return tally += "a"; });
+                link2.closing.fires(function () { return tally += "a"; });
                 link1.close();
                 expect(link2.isClosed).toBe(true);
                 expect(tally).toBe("a");
@@ -118,9 +119,9 @@ describe("scalars", function () {
                 expect(link2.depends.source).toBe(link1);
             });
             describe("3 links", function () {
-                var link3 = link2.convert(function (x) { return x * 2; }, function (x) { return x / 2; });
+                var link3 = link2.convert_(function (x) { return x * 2; }, function (x) { return x / 2; });
                 beforeEach(function () {
-                    link3 = link2.convert(function (x) { return x * 2; }, function (x) { return x / 2; });
+                    link3 = link2.convert_(function (x) { return x * 2; }, function (x) { return x / 2; });
                 });
                 it("update propogates", function () {
                     link3.value = 8;
@@ -134,6 +135,8 @@ describe("scalars", function () {
                     link2.close();
                     expect(link1.isClosed).toBe(false);
                     expect(link3.isClosed).toBe(true);
+                    link1.value = 5;
+                    expect(link1.value).toBe(5);
                 });
             });
         });

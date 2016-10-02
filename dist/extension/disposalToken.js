@@ -5,6 +5,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var index_1 = require("../index");
+var _ = require("lodash");
 var DisposalTokenList = (function (_super) {
     __extends(DisposalTokenList, _super);
     function DisposalTokenList(list) {
@@ -14,23 +15,6 @@ var DisposalTokenList = (function (_super) {
         });
         this._disposalList = list;
     }
-    DisposalTokenList.prototype.and = function () {
-        var otherTokens = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            otherTokens[_i - 0] = arguments[_i];
-        }
-        var newList = this._disposalList.slice(0);
-        for (var _a = 0, otherTokens_1 = otherTokens; _a < otherTokens_1.length; _a++) {
-            var tok = otherTokens_1[_a];
-            if (tok instanceof DisposalTokenList) {
-                newList.push.apply(newList, tok._disposalList);
-            }
-            else {
-                newList.push(tok);
-            }
-        }
-        return new DisposalTokenList(newList);
-    };
     DisposalTokenList.prototype.close = function () {
         _super.prototype.close.call(this);
         this._disposalList = [];
@@ -43,8 +27,9 @@ var DisposableTokenExtensions = {
         for (var _i = 0; _i < arguments.length; _i++) {
             otherTokens[_i - 0] = arguments[_i];
         }
-        otherTokens.unshift(this);
-        return new DisposalTokenList(otherTokens);
+        var arr = [this].concat(otherTokens).map(function (x) { return x instanceof DisposalTokenList ? x._disposalList : [x]; });
+        var flat = _.flatten(arr);
+        return new DisposalTokenList(flat);
     }
 };
 Object.assign(index_1.DisposalToken.prototype, DisposableTokenExtensions);

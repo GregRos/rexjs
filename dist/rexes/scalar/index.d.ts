@@ -4,8 +4,13 @@
 export interface IScalarChangeInfo {
 }
 import { Rex } from "../base";
-export declare abstract class RexScalar<T> extends Rex<IScalarChangeInfo> {
+export interface ScalarChange<T> {
     value: T;
+    oldValue?: T;
+}
+export declare abstract class RexScalar<T> extends Rex<ScalarChange<T>> {
+    value: T;
+    private notifyChange(prevValue);
 }
 import { RexConvert } from './convert';
 import { RexVar } from './var';

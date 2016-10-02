@@ -12,6 +12,7 @@ var ClosedError = (function (_super) {
     function ClosedError(name) {
         if (name === void 0) { name = ""; }
         _super.call(this, "The operation failed because the object '" + name + "' was closed.");
+        this.name = "ClosedError";
     }
     return ClosedError;
 }(Error));
@@ -22,6 +23,7 @@ var AccessError = (function (_super) {
         if (name === void 0) { name = ""; }
         if (access === void 0) { access = "unknown"; }
         _super.call(this, "The operation failed because the object '" + name + "' does not support access of type '" + access + "'.");
+        this.name = "AccessError";
     }
     return AccessError;
 }(Error));

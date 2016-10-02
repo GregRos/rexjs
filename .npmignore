@@ -48,3 +48,4 @@ tsconfig.json
 gulpfile.js
 staging-area
 
+/jrunner.ts

@@ -2,11 +2,14 @@
  * Created by Greg on 01/10/2016.
  */
 import _ =require('lodash');
-import {RexScalar} from '../rexes/scalar'
+import {RexScalar, ScalarChange} from '../rexes/scalar'
 import {Conversion, RexConvert} from "../rexes/scalar/convert";
+import {RexNames} from "../rexes/names";
+import {RexEvent} from "../events/implementation";
+import {RexNotify} from "../rexes/scalar/notify";
 
 declare module '../rexes/scalar' {
-	interface RexScalar<T> {
+	export interface RexScalar<T> {
 		/**
 		 * Applies a forward and back conversion to this Rex, returning a Convert rex.
 		 * @param conversion The conversion object.
@@ -37,6 +40,16 @@ declare module '../rexes/scalar' {
 		member_<TTo>(name : string)  : RexScalar<TTo>;
 
 		/**
+		 *
+		 * @param silencer
+		 */
+		silence_(silencer : (change : ScalarChange<T>) => boolean) : RexScalar<T>;
+
+		notify_(eventGetter : (change : ScalarChange<T>) => RexEvent<void>) : RexScalar<T>;
+
+		notify_(event : RexEvent<void>);
+
+		/**
 		 * Clones the value and applies a mutation on the clone, then updates the Rex with it.
 		 * @param mutation
 		 */
@@ -62,18 +75,32 @@ const RexScalarExtensions =  {
 		}
 	},
 
-	rectify_<T, TTo>(this : RexScalar<T>,to ?: (from : T) => TTo, rectify ?: (to : TTo, from : T) => void)  {
-		return this.convert_(to, to => {
+	rectify_<T, TTo>(this : RexScalar<T>,to ?: (from : T) => TTo, rectify ?: (current : T, input : TTo) => void)  {
+		let rectify_ = this.convert_(to, to => {
 			let clone = _.cloneDeep(this.value);
-			rectify(to, clone);
+			rectify(clone, to);
 			return clone;
 		});
+		rectify_.info.type = RexNames.Rectify;
+		return rectify_;
 	},
 
-	member_<T, TTo>(this : RexScalar<T>, memberName : string) {
-		return this.rectify_(from => from[memberName], (to, from) => {
-			from[memberName] = to;
+	member_<T extends Object, TTo>(this : RexScalar<T>, memberName : string) {
+		let member_ = this.rectify_(from => from[memberName], (current, input) => {
+			current[memberName] = input;
 		});
+		member_.info.type = RexNames.Member;
+		return member_;
+	},
+
+	notify_<T>(this : RexScalar<T>, eventOrEventGetter : RexEvent<void> | ((change : ScalarChange<T>) => RexEvent<void>)) {
+		if (eventOrEventGetter instanceof RexEvent) {
+			return new RexNotify(this, x => eventOrEventGetter);
+		} else if (_.isFunction(eventOrEventGetter)) {
+			return new RexNotify(this, eventOrEventGetter);
+		} else {
+			throw new TypeError(`Failed to resolve overload of notify_: ${eventOrEventGetter} is not a function or an event.`)
+		}
 	},
 
 	mutate<T>(this :RexScalar<T>, mutation : (copy : T) => void) : void {

@@ -1,0 +1,15 @@
+Coverageify npm package
+
+This product is based on the istanbulify package developed by François de Campredon, licensed under
+Apache License Version 2.0.
+
+Portions of this software contains modified code derived from the istanbulify package developed
+by François de Campredon, including modifications by Andres Troiano.
+
+JS code coverage support is provided by istanbul npm package (https://www.npmjs.com/package/istanbul)
+
+Simplified stream construction is provided by through npm package (https://www.npmjs.com/package/through), which is
+open source software, written by Dominic Tarr, licenced under MIT/Apache2.
+
+ECMAScript parsing infrastructure for multipurpose analysis is provided by esprima npm package (https://www.npmjs.com/package/esprima),
+licenced under BSD.

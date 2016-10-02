@@ -15,14 +15,14 @@ var RexConvert = (function (_super) {
         this.parent = parent;
         this.conversion = conversion;
         this.info = {
-            type: names_1.Convert,
+            type: names_1.RexNames.Convert,
             lazy: true,
             functional: true
         };
         this.depends.source = parent;
-        this._subToken = parent.changed.fires(function () { return _this.changed.fire(undefined); });
-        var parentClose = parent.closing.fires(function () { return _this.close(); });
-        var selfChange = this.changed.fires(function () { return _this._last = undefined; });
+        this._subToken = parent.changed.on(function () { return _this.notifyChange(_this._last); });
+        var parentClose = parent.closing.on(function () { return _this.close(); });
+        var selfChange = this.changed.on(function () { return _this._last = undefined; });
         this._subToken = this._subToken.and(parentClose, selfChange);
     }
     Object.defineProperty(RexConvert.prototype, "value", {
@@ -48,7 +48,10 @@ var RexConvert = (function (_super) {
         configurable: true
     });
     RexConvert.prototype.close = function () {
+        if (this.isClosed)
+            return;
         this._subToken.close();
+        this._subToken = null;
         _super.prototype.close.call(this);
     };
     return RexConvert;

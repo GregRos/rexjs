@@ -7,5 +7,5 @@ import {Rex} from './base';
 
 import {RexConvert} from "./scalar/convert";
 import {RexVar} from "./scalar/var";
-
-export {IRexInfo, RexScalar, Rex};
+import {RexNames} from './names';
+export {IRexInfo, RexScalar, Rex, RexNames};

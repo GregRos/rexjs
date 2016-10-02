@@ -2,7 +2,7 @@
  * Created by Greg on 01/10/2016.
  */
 import _ = require('lodash');
-import {DisposalToken} from './interfaces';
+import {DisposalToken} from './disposal-token';
 /**
  * An event primitive used in the rexjs library. Allows the ability to subscribe to notifications.
  *
@@ -14,7 +14,7 @@ export class RexEvent<TParam> {
 	 * @constructor
 	 * @param _name A human-readable name for the event. Optional.
 	 */
-	constructor(private _name : string = "event") {
+	constructor(private _name : string = "Event") {
 
 	}
 
@@ -34,7 +34,7 @@ export class RexEvent<TParam> {
 	 * @param handler The handler, which can be another event or a function.
 	 * @returns {DisposalToken} A token that supports a close() method, upon which this subscription is cancelled.
 	 */
-	fires<S extends TParam>(handler : ((arg : TParam) => void) | RexEvent<S>) : DisposalToken {
+	on<S extends TParam>(handler : ((arg : S) => void) | RexEvent<S>) : DisposalToken {
 		if (handler instanceof RexEvent) {
 			let myBound = handler.fire.bind(handler);
 			this._invocationList.push(myBound);
@@ -60,5 +60,9 @@ export class RexEvent<TParam> {
 	 */
 	clear() {
 		this._invocationList = [];
+	}
+
+	toString() {
+		return `[object RexEvent ${this.name}]`;
 	}
 }

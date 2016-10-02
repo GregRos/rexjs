@@ -7,13 +7,13 @@ import {RexScalar} from "../src/rexes/scalar/index";
 let throwsClosed = (f: () => void) => {
 	expect(f).toThrowError(ClosedError);
 };
+let tally = "";
+beforeEach(() => tally = "");
 let baseTests = (ctor : <T>(init : T) => RexScalar<T>) => {
 	describe("basic tests", () => {
-		let tally = "";
 		let Var = ctor(0);
 
 		beforeEach(() => {
-			tally = "";
 			Var = ctor(0)
 		});
 
@@ -29,13 +29,13 @@ let baseTests = (ctor : <T>(init : T) => RexScalar<T>) => {
 		});
 
 		it("notifies change", () => {
-			Var.changed.fires(x => tally += "a");
+			Var.changed.on(x => tally += "a");
 			Var.value = 1;
 			expect(tally).toBe("a");
 		});
 
 		it("notifies close", () => {
-			Var.closing.fires(x => tally += "closing");
+			Var.closing.on(x => tally += "closing");
 			Var.close();
 			expect(tally).toBe("closing");
 		});
@@ -61,7 +61,7 @@ let baseTests = (ctor : <T>(init : T) => RexScalar<T>) => {
 			});
 
 			it("mutate", () => {
-				let cToken = oVar.changed.fires(x => tally += "a");
+				let cToken = oVar.changed.on(x => tally += "a");
 				let original = oVar.value;
 				oVar.mutate(o => o.a = 2);
 				expect(tally).toBe("a");
@@ -88,16 +88,15 @@ describe("scalars", () => {
 		baseTests(x => Rexs.var_(x).convert_(x => x, x => x));
 		let link1 = Rexs.var_(1);
 		let link2 = link1.convert_(x => x * 2, x => x / 2);
-		let tally = "";
+
 		beforeEach(() => {
 			link1 = Rexs.var_(1);
 			link2 = link1.convert_(x => x * 2, x => x / 2);
-			tally = "";
 		});
 
 		describe("consistency tests", () => {
 			it("notifies change in link1", () => {
-				link2.changed.fires(x => {
+				link2.changed.on(x => {
 					tally += "a";
 				});
 				link1.value = 2;
@@ -106,7 +105,7 @@ describe("scalars", () => {
 			});
 
 			it("sends change back to link1", () => {
-				link1.changed.fires(x => {
+				link1.changed.on(x => {
 					tally += "a";
 				});
 				link2.value = 4;
@@ -115,7 +114,7 @@ describe("scalars", () => {
 			});
 
 			it("closes when link1 is closed", () => {
-				link2.closing.fires(() => tally += "a");
+				link2.closing.on(() => tally += "a");
 				link1.close();
 				expect(link2.isClosed).toBe(true);
 				expect(tally).toBe("a");
@@ -157,7 +156,30 @@ describe("scalars", () => {
 				});
 			})
 		});
-
-
 	});
+
+	describe("member", () => {
+		baseTests(x => Rexs.var_({a : x}).member_('a'));
+		let link1 = Rexs.var_({a : 1});
+		let link2 = link1.member_('a');
+		beforeEach(() => {
+			link1 = Rexs.var_({a : 1});
+			link2 = link1.member_('a');
+		});
+		describe("consistency tests", () => {
+			it("change propagates forward", () => {
+				link2.changed.on(x => tally += x.value);
+				link1.value = {a : 2};
+				expect(tally).toBe("2");
+			});
+
+			it("change propagates back", () => {
+				link1.value = {a: 1, b : 2} as any;
+				link1.changed.on(x => tally += x.value.a);
+				link2.value = 5;
+				expect(tally).toBe("5");
+				expect((link1.value as any).b).toBe(2);
+			});
+		});
+	})
 });

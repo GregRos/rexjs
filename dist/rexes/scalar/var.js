@@ -20,7 +20,7 @@ var RexVar = (function (_super) {
         this.canWrite = canWrite;
         this.info = {
             lazy: false,
-            type: names_1.Var,
+            type: names_1.RexNames.Var,
             functional: true
         };
         this.value = initial;
@@ -38,8 +38,9 @@ var RexVar = (function (_super) {
             if (!this.canWrite) {
                 throw errors_1.Errors.cannotWrite(this.meta.name);
             }
+            var oldVal = this._value;
             this._value = val;
-            this.changed.fire(null);
+            this.notifyChange(oldVal);
         },
         enumerable: true,
         configurable: true

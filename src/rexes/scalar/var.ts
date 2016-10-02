@@ -4,7 +4,7 @@
 import {IScalarChangeInfo, RexScalar} from './';
 import {Rex} from "../base";
 import {IRexInfo} from "../definitions";
-import {Var} from "../names";
+import {RexNames} from "../names";
 import {Errors} from '../../errors';
 export class RexVar<T> extends RexScalar<T> {
 	private _value : T;
@@ -16,7 +16,7 @@ export class RexVar<T> extends RexScalar<T> {
 
 	info : IRexInfo = {
 		lazy : false,
-		type : Var,
+		type : RexNames.Var,
 		functional : true
 	};
 
@@ -33,8 +33,10 @@ export class RexVar<T> extends RexScalar<T> {
 		if (!this.canWrite) {
 			throw Errors.cannotWrite(this.meta.name);
 		}
+
+		let oldVal = this._value;
 		this._value = val;
-		this.changed.fire(null);
+		this.notifyChange(oldVal);
 	}
 }
 

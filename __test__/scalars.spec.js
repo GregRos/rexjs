@@ -7,12 +7,12 @@ var index_1 = require("../src/errors/index");
 var throwsClosed = function (f) {
     expect(f).toThrowError(index_1.ClosedError);
 };
+var tally = "";
+beforeEach(function () { return tally = ""; });
 var baseTests = function (ctor) {
     describe("basic tests", function () {
-        var tally = "";
         var Var = ctor(0);
         beforeEach(function () {
-            tally = "";
             Var = ctor(0);
         });
         it("isn't closed", function () { return expect(Var.isClosed).toBe(false); });
@@ -24,12 +24,12 @@ var baseTests = function (ctor) {
             expect(Var.value).toBe(1);
         });
         it("notifies change", function () {
-            Var.changed.fires(function (x) { return tally += "a"; });
+            Var.changed.on(function (x) { return tally += "a"; });
             Var.value = 1;
             expect(tally).toBe("a");
         });
         it("notifies close", function () {
-            Var.closing.fires(function (x) { return tally += "closing"; });
+            Var.closing.on(function (x) { return tally += "closing"; });
             Var.close();
             expect(tally).toBe("closing");
         });
@@ -53,7 +53,7 @@ var baseTests = function (ctor) {
                 oVar = ctor({ a: 1 });
             });
             it("mutate", function () {
-                var cToken = oVar.changed.fires(function (x) { return tally += "a"; });
+                var cToken = oVar.changed.on(function (x) { return tally += "a"; });
                 var original = oVar.value;
                 oVar.mutate(function (o) { return o.a = 2; });
                 expect(tally).toBe("a");
@@ -79,15 +79,13 @@ describe("scalars", function () {
         baseTests(function (x) { return src_1.Rexs.var_(x).convert_(function (x) { return x; }, function (x) { return x; }); });
         var link1 = src_1.Rexs.var_(1);
         var link2 = link1.convert_(function (x) { return x * 2; }, function (x) { return x / 2; });
-        var tally = "";
         beforeEach(function () {
             link1 = src_1.Rexs.var_(1);
             link2 = link1.convert_(function (x) { return x * 2; }, function (x) { return x / 2; });
-            tally = "";
         });
         describe("consistency tests", function () {
             it("notifies change in link1", function () {
-                link2.changed.fires(function (x) {
+                link2.changed.on(function (x) {
                     tally += "a";
                 });
                 link1.value = 2;
@@ -95,7 +93,7 @@ describe("scalars", function () {
                 expect(tally).toBe("a");
             });
             it("sends change back to link1", function () {
-                link1.changed.fires(function (x) {
+                link1.changed.on(function (x) {
                     tally += "a";
                 });
                 link2.value = 4;
@@ -103,7 +101,7 @@ describe("scalars", function () {
                 expect(link1.value).toBe(2);
             });
             it("closes when link1 is closed", function () {
-                link2.closing.fires(function () { return tally += "a"; });
+                link2.closing.on(function () { return tally += "a"; });
                 link1.close();
                 expect(link2.isClosed).toBe(true);
                 expect(tally).toBe("a");
@@ -138,6 +136,29 @@ describe("scalars", function () {
                     link1.value = 5;
                     expect(link1.value).toBe(5);
                 });
+            });
+        });
+    });
+    describe("member", function () {
+        baseTests(function (x) { return src_1.Rexs.var_({ a: x }).member_('a'); });
+        var link1 = src_1.Rexs.var_({ a: 1 });
+        var link2 = link1.member_('a');
+        beforeEach(function () {
+            link1 = src_1.Rexs.var_({ a: 1 });
+            link2 = link1.member_('a');
+        });
+        describe("consistency tests", function () {
+            it("change propagates forward", function () {
+                link2.changed.on(function (x) { return tally += x.value; });
+                link1.value = { a: 2 };
+                expect(tally).toBe("2");
+            });
+            it("change propagates back", function () {
+                link1.value = { a: 1, b: 2 };
+                link1.changed.on(function (x) { return tally += x.value.a; });
+                link2.value = 5;
+                expect(tally).toBe("5");
+                expect(link1.value.b).toBe(2);
             });
         });
     });

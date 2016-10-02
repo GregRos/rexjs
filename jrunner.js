@@ -1,6 +1,3 @@
-/**
- * Created by Greg on 02/10/2016.
- */
 var Jasmine = require('jasmine');
 var SpecReporter = require('jasmine-spec-reporter');
 

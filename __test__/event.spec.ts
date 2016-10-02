@@ -15,20 +15,20 @@ describe("events", () => {
 	describe("basic subscribe/unsubscribe support", () => {
 
 		it("should basic subscribe", () => {
-			event.fires(x => tally += x);
+			event.on(x => tally += x);
 			event.fire(1);
 			expect(tally).toBe("1");
 		});
 
 		it("should subscribe multiple times", () => {
-			event.fires(x => tally += x);
-			event.fires(x => tally += -x);
+			event.on(x => tally += x);
+			event.on(x => tally += -x);
 			event.fire(1);
 			expect(tally).toBe("1-1");
 		});
 
 		it("should unsubscribe correctly", () => {
-			let token = event.fires(x => tally += x);
+			let token = event.on(x => tally += x);
 			event.fire(1);
 			expect(tally).toBe("1");
 			token.close();
@@ -39,7 +39,7 @@ describe("events", () => {
 		it("should unsubscribe correctly xN", () => {
 			let toks: IDisposable[] = [];
 			for (let i = 0; i < 10; i++) {
-				toks.push(event.fires(x => tally += i));
+				toks.push(event.on(x => tally += i));
 			}
 			event.fire(0);
 			expect(tally).toBe("0123456789");
@@ -57,15 +57,15 @@ describe("events", () => {
 			event2.clear();
 		});
 		it("should subscribe correctly", () => {
-			event2.fires(event);
-			event.fires(x => tally += x);
+			event2.on(event);
+			event.on(x => tally += x);
 			event2.fire(1);
 			expect(tally).toBe("1");
 		});
 
 		it("should unsubscribe correctly", () => {
-			let tok = event2.fires(event);
-			event.fires(x => tally += x);
+			let tok = event2.on(event);
+			event.on(x => tally += x);
 			event2.fire(0);
 			expect(tally).toBe("0");
 			tok.close();

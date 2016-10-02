@@ -15,7 +15,7 @@ var RexEvent = (function () {
      * @param _name A human-readable name for the event. Optional.
      */
     function RexEvent(_name) {
-        if (_name === void 0) { _name = "event"; }
+        if (_name === void 0) { _name = "Event"; }
         this._name = _name;
         this._invocationList = [];
     }
@@ -36,7 +36,7 @@ var RexEvent = (function () {
      * @param handler The handler, which can be another event or a function.
      * @returns {DisposalToken} A token that supports a close() method, upon which this subscription is cancelled.
      */
-    RexEvent.prototype.fires = function (handler) {
+    RexEvent.prototype.on = function (handler) {
         var _this = this;
         if (handler instanceof RexEvent) {
             var myBound_1 = handler.fire.bind(handler);
@@ -63,6 +63,9 @@ var RexEvent = (function () {
      */
     RexEvent.prototype.clear = function () {
         this._invocationList = [];
+    };
+    RexEvent.prototype.toString = function () {
+        return "[object RexEvent " + this.name + "]";
     };
     return RexEvent;
 }());

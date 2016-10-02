@@ -14,13 +14,18 @@ export interface ScalarChange<T> {
 export abstract class RexScalar<T> extends Rex<ScalarChange<T>> {
 	value : T;
 
-	private notifyChange(prevValue : T) {
+	protected notifyChange(prevValue : T) {
+		let self = this;
 		this.changed.fire({
 			get value() {
-				return this.value;
+				return self.value;
 			},
 			oldValue : prevValue
 		});
+	}
+
+	toString() {
+		return `[RexScalar ${this.info.type} ${this.value}]`;
 	}
 }
 import {RexConvert} from './convert';

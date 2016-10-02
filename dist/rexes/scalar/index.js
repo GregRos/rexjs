@@ -18,6 +18,9 @@ var RexScalar = (function (_super) {
             oldValue: prevValue
         });
     };
+    RexScalar.prototype.toString = function () {
+        return "";
+    };
     return RexScalar;
 }(base_1.Rex));
 exports.RexScalar = RexScalar;

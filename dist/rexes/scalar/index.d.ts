@@ -10,7 +10,8 @@ export interface ScalarChange<T> {
 }
 export declare abstract class RexScalar<T> extends Rex<ScalarChange<T>> {
     value: T;
-    private notifyChange(prevValue);
+    protected notifyChange(prevValue: T): void;
+    toString(): string;
 }
 import { RexConvert } from './convert';
 import { RexVar } from './var';

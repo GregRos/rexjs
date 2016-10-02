@@ -1,7 +1,7 @@
 import {IScalarChangeInfo, RexScalar} from "./";
 import {Rex} from "../base";
 import {IRexInfo} from "../definitions";
-import {Convert} from "../names";
+import {RexNames} from "../names";
 import {Errors} from '../../errors';
 import {DisposalToken} from "../../";
 /**
@@ -17,7 +17,7 @@ export class RexConvert<TFrom, TTo> extends RexScalar<TTo> {
 	private _last : TTo;
 	private _subToken : DisposalToken;
 	info : IRexInfo = {
-		type : Convert,
+		type : RexNames.Convert,
 		lazy : true,
 		functional : true
 	};
@@ -25,9 +25,9 @@ export class RexConvert<TFrom, TTo> extends RexScalar<TTo> {
 	constructor(private parent : RexScalar<TFrom>, private conversion : Conversion<TFrom, TTo>) {
 		super();
 		this.depends.source = parent;
-		this._subToken = parent.changed.fires(() => this.changed.fire(undefined));
-		let parentClose = parent.closing.fires(() => this.close());
-		let selfChange = this.changed.fires(() => this._last = undefined);
+		this._subToken = parent.changed.on(() => this.notifyChange(this._last));
+		let parentClose = parent.closing.on(() => this.close());
+		let selfChange = this.changed.on(() => this._last = undefined);
 		this._subToken = this._subToken.and(parentClose, selfChange)
 	}
 
@@ -52,7 +52,9 @@ export class RexConvert<TFrom, TTo> extends RexScalar<TTo> {
 	}
 
 	close() {
+		if (this.isClosed) return;
 		this._subToken.close();
+		this._subToken = null;
 		super.close();
 	}
 }

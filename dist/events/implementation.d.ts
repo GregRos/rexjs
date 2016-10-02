@@ -23,7 +23,7 @@ export declare class RexEvent<TParam> {
      * @param handler The handler, which can be another event or a function.
      * @returns {DisposalToken} A token that supports a close() method, upon which this subscription is cancelled.
      */
-    fires<S extends TParam>(handler: ((arg: TParam) => void) | RexEvent<S>): DisposalToken;
+    on<S extends TParam>(handler: ((arg: TParam) => void) | RexEvent<S>): DisposalToken;
     /**
      * Fires the event. This method's visibility is not restricted, but it should be used carefully.
      * @param arg The argument with which the event is raised.
@@ -33,4 +33,5 @@ export declare class RexEvent<TParam> {
      * Clears the event's subscription list. Use this method carefully.
      */
     clear(): void;
+    toString(): string;
 }

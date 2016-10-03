@@ -8,26 +8,13 @@
     "lodash": "^4.16.2"
   },
   "devDependencies": {
-    "browserify": "^13.1.0",
-    "browserify-istanbul": "^2.0.0",
-    "coverageify": "^1.0.4",
     "gulp": "^3.9.1",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-typescript": "^3.0.2",
     "jasmine": "^2.5.2",
     "jasmine-spec-reporter": "^2.7.0",
-    "karma": "^1.3.0",
-    "karma-browserify": "^5.1.0",
-    "karma-chrome-launcher": "^2.0.0",
-    "karma-commonjs": "^1.0.0",
-    "karma-coverage": "^1.1.1",
-    "karma-html-reporter": "^0.2.7",
-    "karma-jasmine": "^1.0.2",
-    "karma-typescript": "^2.0.6",
-    "karma-typescript-preprocessor": "^0.3.0",
     "merge2": "^1.0.2",
-    "typescript": "^2.0.3",
-    "watchify": "^3.7.0"
+    "typescript": "^2.0.3"
   },
   "scripts": {
     "test": "node %NODE_DEBUG_OPTION% ./jrunner.js"

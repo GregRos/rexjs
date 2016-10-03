@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+	"module": "commonjs",
+	"target": "es5",
+	"charset": "utf8",
+	"experimentalDecorators": true,
+	"jsx": "react",
+	"sourceMap": true
+  },
+  "exclude": [
+	"typings/globals",
+	"typings/modules",
+	"node_modules"
+  ]
+}

@@ -1,0 +1,703 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7dea5258-df22-4e39-ab0c-dfefd26cd69f" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/events/subscription.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/events/subscription.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/events/subscription.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/events/rex-event.js.map" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/events/disposal-token.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/events/disposal-token.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/events/implementation.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/my.conf.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/events/interfaces.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/events/interfaces.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/rexes/definitions.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/rexes/definitions.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/events/interfaces.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/events/disposal-token.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/rexes/definitions.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rexes/scalar/convert.js" afterPath="$PROJECT_DIR$/src/rexes/scalar/convert.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rexes/names.ts" afterPath="$PROJECT_DIR$/src/rexes/names.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/__test__/event.spec.js.map" afterPath="$PROJECT_DIR$/__test__/event.spec.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rexes/scalar/silence.js" afterPath="$PROJECT_DIR$/src/rexes/scalar/silence.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/__test__/scalars.spec.js.map" afterPath="$PROJECT_DIR$/__test__/scalars.spec.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rexes/scalar/var.js" afterPath="$PROJECT_DIR$/src/rexes/scalar/var.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rexes/scalar/notify.js.map" afterPath="$PROJECT_DIR$/src/rexes/scalar/notify.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/__test__/scalars.spec.ts" afterPath="$PROJECT_DIR$/__test__/scalars.spec.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rexes/scalar/var.js.map" afterPath="$PROJECT_DIR$/src/rexes/scalar/var.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/__test__/disposal.spec.js" afterPath="$PROJECT_DIR$/__test__/disposal.spec.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/index.js" afterPath="$PROJECT_DIR$/src/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/index.js.map" afterPath="$PROJECT_DIR$/src/index.js.map" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/events/implementation.js" afterPath="$PROJECT_DIR$/src/events/rex-event.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/extension/scalar.js.map" afterPath="$PROJECT_DIR$/src/extension/scalar.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rexes/base.js.map" afterPath="$PROJECT_DIR$/src/rexes/base.js.map" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/events/implementation.ts" afterPath="$PROJECT_DIR$/src/events/rex-event.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rexes/scalar/var.ts" afterPath="$PROJECT_DIR$/src/rexes/scalar/var.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rexes/scalar/notify.ts" afterPath="$PROJECT_DIR$/src/rexes/scalar/notify.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/__test__/disposal.spec.js.map" afterPath="$PROJECT_DIR$/__test__/disposal.spec.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rexes/scalar/convert.js.map" afterPath="$PROJECT_DIR$/src/rexes/scalar/convert.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rexes/names.js" afterPath="$PROJECT_DIR$/src/rexes/names.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/extension/scalar.js" afterPath="$PROJECT_DIR$/src/extension/scalar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rexes/base.js" afterPath="$PROJECT_DIR$/src/rexes/base.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/events/index.ts" afterPath="$PROJECT_DIR$/src/events/index.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rexes/scalar/silence.js.map" afterPath="$PROJECT_DIR$/src/rexes/scalar/silence.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rexes/index.ts" afterPath="$PROJECT_DIR$/src/rexes/index.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rexes/scalar/convert.ts" afterPath="$PROJECT_DIR$/src/rexes/scalar/convert.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/__test__/disposal.spec.ts" afterPath="$PROJECT_DIR$/__test__/disposal.spec.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/events/index.js" afterPath="$PROJECT_DIR$/src/events/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/__test__/event.spec.ts" afterPath="$PROJECT_DIR$/__test__/event.spec.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/events/index.js.map" afterPath="$PROJECT_DIR$/src/events/index.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/__test__/scalars.spec.js" afterPath="$PROJECT_DIR$/__test__/scalars.spec.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rexes/base.ts" afterPath="$PROJECT_DIR$/src/rexes/base.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/extension/scalar.ts" afterPath="$PROJECT_DIR$/src/extension/scalar.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rexes/names.js.map" afterPath="$PROJECT_DIR$/src/rexes/names.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rexes/scalar/notify.js" afterPath="$PROJECT_DIR$/src/rexes/scalar/notify.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rexes/scalar/silence.ts" afterPath="$PROJECT_DIR$/src/rexes/scalar/silence.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/index.ts" afterPath="$PROJECT_DIR$/src/index.ts" />
+    </list>
+    <ignored path="rexjs.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/rexjs$karma.coverage" NAME="karma Coverage Results" MODIFIED="1475489571988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="KarmaJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="rexjs" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="300">
+                <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="jrunner.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/jrunner.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="175">
+              <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1075">
+              <caret line="43" column="5" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="Markdown File" />
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/__test__/support/jasmine.json" />
+        <option value="$PROJECT_DIR$/dist/extension/disposalToken.d.ts" />
+        <option value="$PROJECT_DIR$/dist/events/interfaces.d.ts" />
+        <option value="internal/module.js" />
+        <option value="$PROJECT_DIR$/dist/rexes/scalar/index.js" />
+        <option value="$PROJECT_DIR$/dist/rexes/scalar/convert.d.ts" />
+        <option value="$PROJECT_DIR$/__test__/tsconfig.json" />
+        <option value="$PROJECT_DIR$/__test__/scalars.ts" />
+        <option value="$PROJECT_DIR$/src/extension/disposalToken.ts" />
+        <option value="$PROJECT_DIR$/__test__/disposal.spec.ts" />
+        <option value="$PROJECT_DIR$/__test__/event.spec.ts" />
+        <option value="$PROJECT_DIR$/src/extension/rex.ts" />
+        <option value="$PROJECT_DIR$/src/rexes/scalar/RexMember.ts" />
+        <option value="$PROJECT_DIR$/dist/extension/index.d.ts" />
+        <option value="$PROJECT_DIR$/src/errors/index.ts" />
+        <option value="$PROJECT_DIR$/tsconfig.json" />
+        <option value="$PROJECT_DIR$/.npmignore" />
+        <option value="$PROJECT_DIR$/typings.json" />
+        <option value="$PROJECT_DIR$/jrunner.ts" />
+        <option value="$PROJECT_DIR$/src/jrunner.ts" />
+        <option value="$PROJECT_DIR$/jrunner.js" />
+        <option value="$PROJECT_DIR$/gulpfile.js" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/src/index.ts" />
+        <option value="$PROJECT_DIR$/src/rexes/scalar/RexNotify.ts" />
+        <option value="$PROJECT_DIR$/src/events/interfaces.ts" />
+        <option value="$PROJECT_DIR$/src/extension/disposal-token.ts" />
+        <option value="$PROJECT_DIR$/src/events/index.ts" />
+        <option value="$PROJECT_DIR$/src/rexes/scalar/index.ts" />
+        <option value="$PROJECT_DIR$/src/extension/index.ts" />
+        <option value="$PROJECT_DIR$/src/errors/index.js" />
+        <option value="$PROJECT_DIR$/karma_html/Chrome 53.0.2785 (Windows 10 0.0.0)/index.html" />
+        <option value="$PROJECT_DIR$/my.conf.js" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/src/rexes/names.ts" />
+        <option value="$PROJECT_DIR$/src/rexes/scalar/var.ts" />
+        <option value="$PROJECT_DIR$/src/events/disposal-token.ts" />
+        <option value="$PROJECT_DIR$/src/events/implementation.ts" />
+        <option value="$PROJECT_DIR$/src/rexes/scalar/member.ts" />
+        <option value="$PROJECT_DIR$/src/rexes/scalar/rectify.ts" />
+        <option value="$PROJECT_DIR$/src/rexes/scalar/convert.ts" />
+        <option value="$PROJECT_DIR$/src/events/subscription.ts" />
+        <option value="$PROJECT_DIR$/__test__/scalars.spec.ts" />
+        <option value="$PROJECT_DIR$/src/rexes/scalar/silence.ts" />
+        <option value="$PROJECT_DIR$/src/rexes/definitions.ts" />
+        <option value="$PROJECT_DIR$/src/rexes/base.ts" />
+        <option value="$PROJECT_DIR$/src/rexes/index.ts" />
+        <option value="$PROJECT_DIR$/src/rexes/scalar/notify.ts" />
+        <option value="$PROJECT_DIR$/src/rexes/scalar/link.ts" />
+        <option value="$PROJECT_DIR$/src/extension/scalar.ts" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBowerSettings">
+    <exe-path />
+    <config-path />
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/node_modules" />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="64" />
+    <option name="y" value="805" />
+    <option name="width" value="1851" />
+    <option name="height" value="1078" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>CSS</id>
+          </State>
+          <State>
+            <id>Code style issuesCSS</id>
+          </State>
+          <State>
+            <id>Code style issuesJavaScript</id>
+          </State>
+          <State>
+            <id>Control flow issuesJavaScript</id>
+          </State>
+          <State>
+            <id>DOM issuesJavaScript</id>
+          </State>
+          <State>
+            <id>General</id>
+          </State>
+          <State>
+            <id>GeneralJavaScript</id>
+          </State>
+          <State>
+            <id>HTML</id>
+          </State>
+          <State>
+            <id>Invalid elementsCSS</id>
+          </State>
+          <State>
+            <id>JavaScript</id>
+          </State>
+          <State>
+            <id>Potentially confusing code constructsJavaScript</id>
+          </State>
+          <State>
+            <id>Probable bugsCSS</id>
+          </State>
+          <State>
+            <id>Pug/Jade</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>AngularJS</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="1" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rexjs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rexjs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rexjs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rexjs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rexjs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="__test__" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <option name="show-excluded-files" value="false" />
+      </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="settings.editor.selected.configurable" value="debugger.dataViews" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
+    <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Roaming/npm/node_modules/typescript/lib" />
+    <property name="javascript.nodejs.core.library.configured.version" value="6.6.0" />
+    <property name="JavaScriptPreferStrict" value="false" />
+    <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
+    <property name="ignore_missing_gitignore" value="true" />
+    <property name="js.eslint.eslintPackage" value="" />
+    <property name="nodejs.mocha.mocha_node_package_dir" value="" />
+    <property name="prop_add_unversioned_files" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Greg\OneDrive\Documents\GitHub\JavaScript\rexjs\__test__" />
+      <recent name="C:\Users\Greg\OneDrive\Documents\GitHub\JavaScript\rexjs" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Greg\OneDrive\Documents\GitHub\JavaScript\rexjs" />
+      <recent name="C:\Users\Greg\OneDrive\Documents\GitHub\JavaScript\rexjs\src" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Node.js.jrunner.js">
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
+    <configuration default="true" type="DartTestRunConfigurationType" factoryName="Dart Test">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma">
+      <config-file value="$PROJECT_DIR$/my.conf.js" />
+      <karma-package-dir value="$PROJECT_DIR$/node_modules/karma" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSRemoteDebug" factoryName="Node.js Remote Debug">
+      <node-js-remote-debug />
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeWebKit" factoryName="NW.js">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeunitConfigurationType" factoryName="Nodeunit">
+      <setting name="nodePath" value="project" />
+      <envs />
+      <setting name="nodeunitModuleDir" value="" />
+      <setting name="workingDirectory" value="" />
+      <setting name="testType" value="JS_FILE" />
+      <setting name="jsFile" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" value="" />
+      <option name="executablePath" value="" />
+      <option name="filePath" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run-script" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="meteor-app-runner" factoryName="Meteor">
+      <option name="startBrowserSettings">
+        <browser url="http://localhost:3000" />
+      </option>
+      <meteor-runner-state>
+        <startBrowserSettings>
+          <browser url="http://localhost:3000" />
+        </startBrowserSettings>
+      </meteor-runner-state>
+      <method />
+    </configuration>
+    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory />
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui />
+      <extra-mocha-options />
+      <test-kind>DIRECTORY</test-kind>
+      <test-directory />
+      <recursive>false</recursive>
+      <method />
+    </configuration>
+    <configuration default="false" name="jrunner.js" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" path-to-js-file="jrunner.js" working-dir="$PROJECT_DIR$">
+      <profiling v8-profiler-path="" />
+      <EXTENSION ID="com.jetbrains.nodejs.run.NodeJSProfilingRunConfigurationExtension">
+        <profiling v8-profiler-path="" />
+      </EXTENSION>
+      <method />
+    </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Node.js.jrunner.js" />
+    </list>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\Greg\AppData\Roaming\Subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7dea5258-df22-4e39-ab0c-dfefd26cd69f" name="Default" comment="" />
+      <created>1475403770194</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1475403770194</updated>
+      <workItem from="1475403771674" duration="9084000" />
+      <workItem from="1475414324924" duration="1663000" />
+      <workItem from="1475416395525" duration="17851000" />
+      <workItem from="1475438782785" duration="2482000" />
+      <workItem from="1475441458600" duration="468000" />
+      <workItem from="1475442334030" duration="6450000" />
+      <workItem from="1475453656984" duration="280000" />
+      <workItem from="1475485553278" duration="3156000" />
+      <workItem from="1475488747764" duration="225000" />
+      <workItem from="1475488985390" duration="1819000" />
+      <workItem from="1475490828741" duration="6454000" />
+      <workItem from="1475507302804" duration="13319000" />
+      <workItem from="1475524317204" duration="4000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="karma - 2016.10.03 at 13h 11m 42s.xml">
+      <configuration name="karma" configurationId="JavaScriptTestRunnerKarma" />
+    </history-entry>
+    <history-entry file="karma - 2016.10.03 at 13h 12m 53s.xml">
+      <configuration name="karma" configurationId="JavaScriptTestRunnerKarma" />
+    </history-entry>
+    <history-entry file="karma - 2016.10.03 at 13h 17m 15s.xml">
+      <configuration name="karma" configurationId="JavaScriptTestRunnerKarma" />
+    </history-entry>
+    <history-entry file="karma - 2016.10.03 at 13h 19m 28s.xml">
+      <configuration name="karma" configurationId="JavaScriptTestRunnerKarma" />
+    </history-entry>
+    <history-entry file="karma - 2016.10.03 at 13h 19m 30s.xml">
+      <configuration name="karma" configurationId="JavaScriptTestRunnerKarma" />
+    </history-entry>
+    <history-entry file="karma - 2016.10.03 at 13h 34m 18s.xml">
+      <configuration name="karma" configurationId="JavaScriptTestRunnerKarma" />
+    </history-entry>
+    <history-entry file="karma - 2016.10.03 at 13h 35m 13s.xml">
+      <configuration name="karma" configurationId="JavaScriptTestRunnerKarma" />
+    </history-entry>
+    <history-entry file="karma - 2016.10.03 at 13h 35m 40s.xml">
+      <configuration name="karma" configurationId="JavaScriptTestRunnerKarma" />
+    </history-entry>
+    <history-entry file="karma - 2016.10.03 at 13h 45m 33s.xml">
+      <configuration name="karma" configurationId="JavaScriptTestRunnerKarma" />
+    </history-entry>
+    <history-entry file="karma - 2016.10.03 at 13h 45m 55s.xml">
+      <configuration name="karma" configurationId="JavaScriptTestRunnerKarma" />
+    </history-entry>
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="63255000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="64" y="805" width="1851" height="1078" extended-state="0" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13512005" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19513543" sideWeight="0.3665628" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31177446" sideWeight="0.63343716" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46323937" sideWeight="0.55140185" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="TypeScript" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31177446" sideWeight="0.3665628" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33437175" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27307904" sideWeight="0.5181724" order="6" side_tool="false" content_ui="tabs" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917964" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3364486" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18587747" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13271436" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3997923" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint type="javascript-exception">
+          <properties name="RangeError" />
+          <option name="timeStamp" value="26" />
+        </breakpoint>
+        <breakpoint type="javascript-exception">
+          <properties name="Range" />
+          <option name="timeStamp" value="27" />
+        </breakpoint>
+      </breakpoints>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <default-breakpoints>
+        <breakpoint type="javascript-exception">
+          <dependency master-id="0" />
+          <properties />
+        </breakpoint>
+      </default-breakpoints>
+      <option name="time" value="53" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/typings.json" />
+    <entry file="file://$PROJECT_DIR$/src/extension/disposal-token.ts" />
+    <entry file="file://$PROJECT_DIR$/src/extension/disposal-token.js" />
+    <entry file="file://$PROJECT_DIR$/src/rexes/base.js" />
+    <entry file="file://$PROJECT_DIR$/src/rexes/scalar/convert.js" />
+    <entry file="file://$PROJECT_DIR$/src/rexes/scalar/notify.js" />
+    <entry file="file://$PROJECT_DIR$/src/index.js" />
+    <entry file="file://$PROJECT_DIR$/karma_html/Chrome 53.0.2785 (Windows 10 0.0.0)/index.html" />
+    <entry file="file://$PROJECT_DIR$/src/errors/index.ts" />
+    <entry file="file://$PROJECT_DIR$/src/errors/index.js" />
+    <entry file="file://$PROJECT_DIR$/src/extension/index.js.map" />
+    <entry file="file://$PROJECT_DIR$/node_modules/lodash/lodash.js" />
+    <entry file="file://$PROJECT_DIR$/src/events/subscription.js" />
+    <entry file="file://$PROJECT_DIR$/node_modules/karma-commonjs/client/commonjs_bridge.js" />
+    <entry file="file://$PROJECT_DIR$/coverage/Chrome 53.0.2785 (Windows 10 0.0.0)/index.html" />
+    <entry file="file://$PROJECT_DIR$/src/events/index.js" />
+    <entry file="file://$PROJECT_DIR$/package.json" />
+    <entry file="file://$PROJECT_DIR$/src/rexes/names.ts" />
+    <entry file="file://$PROJECT_DIR$/my.conf.js" />
+    <entry file="file://$PROJECT_DIR$/src/extension/index.js" />
+    <entry file="file://$PROJECT_DIR$/tsconfig.json" />
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/typescriptCompiler/external/lib.es6.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="1553" column="27" selection-start-line="1553" selection-start-column="27" selection-end-line="1553" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__test__/event.spec.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/javascript/nodejs/6.6.0/core-modules/fs.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="950" column="16" selection-start-line="950" selection-start-column="16" selection-end-line="950" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/events/interfaces.ts" />
+    <entry file="file://$PROJECT_DIR$/typings/modules/lodash/index.d.ts" />
+    <entry file="file://$PROJECT_DIR$/src/rexes/scalar/var.ts" />
+    <entry file="file://$PROJECT_DIR$/src/rexes/scalar/index.ts" />
+    <entry file="file://$PROJECT_DIR$/src/rexes/scalar/convert.ts" />
+    <entry file="file://$PROJECT_DIR$/__test__/disposal.spec.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="24" column="6" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__test__/scalars.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__test__/scalars.spec.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="7" column="32" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rexes/scalar/rectify.ts" />
+    <entry file="file://$PROJECT_DIR$/src/rexes/scalar/silence.ts" />
+    <entry file="file://$PROJECT_DIR$/src/rexes/scalar/member.ts" />
+    <entry file="file://$PROJECT_DIR$/src/rexes/definitions.ts" />
+    <entry file="file://$PROJECT_DIR$/src/rexes/base.ts" />
+    <entry file="file://$PROJECT_DIR$/src/rexes/index.ts" />
+    <entry file="file://$PROJECT_DIR$/src/rexes/scalar/notify.ts" />
+    <entry file="file://$PROJECT_DIR$/src/rexes/scalar/link.ts" />
+    <entry file="file://$PROJECT_DIR$/src/rexes/definitions.js" />
+    <entry file="file://$PROJECT_DIR$/src/extension/index.ts" />
+    <entry file="file://$PROJECT_DIR$/src/extension/rex.ts" />
+    <entry file="file://$PROJECT_DIR$/src/extension/scalar.ts" />
+    <entry file="file://$PROJECT_DIR$/src/events/index.ts" />
+    <entry file="file://$PROJECT_DIR$/src/events/rex-event.ts" />
+    <entry file="file://$PROJECT_DIR$/src/events/subscription.ts" />
+    <entry file="file://$PROJECT_DIR$/src/index.ts" />
+    <entry file="file://$PROJECT_DIR$/jrunner.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1075">
+          <caret line="43" column="5" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="300">
+            <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

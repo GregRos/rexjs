@@ -1,7 +1,7 @@
 /**
  * Created by Greg on 02/10/2016.
  */
-import {IDisposable, DisposalToken} from "../src";
+import {ISubscription, Subscription} from "../src";
 
 describe("disposal token", () => {
 	let tally = "";
@@ -12,23 +12,23 @@ describe("disposal token", () => {
 	});
 
 	it("disposes", () => {
-		let token = new DisposalToken(() => tally += "a");
+		let token = new Subscription(() => tally += "a");
 		token.close();
 		expect(tally).toBe("a");
 	});
 
 	it("disposes twice, 2nd time is harmless", () => {
-		let token = new DisposalToken(() => tally += "a");
+		let token = new Subscription(() => tally += "a");
 		token.close();
 		token.close();
 		expect(tally).toBe("a");
 	})
 
 	it("merges", () => {
-		let tokens : DisposalToken[] = [] ;
+		let tokens : Subscription[] = [] ;
 
 		for (let i = 0; i < 10; i++) {
-			tokens.push(new DisposalToken(() => tally += i));
+			tokens.push(new Subscription(() => tally += i));
 		}
 		let [fst, ...toks] = tokens;
 		let total = fst.and(...toks);
@@ -37,13 +37,13 @@ describe("disposal token", () => {
 	});
 
 	it("mutli-merges", () => {
-		let tokens1 : DisposalToken[] = [];
+		let tokens1 : Subscription[] = [];
 		for (let i = 0; i < 10; i++) {
-			tokens1.push(new DisposalToken(() => tally += i));
+			tokens1.push(new Subscription(() => tally += i));
 		}
-		let tokens2 : DisposalToken[]  = [];
+		let tokens2 : Subscription[]  = [];
 		for (let i = 0; i < 10; i++) {
-			tokens2.push(new DisposalToken(() => tally += i));
+			tokens2.push(new Subscription(() => tally += i));
 		}
 		let [fst1, ...rest1] = tokens1;
 		let [fst2, ...rest2] = tokens2;

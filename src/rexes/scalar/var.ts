@@ -35,6 +35,9 @@ export class RexVar<T> extends RexScalar<T> {
 		}
 
 		let oldVal = this._value;
+		if (Object.is(this._value, val)) {
+			return;
+		}
 		this._value = val;
 		this.notifyChange(oldVal);
 	}

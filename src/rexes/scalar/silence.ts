@@ -1,7 +1,7 @@
 import {RexScalar, ScalarChange} from "./index";
 import {IRexInfo} from "../";
 import {RexNames} from '../';
-import {DisposalToken} from "../..";
+import {Subscription} from "../..";
 /**
  * Created by Greg on 03/10/2016.
  */
@@ -12,10 +12,11 @@ export class RexSilence<T> extends RexScalar<T> {
 		lazy : true,
 		functional : false
 	};
-	private _token : DisposalToken;
+	private _token : Subscription;
 	constructor(private parent : RexScalar<T>, criterion : (change : ScalarChange<T>) => boolean) {
 		super();
-		this._token = parent.changed.on(x => criterion(x) ? this.changed.fire(x) : void 0);
+		this.depends.source = parent;
+		this._token = parent.changed.on(x => !criterion(x) ? this.changed.fire(x) : void 0);
 	}
 
 	get value() {

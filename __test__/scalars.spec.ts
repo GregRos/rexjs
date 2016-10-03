@@ -4,6 +4,8 @@
 import {Rexs} from '../src';
 import {ClosedError} from "../src/errors/index";
 import {RexScalar} from "../src/rexes/scalar/index";
+import {Rex} from "../src/rexes/base";
+import {RexEvent} from "../src";
 let throwsClosed = (f: () => void) => {
 	expect(f).toThrowError(ClosedError);
 };
@@ -28,10 +30,27 @@ let baseTests = (ctor : <T>(init : T) => RexScalar<T>) => {
 			expect(Var.value).toBe(1);
 		});
 
+
+
 		it("notifies change", () => {
 			Var.changed.on(x => tally += "a");
 			Var.value = 1;
 			expect(tally).toBe("a");
+		});
+
+		describe("does not notify change when set to current value", () => {
+
+			it("for numbers", () => {
+				let num_ = ctor(0);
+				num_.value = 0;
+				num_.changed.on(() => tally += "a");
+				num_.value = 0;
+				expect(tally).toBe("");
+			});
+			it("for strings", () => {
+				let str_= ctor("a");
+				str_.changed.on(() => tally += "a");
+			});
 		});
 
 		it("notifies close", () => {
@@ -181,5 +200,81 @@ describe("scalars", () => {
 				expect((link1.value as any).b).toBe(2);
 			});
 		});
+	});
+
+	describe("notify", () => {
+		let notifier = new RexEvent<void>();
+		baseTests(x => Rexs.var_(x).notify_(x => notifier));
+		//this is the intended usage of the notify_ Rex:
+
+		let notifierObject =(val : number) => {
+			let _val = val;
+			return {
+				notifier: new RexEvent<number>(),
+					get val() {
+					return _val;
+				},
+				set val(newVal : number) {
+					_val = newVal;
+					this.notifier.fire(_val);
+				}
+			}
+		};
+
+		//note that notify_ doesn't make sense by itself, but it does when followed by member_.
+		let link1 =  Rexs.var_(notifierObject(0));
+		let link2 = link1.notify_(obj => obj.value.notifier);
+		let link3 = link2.member_<number>('val');
+
+		beforeEach(() => {
+			link1 =  Rexs.var_(notifierObject(0));
+			link2 = link1.notify_(obj => obj.value.notifier);
+			link3 = link2.member_<number>('val');
+		});
+
+		describe("value propogation", () => {
+			it("propagate back", () => {
+				link3.value = 3;
+				expect(link1.value.val).toBe(3);
+			});
+
+			it("propagate forward", () => {
+				link1.value.val = 5;
+				expect(link3.value).toBe(5);
+			});
+
+			it("set link1", () => {
+				let origObject = link1.value;
+				link1.value = notifierObject(2);
+				expect(origObject.val).toBe(0);
+				expect(link3.value).toBe(2);
+				link3.value = 6;
+				expect(link3.value).toBe(6);
+				expect(link1.value.val).toBe(6);
+				expect(origObject.val).toBe(0);
+			});
+		});
+	});
+
+	describe("silence", () => {
+		//silence is tricky to test because it breaks the normal change propagation flow
+
+		let link1 = Rexs.var_(0);
+		let link2 = link1.silence_(change => change.value > 5);
+
+		beforeEach(() => {
+			link1 = Rexs.var_(0);
+			link2 = link1.silence_(change => change.value > 5);
+		});
+
+		describe("change propagation", () => {
+			it("raises/doesn't raise change correctly", () => {
+				link2.changed.on(x => tally += x.value);
+				link1.value = 1;
+				expect(tally).toBe("1");
+				link1.value = 6;
+				expect(tally).toBe("1");
+			});
+		})
 	})
 });

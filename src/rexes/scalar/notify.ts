@@ -1,7 +1,7 @@
 import {RexScalar, ScalarChange} from "./index";
-import {DisposalToken} from "../../events/disposal-token";
-import {RexEvent} from "../../events/implementation";
-import {IRexInfo} from "../definitions";
+import {Subscription} from "../../events/subscription";
+import {RexEvent} from "../../events/rex-event";
+import {IRexInfo} from "../base";
 import {RexNames} from '../names';
 /**
  * Created by Greg on 03/10/2016.
@@ -13,16 +13,19 @@ export class RexNotify<T> extends RexScalar<T> {
 		functional : false,
 		type : RexNames.Convert
 	};
-	private _parentToken : DisposalToken;
-	private _notifierToken : DisposalToken;
-	private _selfToken : DisposalToken;
+	private _parentToken : Subscription;
+	private _notifierToken : Subscription;
+	private _selfToken : Subscription;
 	constructor(private parent : RexScalar<T>, notifier : (change : ScalarChange<T>) => RexEvent<void>) {
 		super();
-
+		this.depends.source = parent;
 		this._parentToken = parent.changed.on(this.changed).and()
 		let onChange = (change : ScalarChange<T>) => {
 			let newNotifier = notifier(change);
-			this._notifierToken.close();
+			if (this._notifierToken) {
+				this._notifierToken.close();
+			}
+
 			this._notifierToken = newNotifier.on(() => this.notifyChange(undefined));
 		};
 		this._selfToken = this.changed.on(onChange);

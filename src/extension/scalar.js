@@ -5,9 +5,12 @@
 var _ = require('lodash');
 var scalar_1 = require('../rexes/scalar');
 var convert_1 = require("../rexes/scalar/convert");
-var names_1 = require("../rexes/names");
-var implementation_1 = require("../events/implementation");
+var rex_event_1 = require("../events/rex-event");
 var notify_1 = require("../rexes/scalar/notify");
+var silence_1 = require("../rexes/scalar/silence");
+var member_1 = require("../rexes/scalar/member");
+var rectify_1 = require("../rexes/scalar/rectify");
+var link_1 = require("../rexes/scalar/link");
 var RexScalarExtensions = {
     convert_: function (arg1, arg2) {
         if (_.isFunction(arg1) || _.isFunction(arg2)) {
@@ -20,25 +23,31 @@ var RexScalarExtensions = {
             return new convert_1.RexConvert(this, arg1);
         }
     },
-    rectify_: function (to, rectify) {
-        var _this = this;
-        var rectify_ = this.convert_(to, function (to) {
-            var clone = _.cloneDeep(_this.value);
-            rectify(clone, to);
-            return clone;
-        });
-        rectify_.info.type = names_1.RexNames.Rectify;
-        return rectify_;
+    link_: function () {
+        return new link_1.RexLink(this);
+    },
+    rectify_: function (arg1, arg2) {
+        if (_.isFunction(arg1)) {
+            return new rectify_1.RexRectify(this, {
+                to: arg1,
+                rectify: arg2
+            });
+        }
+        else {
+            return new rectify_1.RexRectify(this, arg1);
+        }
     },
     member_: function (memberName) {
-        var member_ = this.rectify_(function (from) { return from[memberName]; }, function (current, input) {
-            current[memberName] = input;
-        });
-        member_.info.type = names_1.RexNames.Member;
-        return member_;
+        if (!memberName) {
+            return this.link_();
+        }
+        return new member_1.RexMember(this, memberName);
     },
     notify_: function (eventOrEventGetter) {
-        if (eventOrEventGetter instanceof implementation_1.RexEvent) {
+        if (!eventOrEventGetter) {
+            return this.link_();
+        }
+        else if (eventOrEventGetter instanceof rex_event_1.RexEvent) {
             return new notify_1.RexNotify(this, function (x) { return eventOrEventGetter; });
         }
         else if (_.isFunction(eventOrEventGetter)) {
@@ -46,6 +55,14 @@ var RexScalarExtensions = {
         }
         else {
             throw new TypeError("Failed to resolve overload of notify_: " + eventOrEventGetter + " is not a function or an event.");
+        }
+    },
+    silence_: function (silencer) {
+        if (!silencer) {
+            return this.link_();
+        }
+        else {
+            return new silence_1.RexSilence(this, silencer);
         }
     },
     mutate: function (mutation) {

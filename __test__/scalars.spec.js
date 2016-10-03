@@ -4,6 +4,7 @@
  */
 var src_1 = require('../src');
 var index_1 = require("../src/errors/index");
+var src_2 = require("../src");
 var throwsClosed = function (f) {
     expect(f).toThrowError(index_1.ClosedError);
 };
@@ -27,6 +28,19 @@ var baseTests = function (ctor) {
             Var.changed.on(function (x) { return tally += "a"; });
             Var.value = 1;
             expect(tally).toBe("a");
+        });
+        describe("does not notify change when set to current value", function () {
+            it("for numbers", function () {
+                var num_ = ctor(0);
+                num_.value = 0;
+                num_.changed.on(function () { return tally += "a"; });
+                num_.value = 0;
+                expect(tally).toBe("");
+            });
+            it("for strings", function () {
+                var str_ = ctor("a");
+                str_.changed.on(function () { return tally += "a"; });
+            });
         });
         it("notifies close", function () {
             Var.closing.on(function (x) { return tally += "closing"; });
@@ -159,6 +173,71 @@ describe("scalars", function () {
                 link2.value = 5;
                 expect(tally).toBe("5");
                 expect(link1.value.b).toBe(2);
+            });
+        });
+    });
+    describe("notify", function () {
+        var notifier = new src_2.RexEvent();
+        baseTests(function (x) { return src_1.Rexs.var_(x).notify_(function (x) { return notifier; }); });
+        //this is the intended usage of the notify_ Rex:
+        var notifierObject = function (val) {
+            var _val = val;
+            return {
+                notifier: new src_2.RexEvent(),
+                get val() {
+                    return _val;
+                },
+                set val(newVal) {
+                    _val = newVal;
+                    this.notifier.fire(_val);
+                }
+            };
+        };
+        //note that notify_ doesn't make sense by itself, but it does when followed by member_.
+        var link1 = src_1.Rexs.var_(notifierObject(0));
+        var link2 = link1.notify_(function (obj) { return obj.value.notifier; });
+        var link3 = link2.member_('val');
+        beforeEach(function () {
+            link1 = src_1.Rexs.var_(notifierObject(0));
+            link2 = link1.notify_(function (obj) { return obj.value.notifier; });
+            link3 = link2.member_('val');
+        });
+        describe("value propogation", function () {
+            it("propagate back", function () {
+                link3.value = 3;
+                expect(link1.value.val).toBe(3);
+            });
+            it("propagate forward", function () {
+                link1.value.val = 5;
+                expect(link3.value).toBe(5);
+            });
+            it("set link1", function () {
+                var origObject = link1.value;
+                link1.value = notifierObject(2);
+                expect(origObject.val).toBe(0);
+                expect(link3.value).toBe(2);
+                link3.value = 6;
+                expect(link3.value).toBe(6);
+                expect(link1.value.val).toBe(6);
+                expect(origObject.val).toBe(0);
+            });
+        });
+    });
+    describe("silence", function () {
+        //silence is tricky to test because it breaks the normal change propagation flow
+        var link1 = src_1.Rexs.var_(0);
+        var link2 = link1.silence_(function (change) { return change.value > 5; });
+        beforeEach(function () {
+            link1 = src_1.Rexs.var_(0);
+            link2 = link1.silence_(function (change) { return change.value > 5; });
+        });
+        describe("change propagation", function () {
+            it("raises/doesn't raise change correctly", function () {
+                link2.changed.on(function (x) { return tally += x.value; });
+                link1.value = 1;
+                expect(tally).toBe("1");
+                link1.value = 6;
+                expect(tally).toBe("1");
             });
         });
     });

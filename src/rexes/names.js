@@ -10,5 +10,6 @@ var RexNames;
     RexNames.Rectify = "Rectify";
     RexNames.Silence = "Silence";
     RexNames.Notify = "Notify";
+    RexNames.Link = "Link";
 })(RexNames = exports.RexNames || (exports.RexNames = {}));
 //# sourceMappingURL=names.js.map

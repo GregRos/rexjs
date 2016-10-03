@@ -20,7 +20,8 @@ var RexSilence = (function (_super) {
             lazy: true,
             functional: false
         };
-        this._token = parent.changed.on(function (x) { return criterion(x) ? _this.changed.fire(x) : void 0; });
+        this.depends.source = parent;
+        this._token = parent.changed.on(function (x) { return !criterion(x) ? _this.changed.fire(x) : void 0; });
     }
     Object.defineProperty(RexSilence.prototype, "value", {
         get: function () {

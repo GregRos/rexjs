@@ -8,6 +8,7 @@ export module RexNames {
 	export const Rectify = "Rectify";
 	export const Silence = "Silence";
 	export const Notify = "Notify";
+	export const Link = "Link";
 }
 
 

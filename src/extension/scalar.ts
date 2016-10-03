@@ -5,8 +5,15 @@ import _ =require('lodash');
 import {RexScalar, ScalarChange} from '../rexes/scalar'
 import {Conversion, RexConvert} from "../rexes/scalar/convert";
 import {RexNames} from "../rexes/names";
-import {RexEvent} from "../events/implementation";
+import {RexEvent} from "../events/rex-event";
 import {RexNotify} from "../rexes/scalar/notify";
+import {RexSilence} from "../rexes/scalar/silence";
+import {RexMember} from "../rexes/scalar/member";
+import {RexRectify, Rectifier} from "../rexes/scalar/rectify";
+import {RexLink} from "../rexes/scalar/link";
+/**
+ * This file contains "extension methods" for RexScalar objects.
+ */
 
 declare module '../rexes/scalar' {
 	export interface RexScalar<T> {
@@ -32,6 +39,7 @@ declare module '../rexes/scalar' {
 		 */
 		rectify_<TTo>(to ?: (from : T) => TTo, rectifier ?: (current : T, to : TTo) => void) : RexScalar<TTo>;
 
+		rectify_<TTo>(rectifier : Rectifier<T, TTo>);
 		/**
 		 * Gets the member of the specified name from the Rex.
 		 * In the back conversion, the current value is cloned and the clone's member is set. Then this rex is updated with the new object.
@@ -40,24 +48,39 @@ declare module '../rexes/scalar' {
 		member_<TTo>(name : string)  : RexScalar<TTo>;
 
 		/**
-		 *
+		 * Applies a Silencer Rex that suppresses change notifications that match a certain criterion.
+		 * This does not change the value of the Rex.
 		 * @param silencer
 		 */
 		silence_(silencer : (change : ScalarChange<T>) => boolean) : RexScalar<T>;
 
-		notify_(eventGetter : (change : ScalarChange<T>) => RexEvent<void>) : RexScalar<T>;
+		/**
+		 * Applies a linking Rex that mirrors this Rex.
+		 * Used to manage event subscriptions.
+		 */
+		link_() : RexScalar<T>;
 
-		notify_(event : RexEvent<void>);
+		/**
+		 * Creates a Rex that monitors an external event for change notification.
+		 * @param eventGetter A function that, given a change notification, constructs an event that can be used to listen for hidden changes.
+		 */
+		notify_(eventGetter : (change : ScalarChange<T>) => RexEvent<any>) : RexScalar<T>;
+
+		/**
+		 * Creates a Rex that monitors an external event for change notification.
+		 * @param event An event that, when fired, means a change in the Rex may have occurred.
+		 */
+		notify_(event : RexEvent<void>) : RexScalar<T>;
 
 		/**
 		 * Clones the value and applies a mutation on the clone, then updates the Rex with it.
-		 * @param mutation
+		 * @param mutation The mutation.
 		 */
 		mutate(mutation : (copy : T) => void) : void;
 
 		/**
 		 * Takes a function that updates the current value of the Rex to another value.
-		 * @param reducer
+		 * @param reducer The reducer.
 		 */
 		reduce(reducer : (current : T) => T) : void;
 	}
@@ -75,31 +98,47 @@ const RexScalarExtensions =  {
 		}
 	},
 
-	rectify_<T, TTo>(this : RexScalar<T>,to ?: (from : T) => TTo, rectify ?: (current : T, input : TTo) => void)  {
-		let rectify_ = this.convert_(to, to => {
-			let clone = _.cloneDeep(this.value);
-			rectify(clone, to);
-			return clone;
-		});
-		rectify_.info.type = RexNames.Rectify;
-		return rectify_;
+	link_<T>(this : RexScalar<T>) : RexScalar<T> {
+		return new RexLink(this);
 	},
 
-	member_<T extends Object, TTo>(this : RexScalar<T>, memberName : string) {
-		let member_ = this.rectify_(from => from[memberName], (current, input) => {
-			current[memberName] = input;
-		});
-		member_.info.type = RexNames.Member;
-		return member_;
+	rectify_<T, TTo>(this : RexScalar<T>, arg1 : any, arg2 : any)  {
+		if (_.isFunction(arg1)) {
+			return new RexRectify(this, {
+				to : arg1,
+				rectify : arg2
+			})
+		} else {
+			return new RexRectify(this, arg1);
+		}
+	},
+
+	member_<T extends Object, TTo>(this : RexScalar<T>, memberName : string) : any {
+		if (!memberName) {
+			return this.link_();
+		}
+		return new RexMember<TTo>(this, memberName);
 	},
 
 	notify_<T>(this : RexScalar<T>, eventOrEventGetter : RexEvent<void> | ((change : ScalarChange<T>) => RexEvent<void>)) {
-		if (eventOrEventGetter instanceof RexEvent) {
+		if (!eventOrEventGetter) {
+			return this.link_();
+		}
+		else if (eventOrEventGetter instanceof RexEvent) {
 			return new RexNotify(this, x => eventOrEventGetter);
 		} else if (_.isFunction(eventOrEventGetter)) {
 			return new RexNotify(this, eventOrEventGetter);
 		} else {
 			throw new TypeError(`Failed to resolve overload of notify_: ${eventOrEventGetter} is not a function or an event.`)
+		}
+	},
+
+	silence_<T>(this : RexScalar<T>, silencer : (change : ScalarChange<T>) => boolean) {
+		if (!silencer) {
+			return this.link_();
+		}
+		else {
+			return new RexSilence<T>(this, silencer);
 		}
 	},
 

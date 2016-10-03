@@ -1,7 +1,7 @@
 /**
  * Created by Greg on 01/10/2016.
  */
-import {DisposalToken, IDisposable} from './disposal-token';
-import {RexEvent} from './implementation';
+import {Subscription, ISubscription} from './subscription';
+import {RexEvent} from './rex-event';
 
-export {RexEvent, DisposalToken, IDisposable};
+export {RexEvent, Subscription, ISubscription};

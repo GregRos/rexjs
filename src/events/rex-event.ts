@@ -2,13 +2,14 @@
  * Created by Greg on 01/10/2016.
  */
 import _ = require('lodash');
-import {DisposalToken} from './disposal-token';
+import {Subscription} from './subscription';
 /**
  * An event primitive used in the rexjs library. Allows the ability to subscribe to notifications.
  *
  */
-export class RexEvent<TParam> {
 
+const freezeKey = "rexjs:RexEvent-frozen";
+export class RexEvent<TParam> {
 	/**
 	 * Constructs a new instance of the @RexEvent.
 	 * @constructor
@@ -25,26 +26,28 @@ export class RexEvent<TParam> {
 	get name() {
 		return this._name;
 	}
-
-	private _invocationList = [];
-
+	private _invocationList : ((arg : TParam) => void)[] = [];
 	/**
 	 * Attaches a handler to this event or subscribes to it. When the event will fire it will also fire the handler.
 	 * If the handler is a function, it's called, and if it's an event, it's fired.
 	 * @param handler The handler, which can be another event or a function.
-	 * @returns {DisposalToken} A token that supports a close() method, upon which this subscription is cancelled.
+	 * @returns {Subscription} A token that supports a close() method, upon which this subscription is cancelled.
 	 */
-	on<S extends TParam>(handler : ((arg : S) => void) | RexEvent<S>) : DisposalToken {
+	on<S extends TParam>(handler : ((arg : S) => void) | RexEvent<S>) : Subscription {
+		let finalHandler : (arg : S) => void;
 		if (handler instanceof RexEvent) {
-			let myBound = handler.fire.bind(handler);
-			this._invocationList.push(myBound);
-			return new DisposalToken(() => _.remove(this._invocationList, x => x === myBound));
+			finalHandler = handler.fire.bind(handler);
 		} else if (_.isFunction(handler)) {
-			this._invocationList.push(handler);
-			return new DisposalToken(() => _.remove(this._invocationList, x => x === handler));
+			finalHandler = handler;
 		} else {
 			throw new TypeError(`Failed to resolve overload: ${handler} is not a RexEvent or a function.`);
 		}
+		this._invocationList.push(finalHandler);
+		return new Subscription({
+			close: () => _.pull(this._invocationList, finalHandler),
+			freeze : () => finalHandler[freezeKey] = true,
+			unfreeze : () => finalHandler[freezeKey] = undefined
+		});
 	}
 
 	/**
@@ -52,7 +55,11 @@ export class RexEvent<TParam> {
 	 * @param arg The argument with which the event is raised.
 	 */
 	fire(arg : TParam) {
-		this._invocationList.forEach(f => f(arg));
+		this._invocationList.forEach(f => {
+			if (!f[freezeKey]) {
+				f(arg)
+			}
+		});
 	}
 
 	/**

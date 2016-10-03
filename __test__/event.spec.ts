@@ -1,4 +1,4 @@
-import {RexEvent, IDisposable} from "../src";
+import {RexEvent, ISubscription} from "../src";
 /**
  * Created by Greg on 02/10/2016.
  */
@@ -37,7 +37,7 @@ describe("events", () => {
 		});
 
 		it("should unsubscribe correctly xN", () => {
-			let toks: IDisposable[] = [];
+			let toks: ISubscription[] = [];
 			for (let i = 0; i < 10; i++) {
 				toks.push(event.on(x => tally += i));
 			}

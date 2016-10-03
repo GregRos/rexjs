@@ -3,11 +3,12 @@
  * Created by Greg on 01/10/2016.
  */
 var _ = require('lodash');
-var disposal_token_1 = require('./disposal-token');
+var subscription_1 = require('./subscription');
 /**
  * An event primitive used in the rexjs library. Allows the ability to subscribe to notifications.
  *
  */
+var freezeKey = "rexjs:RexEvent-frozen";
 var RexEvent = (function () {
     /**
      * Constructs a new instance of the @RexEvent.
@@ -34,29 +35,37 @@ var RexEvent = (function () {
      * Attaches a handler to this event or subscribes to it. When the event will fire it will also fire the handler.
      * If the handler is a function, it's called, and if it's an event, it's fired.
      * @param handler The handler, which can be another event or a function.
-     * @returns {DisposalToken} A token that supports a close() method, upon which this subscription is cancelled.
+     * @returns {Subscription} A token that supports a close() method, upon which this subscription is cancelled.
      */
     RexEvent.prototype.on = function (handler) {
         var _this = this;
+        var finalHandler;
         if (handler instanceof RexEvent) {
-            var myBound_1 = handler.fire.bind(handler);
-            this._invocationList.push(myBound_1);
-            return new disposal_token_1.DisposalToken(function () { return _.remove(_this._invocationList, function (x) { return x === myBound_1; }); });
+            finalHandler = handler.fire.bind(handler);
         }
         else if (_.isFunction(handler)) {
-            this._invocationList.push(handler);
-            return new disposal_token_1.DisposalToken(function () { return _.remove(_this._invocationList, function (x) { return x === handler; }); });
+            finalHandler = handler;
         }
         else {
             throw new TypeError("Failed to resolve overload: " + handler + " is not a RexEvent or a function.");
         }
+        this._invocationList.push(finalHandler);
+        return new subscription_1.Subscription({
+            close: function () { return _.pull(_this._invocationList, finalHandler); },
+            freeze: function () { return finalHandler[freezeKey] = true; },
+            unfreeze: function () { return finalHandler[freezeKey] = undefined; }
+        });
     };
     /**
      * Fires the event. This method's visibility is not restricted, but it should be used carefully.
      * @param arg The argument with which the event is raised.
      */
     RexEvent.prototype.fire = function (arg) {
-        this._invocationList.forEach(function (f) { return f(arg); });
+        this._invocationList.forEach(function (f) {
+            if (!f[freezeKey]) {
+                f(arg);
+            }
+        });
     };
     /**
      * Clears the event's subscription list. Use this method carefully.
@@ -70,4 +79,4 @@ var RexEvent = (function () {
     return RexEvent;
 }());
 exports.RexEvent = RexEvent;
-//# sourceMappingURL=implementation.js.map
+//# sourceMappingURL=rex-event.js.map

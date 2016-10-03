@@ -20,10 +20,13 @@ var RexNotify = (function (_super) {
             functional: false,
             type: names_1.RexNames.Convert
         };
+        this.depends.source = parent;
         this._parentToken = parent.changed.on(this.changed).and();
         var onChange = function (change) {
             var newNotifier = notifier(change);
-            _this._notifierToken.close();
+            if (_this._notifierToken) {
+                _this._notifierToken.close();
+            }
             _this._notifierToken = newNotifier.on(function () { return _this.notifyChange(undefined); });
         };
         this._selfToken = this.changed.on(onChange);

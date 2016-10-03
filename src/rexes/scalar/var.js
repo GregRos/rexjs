@@ -39,6 +39,9 @@ var RexVar = (function (_super) {
                 throw errors_1.Errors.cannotWrite(this.meta.name);
             }
             var oldVal = this._value;
+            if (Object.is(this._value, val)) {
+                return;
+            }
             this._value = val;
             this.notifyChange(oldVal);
         },

@@ -1,10 +1,15 @@
-import {IRexInfo} from "./definitions";
+
 import {RexEvent} from "../";
 import {Errors} from '../errors';
 /**
  * Created by Greg on 01/10/2016.
  */
 
+export interface IRexInfo {
+	type : string;
+	lazy : boolean;
+	functional : boolean;
+}
 
 
 export abstract class Rex<TChange> {
@@ -12,8 +17,8 @@ export abstract class Rex<TChange> {
 	abstract info : IRexInfo;
 	meta = {} as any;
 	depends = {} as any;
-	closing = new RexEvent<void>("onClosing");
-	changed = new RexEvent<TChange>("onChanged");
+	closing : RexEvent<void> = new RexEvent<void>("onClosing");
+	changed : RexEvent<TChange> = new RexEvent<TChange>("onChanged");
 
 	get isClosed() {
 		return this._isClosed;

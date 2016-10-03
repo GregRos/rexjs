@@ -11,12 +11,12 @@ describe("disposal token", function () {
         nTally = 0;
     });
     it("disposes", function () {
-        var token = new src_1.DisposalToken(function () { return tally += "a"; });
+        var token = new src_1.Subscription(function () { return tally += "a"; });
         token.close();
         expect(tally).toBe("a");
     });
     it("disposes twice, 2nd time is harmless", function () {
-        var token = new src_1.DisposalToken(function () { return tally += "a"; });
+        var token = new src_1.Subscription(function () { return tally += "a"; });
         token.close();
         token.close();
         expect(tally).toBe("a");
@@ -24,7 +24,7 @@ describe("disposal token", function () {
     it("merges", function () {
         var tokens = [];
         var _loop_1 = function(i) {
-            tokens.push(new src_1.DisposalToken(function () { return tally += i; }));
+            tokens.push(new src_1.Subscription(function () { return tally += i; }));
         };
         for (var i = 0; i < 10; i++) {
             _loop_1(i);
@@ -37,14 +37,14 @@ describe("disposal token", function () {
     it("mutli-merges", function () {
         var tokens1 = [];
         var _loop_2 = function(i) {
-            tokens1.push(new src_1.DisposalToken(function () { return tally += i; }));
+            tokens1.push(new src_1.Subscription(function () { return tally += i; }));
         };
         for (var i = 0; i < 10; i++) {
             _loop_2(i);
         }
         var tokens2 = [];
         var _loop_3 = function(i) {
-            tokens2.push(new src_1.DisposalToken(function () { return tally += i; }));
+            tokens2.push(new src_1.Subscription(function () { return tally += i; }));
         };
         for (var i = 0; i < 10; i++) {
             _loop_3(i);

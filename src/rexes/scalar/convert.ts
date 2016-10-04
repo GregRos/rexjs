@@ -1,6 +1,5 @@
 import {IScalarChangeInfo, RexScalar} from "./";
-import {Rex} from "../base";
-import {IRexInfo} from "../definitions";
+import {Rex, IRexInfo} from "../base";
 import {RexNames} from "../names";
 import {Errors} from '../../errors';
 import {Subscription} from "../../";

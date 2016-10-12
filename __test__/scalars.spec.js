@@ -87,14 +87,14 @@ var baseTests = function (ctor) {
 };
 describe("scalars", function () {
     describe("var", function () {
-        baseTests(src_1.Rexs.var_);
+        baseTests(src_1.Rexes.var_);
     });
     describe("convert", function () {
-        baseTests(function (x) { return src_1.Rexs.var_(x).convert_(function (x) { return x; }, function (x) { return x; }); });
-        var link1 = src_1.Rexs.var_(1);
+        baseTests(function (x) { return src_1.Rexes.var_(x).convert_(function (x) { return x; }, function (x) { return x; }); });
+        var link1 = src_1.Rexes.var_(1);
         var link2 = link1.convert_(function (x) { return x * 2; }, function (x) { return x / 2; });
         beforeEach(function () {
-            link1 = src_1.Rexs.var_(1);
+            link1 = src_1.Rexes.var_(1);
             link2 = link1.convert_(function (x) { return x * 2; }, function (x) { return x / 2; });
         });
         describe("consistency tests", function () {
@@ -154,11 +154,11 @@ describe("scalars", function () {
         });
     });
     describe("member", function () {
-        baseTests(function (x) { return src_1.Rexs.var_({ a: x }).member_('a'); });
-        var link1 = src_1.Rexs.var_({ a: 1 });
+        baseTests(function (x) { return src_1.Rexes.var_({ a: x }).member_('a'); });
+        var link1 = src_1.Rexes.var_({ a: 1 });
         var link2 = link1.member_('a');
         beforeEach(function () {
-            link1 = src_1.Rexs.var_({ a: 1 });
+            link1 = src_1.Rexes.var_({ a: 1 });
             link2 = link1.member_('a');
         });
         describe("consistency tests", function () {
@@ -178,7 +178,7 @@ describe("scalars", function () {
     });
     describe("notify", function () {
         var notifier = new src_2.RexEvent();
-        baseTests(function (x) { return src_1.Rexs.var_(x).notify_(function (x) { return notifier; }); });
+        baseTests(function (x) { return src_1.Rexes.var_(x).notify_(function (x) { return notifier; }); });
         //this is the intended usage of the notify_ Rex:
         var notifierObject = function (val) {
             var _val = val;
@@ -194,11 +194,11 @@ describe("scalars", function () {
             };
         };
         //note that notify_ doesn't make sense by itself, but it does when followed by member_.
-        var link1 = src_1.Rexs.var_(notifierObject(0));
+        var link1 = src_1.Rexes.var_(notifierObject(0));
         var link2 = link1.notify_(function (obj) { return obj.value.notifier; });
         var link3 = link2.member_('val');
         beforeEach(function () {
-            link1 = src_1.Rexs.var_(notifierObject(0));
+            link1 = src_1.Rexes.var_(notifierObject(0));
             link2 = link1.notify_(function (obj) { return obj.value.notifier; });
             link3 = link2.member_('val');
         });
@@ -225,10 +225,10 @@ describe("scalars", function () {
     });
     describe("silence", function () {
         //silence is tricky to test because it breaks the normal change propagation flow
-        var link1 = src_1.Rexs.var_(0);
+        var link1 = src_1.Rexes.var_(0);
         var link2 = link1.silence_(function (change) { return change.value > 5; });
         beforeEach(function () {
-            link1 = src_1.Rexs.var_(0);
+            link1 = src_1.Rexes.var_(0);
             link2 = link1.silence_(function (change) { return change.value > 5; });
         });
         describe("change propagation", function () {

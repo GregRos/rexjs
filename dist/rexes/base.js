@@ -1,9 +1,6 @@
 "use strict";
 var _1 = require("../");
 var errors_1 = require('../errors');
-/**
- * Created by Greg on 01/10/2016.
- */
 var Rex = (function () {
     function Rex() {
         this._isClosed = false;

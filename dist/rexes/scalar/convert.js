@@ -7,6 +7,9 @@ var __extends = (this && this.__extends) || function (d, b) {
 var _1 = require("./");
 var names_1 = require("../names");
 var errors_1 = require('../../errors');
+//instead of using undefined to signify a dirty cached value, we use a special token,
+//because 'undefined' is a valid value.
+var missing = {};
 var RexConvert = (function (_super) {
     __extends(RexConvert, _super);
     function RexConvert(parent, conversion) {
@@ -14,21 +17,25 @@ var RexConvert = (function (_super) {
         _super.call(this);
         this.parent = parent;
         this.conversion = conversion;
+        this._last = missing;
         this.info = {
             type: names_1.RexNames.Convert,
             lazy: true,
             functional: true
         };
         this.depends.source = parent;
-        this._subToken = parent.changed.on(function () { return _this.notifyChange(_this._last); });
+        this._parentSub = parent.changed.on(function () {
+            var lastVal = _this._last;
+            _this._last = missing;
+            _this.notifyChange(lastVal);
+        });
         var parentClose = parent.closing.on(function () { return _this.close(); });
-        var selfChange = this.changed.on(function () { return _this._last = undefined; });
-        this._subToken = this._subToken.and(parentClose, selfChange);
+        this._otherSubs = parentClose;
     }
     Object.defineProperty(RexConvert.prototype, "value", {
         get: function () {
             this.makeSureNotClosed();
-            if (this._last === undefined) {
+            if (this._last === missing) {
                 if (!this.conversion.from) {
                     throw errors_1.Errors.cannotRead(this.meta.name);
                 }
@@ -37,18 +44,29 @@ var RexConvert = (function (_super) {
             return this._last;
         },
         set: function (val) {
+            var _this = this;
             this.makeSureNotClosed();
             if (!this.conversion.to) {
                 throw errors_1.Errors.cannotWrite(this.meta.name);
             }
+            var prevVal = this._last;
+            //use Object.is in case of NaN
+            if (Object.is(prevVal, val)) {
+                return;
+            }
             this._last = val;
-            this.parent.value = this.conversion.from(val);
+            var newVal = this.conversion.from(val);
+            this._parentSub.freezeWhile(function () { return _this.parent.value = newVal; });
+            this.notifyChange(prevVal);
         },
         enumerable: true,
         configurable: true
     });
     RexConvert.prototype.close = function () {
-        this._subToken.close();
+        if (this.isClosed)
+            return;
+        this._otherSubs.close();
+        this._parentSub.close();
         _super.prototype.close.call(this);
     };
     return RexConvert;

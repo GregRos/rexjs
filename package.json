@@ -1,8 +1,19 @@
 {
   "name": "rexjs",
-  "version": "0.1.0",
+  "version": "0.2.3",
   "description": "A library for smart variables and change notification.",
+  "directories": {
+    "bin": "dist",
+    "test" :"__test__",
+    "lib" : "dist"
+  },
+  "files" : [
+    "dist/",
+    "src/",
+    "__test__/"
+  ],
   "main": "dist/index.js",
+  "repository" : "https://github.com/GregRos/rexjs",
   "dependencies": {
     "core-js": "^2.4.1",
     "lodash": "^4.16.2"
@@ -28,6 +39,7 @@
     "event",
     "events"
   ],
+  "typings" : "dist/index",
   "author": "Greg Ros",
   "license": "MIT"
 }

@@ -4,5 +4,5 @@
  */
 require('./scalar');
 var rex_1 = require('./rex');
-exports.Rexs = rex_1.Rexs;
+exports.Rexes = rex_1.Rexes;
 //# sourceMappingURL=index.js.map

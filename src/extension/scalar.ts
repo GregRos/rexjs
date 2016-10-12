@@ -11,6 +11,7 @@ import {RexSilence} from "../rexes/scalar/silence";
 import {RexMember} from "../rexes/scalar/member";
 import {RexRectify, Rectifier} from "../rexes/scalar/rectify";
 import {RexLink} from "../rexes/scalar/link";
+import {RexListen} from "../rexes/scalar/listen";
 /**
  * This file contains "extension methods" for RexScalar objects.
  */
@@ -73,6 +74,12 @@ declare module '../rexes/scalar' {
 		notify_(event : RexEvent<void>) : RexScalar<T>;
 
 		/**
+		 * Attaches an array of listeners to the Rex and returns it.
+		 * @param listeners The listeners to attach.
+		 */
+		listen_(...listeners : ((change : ScalarChange<T>) => void)[]);
+
+		/**
 		 * Clones the value and applies a mutation on the clone, then updates the Rex with it.
 		 * @param mutation The mutation.
 		 */
@@ -83,6 +90,8 @@ declare module '../rexes/scalar' {
 		 * @param reducer The reducer.
 		 */
 		reduce(reducer : (current : T) => T) : void;
+
+
 	}
 }
 
@@ -140,6 +149,14 @@ const RexScalarExtensions =  {
 		else {
 			return new RexSilence<T>(this, silencer);
 		}
+	},
+
+	listen_<T>(this : RexScalar<T>, ...callbacks : ((change : ScalarChange<T>) => void)[]) {
+		let allCallbacks = (change : ScalarChange<T>) => {
+			callbacks.forEach(f => f(change));
+		};
+		this.changed.on(allCallbacks);
+		return this;
 	},
 
 	mutate<T>(this :RexScalar<T>, mutation : (copy : T) => void) : void {

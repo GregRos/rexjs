@@ -9,6 +9,8 @@ export module RexNames {
 	export const Silence = "Silence";
 	export const Notify = "Notify";
 	export const Link = "Link";
+	export const Listen = "Listen";
+	export const Computed = "Computed";
 }
 
 

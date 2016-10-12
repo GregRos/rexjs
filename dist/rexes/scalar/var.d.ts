@@ -2,7 +2,7 @@
  * Created by Greg on 01/10/2016.
  */
 import { RexScalar } from './';
-import { IRexInfo } from "../definitions";
+import { IRexInfo } from "../";
 export declare class RexVar<T> extends RexScalar<T> {
     private canRead;
     private canWrite;

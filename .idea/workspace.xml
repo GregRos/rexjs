@@ -3,9 +3,67 @@
   <component name="ChangeListManager">
     <list default="true" id="7dea5258-df22-4e39-ab0c-dfefd26cd69f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rexes/scalar/convert.js.map" afterPath="$PROJECT_DIR$/src/rexes/scalar/convert.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rexes/scalar/convert.ts" afterPath="$PROJECT_DIR$/src/rexes/scalar/convert.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.npmignore" afterPath="$PROJECT_DIR$/.npmignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/__test__/scalars.spec.js" afterPath="$PROJECT_DIR$/__test__/scalars.spec.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/__test__/scalars.spec.js.map" afterPath="$PROJECT_DIR$/__test__/scalars.spec.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/__test__/scalars.spec.ts" afterPath="$PROJECT_DIR$/__test__/scalars.spec.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/errors/index.d.ts" afterPath="$PROJECT_DIR$/dist/errors/index.d.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/errors/index.js" afterPath="$PROJECT_DIR$/dist/errors/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/events/index.d.ts" afterPath="$PROJECT_DIR$/dist/events/index.d.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/events/index.js" afterPath="$PROJECT_DIR$/dist/events/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/events/index.js.map" afterPath="$PROJECT_DIR$/dist/events/index.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/extension/index.d.ts" afterPath="$PROJECT_DIR$/dist/extension/index.d.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/extension/index.js" afterPath="$PROJECT_DIR$/dist/extension/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/extension/index.js.map" afterPath="$PROJECT_DIR$/dist/extension/index.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/extension/rex.d.ts" afterPath="$PROJECT_DIR$/dist/extension/rex.d.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/extension/rex.js" afterPath="$PROJECT_DIR$/dist/extension/rex.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/extension/rex.js.map" afterPath="$PROJECT_DIR$/dist/extension/rex.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/extension/scalar.d.ts" afterPath="$PROJECT_DIR$/dist/extension/scalar.d.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/extension/scalar.js" afterPath="$PROJECT_DIR$/dist/extension/scalar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/extension/scalar.js.map" afterPath="$PROJECT_DIR$/dist/extension/scalar.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/index.d.ts" afterPath="$PROJECT_DIR$/dist/index.d.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/index.js" afterPath="$PROJECT_DIR$/dist/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/index.js.map" afterPath="$PROJECT_DIR$/dist/index.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/rexes/base.d.ts" afterPath="$PROJECT_DIR$/dist/rexes/base.d.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/rexes/base.js" afterPath="$PROJECT_DIR$/dist/rexes/base.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/rexes/base.js.map" afterPath="$PROJECT_DIR$/dist/rexes/base.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/rexes/index.d.ts" afterPath="$PROJECT_DIR$/dist/rexes/index.d.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/rexes/index.js" afterPath="$PROJECT_DIR$/dist/rexes/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/rexes/index.js.map" afterPath="$PROJECT_DIR$/dist/rexes/index.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/rexes/names.d.ts" afterPath="$PROJECT_DIR$/dist/rexes/names.d.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/rexes/names.js" afterPath="$PROJECT_DIR$/dist/rexes/names.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/rexes/names.js.map" afterPath="$PROJECT_DIR$/dist/rexes/names.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/rexes/scalar/convert.d.ts" afterPath="$PROJECT_DIR$/dist/rexes/scalar/convert.d.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/rexes/scalar/convert.js" afterPath="$PROJECT_DIR$/dist/rexes/scalar/convert.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/rexes/scalar/convert.js.map" afterPath="$PROJECT_DIR$/dist/rexes/scalar/convert.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/rexes/scalar/index.d.ts" afterPath="$PROJECT_DIR$/dist/rexes/scalar/index.d.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/rexes/scalar/index.js" afterPath="$PROJECT_DIR$/dist/rexes/scalar/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/rexes/scalar/index.js.map" afterPath="$PROJECT_DIR$/dist/rexes/scalar/index.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/rexes/scalar/var.d.ts" afterPath="$PROJECT_DIR$/dist/rexes/scalar/var.d.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/rexes/scalar/var.js" afterPath="$PROJECT_DIR$/dist/rexes/scalar/var.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/rexes/scalar/var.js.map" afterPath="$PROJECT_DIR$/dist/rexes/scalar/var.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/events/subscription.js" afterPath="$PROJECT_DIR$/src/events/subscription.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/events/subscription.js.map" afterPath="$PROJECT_DIR$/src/events/subscription.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/events/subscription.ts" afterPath="$PROJECT_DIR$/src/events/subscription.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/extension/index.js" afterPath="$PROJECT_DIR$/src/extension/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/extension/index.js.map" afterPath="$PROJECT_DIR$/src/extension/index.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/extension/index.ts" afterPath="$PROJECT_DIR$/src/extension/index.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/extension/rex.js" afterPath="$PROJECT_DIR$/src/extension/rex.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/extension/rex.js.map" afterPath="$PROJECT_DIR$/src/extension/rex.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/extension/rex.ts" afterPath="$PROJECT_DIR$/src/extension/rex.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/extension/scalar.js" afterPath="$PROJECT_DIR$/src/extension/scalar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/extension/scalar.js.map" afterPath="$PROJECT_DIR$/src/extension/scalar.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/extension/scalar.ts" afterPath="$PROJECT_DIR$/src/extension/scalar.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/index.js" afterPath="$PROJECT_DIR$/src/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/index.js.map" afterPath="$PROJECT_DIR$/src/index.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/index.ts" afterPath="$PROJECT_DIR$/src/index.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rexes/names.js" afterPath="$PROJECT_DIR$/src/rexes/names.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rexes/names.js.map" afterPath="$PROJECT_DIR$/src/rexes/names.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rexes/names.ts" afterPath="$PROJECT_DIR$/src/rexes/names.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rexes/scalar/member.js.map" afterPath="$PROJECT_DIR$/src/rexes/scalar/member.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rexes/scalar/member.ts" afterPath="$PROJECT_DIR$/src/rexes/scalar/member.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rexes/scalar/var.ts" afterPath="$PROJECT_DIR$/src/rexes/scalar/var.ts" />
     </list>
     <ignored path="rexjs.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,96 +89,108 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="145">
-                <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
-                <folding />
-              </first_editor>
-              <second_editor />
+      <file leaf-file-name="listen.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rexes/scalar/listen.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="175">
+              <caret line="9" column="22" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="22" />
+              <folding>
+                <element signature="e#1#51#0" expanded="true" />
+                <element signature="n#!!doc;n#RexListen#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="convert.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rexes/scalar/convert.ts">
+      <file leaf-file-name="names.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rexes/names.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+            <state relative-caret-position="75">
+              <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="125">
+              <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rex.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/extension/rex.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="521">
+              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/extension/index.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
-                <element signature="e#0#48#0" expanded="true" />
+                <element signature="e#42#60#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rex-event.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/events/rex-event.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="subscription.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/events/subscription.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="635">
+              <caret line="100" column="4" selection-start-line="100" selection-start-column="4" selection-end-line="100" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="scalar.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/extension/scalar.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="275">
+              <caret line="79" column="12" selection-start-line="79" selection-start-column="12" selection-end-line="79" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="computed.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rexes/scalar/computed.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+              <folding>
+                <element signature="n#!!doc;n#RexComputed#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="index.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rexes/scalar/index.ts">
+        <entry file="file://$PROJECT_DIR$/src/rexes/index.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="link.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rexes/scalar/link.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="member.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rexes/scalar/member.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="notify.ts" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/rexes/scalar/notify.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="rectify.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rexes/scalar/rectify.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="jrunner.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/jrunner.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1075">
-              <caret line="43" column="5" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -143,8 +213,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/__test__/support/jasmine.json" />
-        <option value="$PROJECT_DIR$/dist/extension/disposalToken.d.ts" />
         <option value="$PROJECT_DIR$/dist/events/interfaces.d.ts" />
         <option value="internal/module.js" />
         <option value="$PROJECT_DIR$/dist/rexes/scalar/index.js" />
@@ -154,19 +222,16 @@
         <option value="$PROJECT_DIR$/src/extension/disposalToken.ts" />
         <option value="$PROJECT_DIR$/__test__/disposal.spec.ts" />
         <option value="$PROJECT_DIR$/__test__/event.spec.ts" />
-        <option value="$PROJECT_DIR$/src/extension/rex.ts" />
         <option value="$PROJECT_DIR$/src/rexes/scalar/RexMember.ts" />
         <option value="$PROJECT_DIR$/dist/extension/index.d.ts" />
         <option value="$PROJECT_DIR$/src/errors/index.ts" />
         <option value="$PROJECT_DIR$/tsconfig.json" />
-        <option value="$PROJECT_DIR$/.npmignore" />
         <option value="$PROJECT_DIR$/typings.json" />
         <option value="$PROJECT_DIR$/jrunner.ts" />
         <option value="$PROJECT_DIR$/src/jrunner.ts" />
         <option value="$PROJECT_DIR$/jrunner.js" />
         <option value="$PROJECT_DIR$/gulpfile.js" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/src/index.ts" />
         <option value="$PROJECT_DIR$/src/rexes/scalar/RexNotify.ts" />
         <option value="$PROJECT_DIR$/src/events/interfaces.ts" />
         <option value="$PROJECT_DIR$/src/extension/disposal-token.ts" />
@@ -176,14 +241,9 @@
         <option value="$PROJECT_DIR$/src/errors/index.js" />
         <option value="$PROJECT_DIR$/karma_html/Chrome 53.0.2785 (Windows 10 0.0.0)/index.html" />
         <option value="$PROJECT_DIR$/my.conf.js" />
-        <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/src/rexes/names.ts" />
-        <option value="$PROJECT_DIR$/src/rexes/scalar/var.ts" />
         <option value="$PROJECT_DIR$/src/events/disposal-token.ts" />
         <option value="$PROJECT_DIR$/src/events/implementation.ts" />
-        <option value="$PROJECT_DIR$/src/rexes/scalar/member.ts" />
         <option value="$PROJECT_DIR$/src/rexes/scalar/rectify.ts" />
-        <option value="$PROJECT_DIR$/src/events/subscription.ts" />
         <option value="$PROJECT_DIR$/__test__/scalars.spec.ts" />
         <option value="$PROJECT_DIR$/src/rexes/scalar/silence.ts" />
         <option value="$PROJECT_DIR$/src/rexes/definitions.ts" />
@@ -191,9 +251,19 @@
         <option value="$PROJECT_DIR$/src/rexes/index.ts" />
         <option value="$PROJECT_DIR$/src/rexes/scalar/notify.ts" />
         <option value="$PROJECT_DIR$/src/rexes/scalar/link.ts" />
-        <option value="$PROJECT_DIR$/src/extension/scalar.ts" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/rexes/scalar/convert.ts" />
+        <option value="$PROJECT_DIR$/src/rexes/scalar/member.ts" />
+        <option value="$PROJECT_DIR$/.npmignore" />
+        <option value="$PROJECT_DIR$/src/events/subscription.ts" />
+        <option value="$PROJECT_DIR$/src/rexes/scalar/var.ts" />
+        <option value="$PROJECT_DIR$/src/rexes/scalar/listen.ts" />
+        <option value="$PROJECT_DIR$/src/index.ts" />
+        <option value="$PROJECT_DIR$/src/extension/scalar.ts" />
+        <option value="$PROJECT_DIR$/src/rexes/names.ts" />
+        <option value="$PROJECT_DIR$/src/rexes/scalar/computed.ts" />
+        <option value="$PROJECT_DIR$/src/extension/rex.ts" />
+        <option value="$PROJECT_DIR$/package.json" />
       </list>
     </option>
   </component>
@@ -211,10 +281,10 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-237" />
-    <option name="y" value="512" />
-    <option name="width" value="1851" />
-    <option name="height" value="1077" />
+    <option name="x" value="58" />
+    <option name="y" value="-8" />
+    <option name="width" value="1870" />
+    <option name="height" value="1096" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -297,6 +367,7 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -379,14 +450,34 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="__test__" />
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="extension" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rexjs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rexjs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="events" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
-        <option name="show-excluded-files" value="false" />
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -396,7 +487,7 @@
     <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
-    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Roaming/npm/node_modules/typescript/lib" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../react-ts" />
     <property name="javascript.nodejs.core.library.configured.version" value="6.6.0" />
     <property name="JavaScriptPreferStrict" value="false" />
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
@@ -406,13 +497,13 @@
     <property name="prop_add_unversioned_files" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Greg\OneDrive\Documents\GitHub\JavaScript\rexjs\__test__" />
-      <recent name="C:\Users\Greg\OneDrive\Documents\GitHub\JavaScript\rexjs" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Greg\OneDrive\Documents\GitHub\JavaScript\rexjs" />
       <recent name="C:\Users\Greg\OneDrive\Documents\GitHub\JavaScript\rexjs\src" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Greg\OneDrive\Documents\GitHub\JavaScript\rexjs\__test__" />
+      <recent name="C:\Users\Greg\OneDrive\Documents\GitHub\JavaScript\rexjs" />
     </key>
   </component>
   <component name="RunManager" selected="Node.js.jrunner.js">
@@ -535,7 +626,10 @@
       <workItem from="1475507302804" duration="13319000" />
       <workItem from="1475524317204" duration="4000" />
       <workItem from="1475525279197" duration="2000" />
-      <workItem from="1475586813708" duration="1442000" />
+      <workItem from="1475586813708" duration="2718000" />
+      <workItem from="1475845808018" duration="1198000" />
+      <workItem from="1476259580474" duration="4784000" />
+      <workItem from="1476292623292" duration="5657000" />
     </task>
     <servers />
   </component>
@@ -572,20 +666,20 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64699000" />
+    <option name="totallyTimeSpent" value="77614000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-237" y="512" width="1851" height="1077" extended-state="1" />
-    <editor active="true" />
+    <frame x="58" y="-8" width="1870" height="1096" extended-state="6" />
+    <editor active="false" />
     <layout>
-      <window_info id="TypeScript" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31490788" sideWeight="0.37711865" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13512005" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TypeScript" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31878453" sideWeight="0.37711865" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13370165" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31490788" sideWeight="0.62288135" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31490788" sideWeight="0.62288135" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19513543" sideWeight="0.3665628" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28618786" sideWeight="0.3665628" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27307904" sideWeight="0.5181724" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -639,6 +733,11 @@
           <properties name="Range" />
           <option name="timeStamp" value="27" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/rexes/scalar/var.ts</url>
+          <line>3</line>
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
@@ -649,18 +748,11 @@
           <properties />
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="53" />
+      <option name="time" value="54" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/typings.json" />
-    <entry file="file://$PROJECT_DIR$/src/extension/disposal-token.ts" />
-    <entry file="file://$PROJECT_DIR$/src/extension/disposal-token.js" />
-    <entry file="file://$PROJECT_DIR$/src/rexes/base.js" />
-    <entry file="file://$PROJECT_DIR$/src/rexes/scalar/convert.js" />
-    <entry file="file://$PROJECT_DIR$/src/rexes/scalar/notify.js" />
-    <entry file="file://$PROJECT_DIR$/src/index.js" />
     <entry file="file://$PROJECT_DIR$/karma_html/Chrome 53.0.2785 (Windows 10 0.0.0)/index.html" />
     <entry file="file://$PROJECT_DIR$/src/errors/index.ts" />
     <entry file="file://$PROJECT_DIR$/src/errors/index.js" />
@@ -670,11 +762,8 @@
     <entry file="file://$PROJECT_DIR$/node_modules/karma-commonjs/client/commonjs_bridge.js" />
     <entry file="file://$PROJECT_DIR$/coverage/Chrome 53.0.2785 (Windows 10 0.0.0)/index.html" />
     <entry file="file://$PROJECT_DIR$/src/events/index.js" />
-    <entry file="file://$PROJECT_DIR$/package.json" />
-    <entry file="file://$PROJECT_DIR$/src/rexes/names.ts" />
     <entry file="file://$PROJECT_DIR$/my.conf.js" />
     <entry file="file://$PROJECT_DIR$/src/extension/index.js" />
-    <entry file="file://$PROJECT_DIR$/tsconfig.json" />
     <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/typescriptCompiler/external/lib.es6.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="311">
@@ -698,7 +787,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/events/interfaces.ts" />
     <entry file="file://$PROJECT_DIR$/typings/modules/lodash/index.d.ts" />
-    <entry file="file://$PROJECT_DIR$/src/rexes/scalar/var.ts" />
     <entry file="file://$PROJECT_DIR$/__test__/disposal.spec.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="550">
@@ -720,26 +808,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rexes/scalar/silence.ts" />
     <entry file="file://$PROJECT_DIR$/src/rexes/definitions.ts" />
-    <entry file="file://$PROJECT_DIR$/src/rexes/base.ts" />
-    <entry file="file://$PROJECT_DIR$/src/rexes/index.ts" />
     <entry file="file://$PROJECT_DIR$/src/rexes/definitions.js" />
-    <entry file="file://$PROJECT_DIR$/src/extension/index.ts" />
-    <entry file="file://$PROJECT_DIR$/src/extension/rex.ts" />
-    <entry file="file://$PROJECT_DIR$/src/extension/scalar.ts" />
     <entry file="file://$PROJECT_DIR$/src/events/index.ts" />
-    <entry file="file://$PROJECT_DIR$/src/events/rex-event.ts" />
-    <entry file="file://$PROJECT_DIR$/src/events/subscription.ts" />
-    <entry file="file://$PROJECT_DIR$/src/index.ts" />
-    <entry file="file://$PROJECT_DIR$/jrunner.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1075">
@@ -751,33 +822,31 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="145">
+          <first_editor relative-caret-position="300">
             <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
-            <folding />
           </first_editor>
           <second_editor />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rexes/scalar/rectify.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/rexes/scalar/convert.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
+        <state relative-caret-position="575">
           <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding>
-            <element signature="e#0#48#0" expanded="true" />
+            <element signature="e#0#48#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rexes/scalar/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rexes/scalar/rectify.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -789,22 +858,206 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#0#37#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jrunner.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gulpfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rexes/base.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="523">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding>
+            <element signature="e#1#30#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rexes/scalar/member.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="300">
+          <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rexes/scalar/notify.ts">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rexes/scalar/rectify.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rexes/scalar/silence.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.npmignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="575">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rexes/scalar/var.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="18" column="28" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
+          <folding>
+            <element signature="e#42#90#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tsconfig.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/typings.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="10" column="3" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.js.map">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="sourcemapFileViewerProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding>
+            <element signature="e#72#135#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rexes/scalar/listen.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="9" column="22" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="22" />
+          <folding>
+            <element signature="e#1#51#0" expanded="true" />
+            <element signature="n#!!doc;n#RexListen#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/extension/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#42#60#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/events/rex-event.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/events/subscription.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="635">
+          <caret line="100" column="4" selection-start-line="100" selection-start-column="4" selection-end-line="100" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/extension/scalar.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="79" column="12" selection-start-line="79" selection-start-column="12" selection-end-line="79" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rexes/names.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/extension/rex.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="521">
+          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rexes/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rexes/scalar/computed.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+          <folding>
+            <element signature="n#!!doc;n#RexComputed#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
           <folding />
         </state>
       </provider>

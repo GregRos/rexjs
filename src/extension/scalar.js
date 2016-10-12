@@ -65,6 +65,17 @@ var RexScalarExtensions = {
             return new silence_1.RexSilence(this, silencer);
         }
     },
+    listen_: function () {
+        var callbacks = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            callbacks[_i - 0] = arguments[_i];
+        }
+        var allCallbacks = function (change) {
+            callbacks.forEach(function (f) { return f(change); });
+        };
+        this.changed.on(allCallbacks);
+        return this;
+    },
     mutate: function (mutation) {
         var copy = _.cloneDeep(this.value);
         mutation(copy);

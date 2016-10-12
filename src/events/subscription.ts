@@ -93,7 +93,7 @@ export class Subscription implements ISubscription {
 	}
 }
 
-class MultiSubscription extends Subscription {
+export class MultiSubscription extends Subscription {
 	private _disposalList : ISubscription[];
 
 	constructor(list : ISubscription[]) {

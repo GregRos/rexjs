@@ -1,12 +1,13 @@
 import { Rex } from "../rexes/base";
 import { RexScalar } from "../rexes/scalar/index";
+import { RexComputed } from "../rexes/scalar/computed";
 /**
  * Created by Greg on 02/10/2016.
  */
 /**
  * Module for constructing various rexjs objects.
  */
-export declare module Rexs {
+export declare module Rexes {
     /**
      * Constructs a Var Rex object, which is backed by a variable, and supports both reading and writing.
      * @param initial The initial value of the Var.
@@ -19,6 +20,7 @@ export declare module Rexs {
      * @returns {RexVar<T>}
      */
     function const_<T>(value: T): RexScalar<T>;
+    function computed_<T>(onRead: () => T, onWrite?: (input: T) => void): RexComputed<T>;
 }
 /**
  * Module for reflecting over rexjs objects.

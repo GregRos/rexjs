@@ -4,10 +4,9 @@
 import _ = require('lodash');
 import {RexEvent, Subscription, ISubscription} from './events';
 import {RexScalar, Rex, RexNames} from './rexes';
-import {Rexs} from './extension';
+import {Rexes} from './extension';
 
-export {RexScalar, Rex};
-export {RexEvent, Subscription, ISubscription, Rexs, RexNames};
+export {Rex, RexScalar, RexEvent, Subscription, ISubscription, Rexes, RexNames};
 
 
 

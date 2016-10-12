@@ -11,15 +11,16 @@ var RexScalar = (function (_super) {
         _super.apply(this, arguments);
     }
     RexScalar.prototype.notifyChange = function (prevValue) {
+        var self = this;
         this.changed.fire({
             get value() {
-                return this.value;
+                return self.value;
             },
             oldValue: prevValue
         });
     };
     RexScalar.prototype.toString = function () {
-        return "";
+        return "[RexScalar " + this.info.type + " " + this.value + "]";
     };
     return RexScalar;
 }(base_1.Rex));

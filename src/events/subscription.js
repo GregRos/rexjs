@@ -112,4 +112,5 @@ var MultiSubscription = (function (_super) {
     };
     return MultiSubscription;
 }(Subscription));
+exports.MultiSubscription = MultiSubscription;
 //# sourceMappingURL=subscription.js.map

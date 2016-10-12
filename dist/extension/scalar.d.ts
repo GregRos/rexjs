@@ -1,4 +1,9 @@
 import { Conversion } from "../rexes/scalar/convert";
+import { RexEvent } from "../events/rex-event";
+import { Rectifier } from "../rexes/scalar/rectify";
+/**
+ * This file contains "extension methods" for RexScalar objects.
+ */
 declare module '../rexes/scalar' {
     interface RexScalar<T> {
         /**
@@ -20,6 +25,7 @@ declare module '../rexes/scalar' {
          * @param rectifier The backward mutation function.
          */
         rectify_<TTo>(to?: (from: T) => TTo, rectifier?: (current: T, to: TTo) => void): RexScalar<TTo>;
+        rectify_<TTo>(rectifier: Rectifier<T, TTo>): any;
         /**
          * Gets the member of the specified name from the Rex.
          * In the back conversion, the current value is cloned and the clone's member is set. Then this rex is updated with the new object.
@@ -27,13 +33,39 @@ declare module '../rexes/scalar' {
          */
         member_<TTo>(name: string): RexScalar<TTo>;
         /**
+         * Applies a Silencer Rex that suppresses change notifications that match a certain criterion.
+         * This does not change the value of the Rex.
+         * @param silencer
+         */
+        silence_(silencer: (change: ScalarChange<T>) => boolean): RexScalar<T>;
+        /**
+         * Applies a linking Rex that mirrors this Rex.
+         * Used to manage event subscriptions.
+         */
+        link_(): RexScalar<T>;
+        /**
+         * Creates a Rex that monitors an external event for change notification.
+         * @param eventGetter A function that, given a change notification, constructs an event that can be used to listen for hidden changes.
+         */
+        notify_(eventGetter: (change: ScalarChange<T>) => RexEvent<any>): RexScalar<T>;
+        /**
+         * Creates a Rex that monitors an external event for change notification.
+         * @param event An event that, when fired, means a change in the Rex may have occurred.
+         */
+        notify_(event: RexEvent<void>): RexScalar<T>;
+        /**
+         * Attaches an array of listeners to the Rex and returns it.
+         * @param listeners The listeners to attach.
+         */
+        listen_(...listeners: ((change: ScalarChange<T>) => void)[]): any;
+        /**
          * Clones the value and applies a mutation on the clone, then updates the Rex with it.
-         * @param mutation
+         * @param mutation The mutation.
          */
         mutate(mutation: (copy: T) => void): void;
         /**
          * Takes a function that updates the current value of the Rex to another value.
-         * @param reducer
+         * @param reducer The reducer.
          */
         reduce(reducer: (current: T) => T): void;
     }

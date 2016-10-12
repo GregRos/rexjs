@@ -1,7 +1,7 @@
 /**
  * Created by Greg on 02/10/2016.
  */
-import {Rexs} from '../src';
+import {Rexes} from '../src';
 import {ClosedError} from "../src/errors/index";
 import {RexScalar} from "../src/rexes/scalar/index";
 import {Rex} from "../src/rexes/base";
@@ -100,16 +100,16 @@ let baseTests = (ctor : <T>(init : T) => RexScalar<T>) => {
 describe("scalars", () => {
 
 	describe("var", () => {
-		baseTests(Rexs.var_);
+		baseTests(Rexes.var_);
 	});
 
 	describe("convert", () => {
-		baseTests(x => Rexs.var_(x).convert_(x => x, x => x));
-		let link1 = Rexs.var_(1);
+		baseTests(x => Rexes.var_(x).convert_(x => x, x => x));
+		let link1 = Rexes.var_(1);
 		let link2 = link1.convert_(x => x * 2, x => x / 2);
 
 		beforeEach(() => {
-			link1 = Rexs.var_(1);
+			link1 = Rexes.var_(1);
 			link2 = link1.convert_(x => x * 2, x => x / 2);
 		});
 
@@ -178,11 +178,11 @@ describe("scalars", () => {
 	});
 
 	describe("member", () => {
-		baseTests(x => Rexs.var_({a : x}).member_('a'));
-		let link1 = Rexs.var_({a : 1});
+		baseTests(x => Rexes.var_({a : x}).member_('a'));
+		let link1 = Rexes.var_({a : 1});
 		let link2 = link1.member_('a');
 		beforeEach(() => {
-			link1 = Rexs.var_({a : 1});
+			link1 = Rexes.var_({a : 1});
 			link2 = link1.member_('a');
 		});
 		describe("consistency tests", () => {
@@ -204,7 +204,7 @@ describe("scalars", () => {
 
 	describe("notify", () => {
 		let notifier = new RexEvent<void>();
-		baseTests(x => Rexs.var_(x).notify_(x => notifier));
+		baseTests(x => Rexes.var_(x).notify_(x => notifier));
 		//this is the intended usage of the notify_ Rex:
 
 		let notifierObject =(val : number) => {
@@ -222,12 +222,12 @@ describe("scalars", () => {
 		};
 
 		//note that notify_ doesn't make sense by itself, but it does when followed by member_.
-		let link1 =  Rexs.var_(notifierObject(0));
+		let link1 =  Rexes.var_(notifierObject(0));
 		let link2 = link1.notify_(obj => obj.value.notifier);
 		let link3 = link2.member_<number>('val');
 
 		beforeEach(() => {
-			link1 =  Rexs.var_(notifierObject(0));
+			link1 =  Rexes.var_(notifierObject(0));
 			link2 = link1.notify_(obj => obj.value.notifier);
 			link3 = link2.member_<number>('val');
 		});
@@ -259,11 +259,11 @@ describe("scalars", () => {
 	describe("silence", () => {
 		//silence is tricky to test because it breaks the normal change propagation flow
 
-		let link1 = Rexs.var_(0);
+		let link1 = Rexes.var_(0);
 		let link2 = link1.silence_(change => change.value > 5);
 
 		beforeEach(() => {
-			link1 = Rexs.var_(0);
+			link1 = Rexes.var_(0);
 			link2 = link1.silence_(change => change.value > 5);
 		});
 

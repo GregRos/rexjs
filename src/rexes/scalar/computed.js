@@ -22,9 +22,11 @@ var RexComputed = (function (_super) {
     }
     Object.defineProperty(RexComputed.prototype, "value", {
         get: function () {
+            this.makeSureNotClosed();
             return this.onRead();
         },
         set: function (x) {
+            this.makeSureNotClosed();
             if (this.onWrite) {
                 this.onWrite(x);
             }

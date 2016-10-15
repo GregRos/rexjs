@@ -6,8 +6,7 @@ var Rex = (function () {
         this._isClosed = false;
         this.meta = {};
         this.depends = {};
-        this.closing = new _1.RexEvent("onClosing");
-        this.changed = new _1.RexEvent("onChanged");
+        this.changed = new _1.RexEvent("changed");
     }
     Object.defineProperty(Rex.prototype, "isClosed", {
         get: function () {
@@ -18,8 +17,6 @@ var Rex = (function () {
     });
     Rex.prototype.close = function () {
         this.changed.clear();
-        this.closing.fire(undefined);
-        this.closing.clear();
         this._isClosed = true;
     };
     Rex.prototype.makeSureNotClosed = function () {

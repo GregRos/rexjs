@@ -21,7 +21,9 @@ var RexSilence = (function (_super) {
             functional: false
         };
         this.depends.source = parent;
-        this._token = parent.changed.on(function (x) { return !criterion(x) ? _this.changed.fire(x) : void 0; });
+        if (criterion) {
+            this._token = parent.changed.on(function (x) { return !criterion(x) ? _this.changed.fire(x) : void 0; });
+        }
     }
     Object.defineProperty(RexSilence.prototype, "value", {
         get: function () {

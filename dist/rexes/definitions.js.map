@@ -1,1 +1,0 @@
-{"version":3,"sources":["rexes/definitions.ts"],"names":[],"mappings":"AAAA;;GAEG","file":"rexes/definitions.js","sourcesContent":["/**\r\n * Created by Greg on 01/10/2016.\r\n */\r\n\r\nexport interface IRexInfo {\r\n\ttype : string;\r\n\tlazy : boolean;\r\n\tfunctional : boolean;\r\n}\r\n"],"sourceRoot":"/src"}

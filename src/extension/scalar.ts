@@ -2,6 +2,7 @@
  * Created by Greg on 01/10/2016.
  */
 import _ =require('lodash');
+import {ReflectHelper} from '../reflection';
 import {RexScalar, ScalarChange} from '../rexes/scalar'
 import {Conversion, RexConvert} from "../rexes/scalar/convert";
 import {RexNames} from "../rexes/names";
@@ -48,12 +49,14 @@ declare module '../rexes/scalar' {
 		 */
 		member_<TTo>(name : string)  : RexScalar<TTo>;
 
+		member_<TTo>(accessFunction : (v : T) => TTo) : RexScalar<TTo>;
+
 		/**
 		 * Applies a Silencer Rex that suppresses change notifications that match a certain criterion.
 		 * This does not change the value of the Rex.
 		 * @param silencer
 		 */
-		silence_(silencer : (change : ScalarChange<T>) => boolean) : RexScalar<T>;
+		silence_(silencer ?: (change : ScalarChange<T>) => boolean) : RexScalar<T>;
 
 		/**
 		 * Applies a linking Rex that mirrors this Rex.
@@ -90,13 +93,11 @@ declare module '../rexes/scalar' {
 		 * @param reducer The reducer.
 		 */
 		reduce(reducer : (current : T) => T) : void;
-
-
 	}
 }
 
-const RexScalarExtensions =  {
-	convert_<T, TTo>(this : RexScalar<T>, arg1 ?: any, arg2 ?: any) : RexScalar<TTo> {
+abstract class RexScalarExtensions<T> extends RexScalar<T> {
+	convert_<TTo>( arg1 ?: any, arg2 ?: any) : RexScalar<TTo> {
 		if (_.isFunction(arg1) || _.isFunction(arg2)) {
 			return new RexConvert<T, TTo>(this, {to: arg1, from: arg2});
 		} else if (!arg1 && !arg2) {
@@ -105,13 +106,13 @@ const RexScalarExtensions =  {
 		else {
 			return new RexConvert<T, TTo>(this, arg1 as Conversion<T, TTo>);
 		}
-	},
+	}
 
-	link_<T>(this : RexScalar<T>) : RexScalar<T> {
+	link_() : RexScalar<T> {
 		return new RexLink(this);
-	},
+	}
 
-	rectify_<T, TTo>(this : RexScalar<T>, arg1 : any, arg2 : any)  {
+	rectify_( arg1 ?: any, arg2 ?: any)  {
 		if (_.isFunction(arg1)) {
 			return new RexRectify(this, {
 				to : arg1,
@@ -120,16 +121,19 @@ const RexScalarExtensions =  {
 		} else {
 			return new RexRectify(this, arg1);
 		}
-	},
+	}
 
-	member_<T extends Object, TTo>(this : RexScalar<T>, memberName : string) : any {
+	member_<T extends Object, TTo>( memberName : string | ((x : T) => TTo)) : any {
 		if (!memberName) {
 			return this.link_();
 		}
+		if (_.isFunction(memberName)) {
+			memberName = ReflectHelper.getMemberName(memberName)
+		}
 		return new RexMember<TTo>(this, memberName);
-	},
+	}
 
-	notify_<T>(this : RexScalar<T>, eventOrEventGetter : RexEvent<void> | ((change : ScalarChange<T>) => RexEvent<void>)) {
+	notify_( eventOrEventGetter : RexEvent<void> | ((change : ScalarChange<T>) => RexEvent<void>)) : RexScalar<T> {
 		if (!eventOrEventGetter) {
 			return this.link_();
 		}
@@ -140,34 +144,29 @@ const RexScalarExtensions =  {
 		} else {
 			throw new TypeError(`Failed to resolve overload of notify_: ${eventOrEventGetter} is not a function or an event.`)
 		}
-	},
+	}
 
-	silence_<T>(this : RexScalar<T>, silencer : (change : ScalarChange<T>) => boolean) {
-		if (!silencer) {
-			return this.link_();
-		}
-		else {
-			return new RexSilence<T>(this, silencer);
-		}
-	},
+	silence_( silencer ?: (change : ScalarChange<T>) => boolean) {
+		return new RexSilence<T>(this, silencer);
+	}
 
-	listen_<T>(this : RexScalar<T>, ...callbacks : ((change : ScalarChange<T>) => void)[]) {
+	listen_( ...callbacks : ((change : ScalarChange<T>) => void)[]) {
 		let allCallbacks = (change : ScalarChange<T>) => {
 			callbacks.forEach(f => f(change));
 		};
 		this.changed.on(allCallbacks);
 		return this;
-	},
+	}
 
-	mutate<T>(this :RexScalar<T>, mutation : (copy : T) => void) : void {
+	mutate(mutation : (copy : T) => void) : void {
 		let copy = _.cloneDeep(this.value);
 		mutation(copy);
 		this.value = copy;
-	},
+	}
 
-	reduce<T>(this : RexScalar<T>, reducer : (current : T) => T) {
+	reduce( reducer : (current : T) => T) {
 		this.value = reducer(this.value);
 	}
-};
+}
 
-Object.assign(RexScalar.prototype, RexScalarExtensions);
+ReflectHelper.mixin(RexScalar, RexScalarExtensions);

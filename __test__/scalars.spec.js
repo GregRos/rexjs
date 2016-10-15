@@ -16,7 +16,6 @@ var baseTests = function (ctor) {
         beforeEach(function () {
             Var = ctor(0);
         });
-        it("isn't closed", function () { return expect(Var.isClosed).toBe(false); });
         it("can read", function () {
             expect(Var.value).toBe(0);
         });
@@ -42,16 +41,8 @@ var baseTests = function (ctor) {
                 str_.changed.on(function () { return tally += "a"; });
             });
         });
-        it("notifies close", function () {
-            Var.closing.on(function (x) { return tally += "closing"; });
-            Var.close();
-            expect(tally).toBe("closing");
-        });
         describe("operations on closed", function () {
             beforeEach(function () { return Var.close(); });
-            it("is closed", function () {
-                return expect(Var.isClosed).toBe(true);
-            });
             it("can close again", function () { return Var.close(); });
             it("throws on read", function () { return throwsClosed(function () { return Var.value; }); });
             it("throws on write", function () { return throwsClosed(function () { return Var.value = 1; }); });
@@ -114,15 +105,12 @@ describe("scalars", function () {
                 expect(tally).toBe("a");
                 expect(link1.value).toBe(2);
             });
-            it("closes when link1 is closed", function () {
-                link2.closing.on(function () { return tally += "a"; });
+            it("link2 invalid when link1 is closed", function () {
                 link1.close();
-                expect(link2.isClosed).toBe(true);
-                expect(tally).toBe("a");
+                expect(function () { return link2.value; }).toThrow();
             });
             it("when link2 is closed, link1 works", function () {
                 link2.close();
-                expect(link1.isClosed).toBe(false);
                 link1.value = -1;
                 expect(link1.value).toBe(-1);
                 throwsClosed(function () { return link2.value; });
@@ -145,8 +133,8 @@ describe("scalars", function () {
                 });
                 it("closing link2 has the right effect", function () {
                     link2.close();
-                    expect(link1.isClosed).toBe(false);
-                    expect(link3.isClosed).toBe(true);
+                    var a = link1.value;
+                    expect(function () { return link3.value; }).toThrow();
                     link1.value = 5;
                     expect(link1.value).toBe(5);
                 });
@@ -154,27 +142,31 @@ describe("scalars", function () {
         });
     });
     describe("member", function () {
-        baseTests(function (x) { return src_1.Rexes.var_({ a: x }).member_('a'); });
-        var link1 = src_1.Rexes.var_({ a: 1 });
-        var link2 = link1.member_('a');
-        beforeEach(function () {
-            link1 = src_1.Rexes.var_({ a: 1 });
-            link2 = link1.member_('a');
-        });
-        describe("consistency tests", function () {
-            it("change propagates forward", function () {
-                link2.changed.on(function (x) { return tally += x.value; });
-                link1.value = { a: 2 };
-                expect(tally).toBe("2");
+        var memberTest = function (memberMaker) {
+            baseTests(function (x) { return memberMaker(src_1.Rexes.var_({ a: x })); });
+            var link1 = src_1.Rexes.var_({ a: 1 });
+            var link2 = memberMaker(link1);
+            beforeEach(function () {
+                link1 = src_1.Rexes.var_({ a: 1 });
+                link2 = memberMaker(link1);
             });
-            it("change propagates back", function () {
-                link1.value = { a: 1, b: 2 };
-                link1.changed.on(function (x) { return tally += x.value.a; });
-                link2.value = 5;
-                expect(tally).toBe("5");
-                expect(link1.value.b).toBe(2);
+            describe("consistency tests", function () {
+                it("change propagates forward", function () {
+                    link2.changed.on(function (x) { return tally += x.value; });
+                    link1.value = { a: 2 };
+                    expect(tally).toBe("2");
+                });
+                it("change propagates back", function () {
+                    link1.value = { a: 1, b: 2 };
+                    link1.changed.on(function (x) { return tally += x.value.a; });
+                    link2.value = 5;
+                    expect(tally).toBe("5");
+                    expect(link1.value.b).toBe(2);
+                });
             });
-        });
+        };
+        memberTest(function (sc) { return sc.member_('a'); });
+        memberTest(function (sc) { return sc.member_(function (x) { return x.a; }); });
     });
     describe("notify", function () {
         var notifier = new src_2.RexEvent();

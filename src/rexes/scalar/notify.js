@@ -27,10 +27,10 @@ var RexNotify = (function (_super) {
             if (_this._notifierToken) {
                 _this._notifierToken.close();
             }
-            _this._notifierToken = newNotifier.on(function () { return _this.notifyChange(undefined); });
+            _this._notifierToken = newNotifier.on(function () { return _this.notifyChange(); });
         };
         this._selfToken = this.changed.on(onChange);
-        this.notifyChange(undefined);
+        this.notifyChange();
     }
     Object.defineProperty(RexNotify.prototype, "value", {
         get: function () {

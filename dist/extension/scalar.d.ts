@@ -32,12 +32,13 @@ declare module '../rexes/scalar' {
          * @param name The name of the member to get.
          */
         member_<TTo>(name: string): RexScalar<TTo>;
+        member_<TTo>(accessFunction: (v: T) => TTo): RexScalar<TTo>;
         /**
          * Applies a Silencer Rex that suppresses change notifications that match a certain criterion.
          * This does not change the value of the Rex.
          * @param silencer
          */
-        silence_(silencer: (change: ScalarChange<T>) => boolean): RexScalar<T>;
+        silence_(silencer?: (change: ScalarChange<T>) => boolean): RexScalar<T>;
         /**
          * Applies a linking Rex that mirrors this Rex.
          * Used to manage event subscriptions.

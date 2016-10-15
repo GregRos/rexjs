@@ -1,6 +1,6 @@
 {
   "name": "rexjs",
-  "version": "0.2.3",
+  "version": "0.2.12",
   "description": "A library for smart variables and change notification.",
   "directories": {
     "bin": "dist",

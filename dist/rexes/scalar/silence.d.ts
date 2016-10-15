@@ -7,6 +7,6 @@ export declare class RexSilence<T> extends RexScalar<T> {
     private parent;
     info: IRexInfo;
     private _token;
-    constructor(parent: RexScalar<T>, criterion: (change: ScalarChange<T>) => boolean);
+    constructor(parent: RexScalar<T>, criterion?: (change: ScalarChange<T>) => boolean);
     value: T;
 }

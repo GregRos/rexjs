@@ -17,7 +17,7 @@ var Rexes;
      * @returns {RexVar<T>} The Var object.
      */
     function var_(initial) {
-        return new var_1.RexVar(initial);
+        return new var_1.RexVar(initial, true, true);
     }
     Rexes.var_ = var_;
     /**

@@ -8,19 +8,17 @@ export interface IScalarChangeInfo {
 import {Rex} from "../base";
 export interface ScalarChange<T> {
 	value : T;
-	oldValue ?: T;
 }
 
 export abstract class RexScalar<T> extends Rex<ScalarChange<T>> {
 	value : T;
 
-	protected notifyChange(prevValue : T) {
+	protected notifyChange() {
 		let self = this;
 		this.changed.fire({
 			get value() {
 				return self.value;
-			},
-			oldValue : prevValue
+			}
 		});
 	}
 

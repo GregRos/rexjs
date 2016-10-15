@@ -1,8 +1,14 @@
 "use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 /**
  * Created by Greg on 01/10/2016.
  */
 var _ = require('lodash');
+var reflection_1 = require('../reflection');
 var scalar_1 = require('../rexes/scalar');
 var convert_1 = require("../rexes/scalar/convert");
 var rex_event_1 = require("../events/rex-event");
@@ -11,8 +17,12 @@ var silence_1 = require("../rexes/scalar/silence");
 var member_1 = require("../rexes/scalar/member");
 var rectify_1 = require("../rexes/scalar/rectify");
 var link_1 = require("../rexes/scalar/link");
-var RexScalarExtensions = {
-    convert_: function (arg1, arg2) {
+var RexScalarExtensions = (function (_super) {
+    __extends(RexScalarExtensions, _super);
+    function RexScalarExtensions() {
+        _super.apply(this, arguments);
+    }
+    RexScalarExtensions.prototype.convert_ = function (arg1, arg2) {
         if (_.isFunction(arg1) || _.isFunction(arg2)) {
             return new convert_1.RexConvert(this, { to: arg1, from: arg2 });
         }
@@ -22,11 +32,11 @@ var RexScalarExtensions = {
         else {
             return new convert_1.RexConvert(this, arg1);
         }
-    },
-    link_: function () {
+    };
+    RexScalarExtensions.prototype.link_ = function () {
         return new link_1.RexLink(this);
-    },
-    rectify_: function (arg1, arg2) {
+    };
+    RexScalarExtensions.prototype.rectify_ = function (arg1, arg2) {
         if (_.isFunction(arg1)) {
             return new rectify_1.RexRectify(this, {
                 to: arg1,
@@ -36,14 +46,17 @@ var RexScalarExtensions = {
         else {
             return new rectify_1.RexRectify(this, arg1);
         }
-    },
-    member_: function (memberName) {
+    };
+    RexScalarExtensions.prototype.member_ = function (memberName) {
         if (!memberName) {
             return this.link_();
         }
+        if (_.isFunction(memberName)) {
+            memberName = reflection_1.ReflectHelper.getMemberName(memberName);
+        }
         return new member_1.RexMember(this, memberName);
-    },
-    notify_: function (eventOrEventGetter) {
+    };
+    RexScalarExtensions.prototype.notify_ = function (eventOrEventGetter) {
         if (!eventOrEventGetter) {
             return this.link_();
         }
@@ -56,16 +69,11 @@ var RexScalarExtensions = {
         else {
             throw new TypeError("Failed to resolve overload of notify_: " + eventOrEventGetter + " is not a function or an event.");
         }
-    },
-    silence_: function (silencer) {
-        if (!silencer) {
-            return this.link_();
-        }
-        else {
-            return new silence_1.RexSilence(this, silencer);
-        }
-    },
-    listen_: function () {
+    };
+    RexScalarExtensions.prototype.silence_ = function (silencer) {
+        return new silence_1.RexSilence(this, silencer);
+    };
+    RexScalarExtensions.prototype.listen_ = function () {
         var callbacks = [];
         for (var _i = 0; _i < arguments.length; _i++) {
             callbacks[_i - 0] = arguments[_i];
@@ -75,15 +83,16 @@ var RexScalarExtensions = {
         };
         this.changed.on(allCallbacks);
         return this;
-    },
-    mutate: function (mutation) {
+    };
+    RexScalarExtensions.prototype.mutate = function (mutation) {
         var copy = _.cloneDeep(this.value);
         mutation(copy);
         this.value = copy;
-    },
-    reduce: function (reducer) {
+    };
+    RexScalarExtensions.prototype.reduce = function (reducer) {
         this.value = reducer(this.value);
-    }
-};
-Object.assign(scalar_1.RexScalar.prototype, RexScalarExtensions);
+    };
+    return RexScalarExtensions;
+}(scalar_1.RexScalar));
+reflection_1.ReflectHelper.mixin(scalar_1.RexScalar, RexScalarExtensions);
 //# sourceMappingURL=scalar.js.map

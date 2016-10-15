@@ -9,7 +9,10 @@ import {Errors} from '../../errors';
 export class RexVar<T> extends RexScalar<T> {
 	private _value : T;
 
-	constructor(initial : T, private canRead : boolean = true, private canWrite : boolean = true) {
+	constructor(initial : T,
+				private canRead : boolean,
+				private canWrite : boolean
+				) {
 		super();
 		this.value = initial;
 	}
@@ -39,7 +42,7 @@ export class RexVar<T> extends RexScalar<T> {
 			return;
 		}
 		this._value = val;
-		this.notifyChange(oldVal);
+		this.notifyChange();
 	}
 }
 

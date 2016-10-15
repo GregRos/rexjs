@@ -13,8 +13,6 @@ var errors_1 = require('../../errors');
 var RexVar = (function (_super) {
     __extends(RexVar, _super);
     function RexVar(initial, canRead, canWrite) {
-        if (canRead === void 0) { canRead = true; }
-        if (canWrite === void 0) { canWrite = true; }
         _super.call(this);
         this.canRead = canRead;
         this.canWrite = canWrite;
@@ -43,7 +41,7 @@ var RexVar = (function (_super) {
                 return;
             }
             this._value = val;
-            this.notifyChange(oldVal);
+            this.notifyChange();
         },
         enumerable: true,
         configurable: true

@@ -26,10 +26,10 @@ export class RexNotify<T> extends RexScalar<T> {
 				this._notifierToken.close();
 			}
 
-			this._notifierToken = newNotifier.on(() => this.notifyChange(undefined));
+			this._notifierToken = newNotifier.on(() => this.notifyChange());
 		};
 		this._selfToken = this.changed.on(onChange);
-		this.notifyChange(undefined);
+		this.notifyChange();
 	}
 
 	get value() {

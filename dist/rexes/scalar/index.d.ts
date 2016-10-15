@@ -6,11 +6,10 @@ export interface IScalarChangeInfo {
 import { Rex } from "../base";
 export interface ScalarChange<T> {
     value: T;
-    oldValue?: T;
 }
 export declare abstract class RexScalar<T> extends Rex<ScalarChange<T>> {
     value: T;
-    protected notifyChange(prevValue: T): void;
+    protected notifyChange(): void;
     toString(): string;
 }
 import { RexConvert } from './convert';

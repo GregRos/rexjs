@@ -19,8 +19,6 @@ let baseTests = (ctor : <T>(init : T) => RexScalar<T>) => {
 			Var = ctor(0)
 		});
 
-		it("isn't closed", () => expect(Var.isClosed).toBe(false));
-
 		it("can read", () => {
 			expect(Var.value).toBe(0);
 		});
@@ -53,16 +51,8 @@ let baseTests = (ctor : <T>(init : T) => RexScalar<T>) => {
 			});
 		});
 
-		it("notifies close", () => {
-			Var.closing.on(x => tally += "closing");
-			Var.close();
-			expect(tally).toBe("closing");
-		});
-
 		describe("operations on closed", () => {
 			beforeEach(() => Var.close());
-			it("is closed", () =>
-				expect(Var.isClosed).toBe(true));
 			it("can close again", () => Var.close());
 			it("throws on read", () => throwsClosed(() => Var.value));
 			it("throws on write", () => throwsClosed(() => Var.value = 1));
@@ -132,16 +122,14 @@ describe("scalars", () => {
 				expect(link1.value).toBe(2);
 			});
 
-			it("closes when link1 is closed", () => {
-				link2.closing.on(() => tally += "a");
+			it("link2 invalid when link1 is closed", () => {
 				link1.close();
-				expect(link2.isClosed).toBe(true);
-				expect(tally).toBe("a");
+				expect(() => link2.value).toThrow();
 			});
 
 			it("when link2 is closed, link1 works", () => {
 				link2.close();
-				expect(link1.isClosed).toBe(false);
+
 				link1.value = -1;
 				expect(link1.value).toBe(-1);
 				throwsClosed(() => link2.value);
@@ -168,8 +156,9 @@ describe("scalars", () => {
 
 				it("closing link2 has the right effect", () => {
 					link2.close();
-					expect(link1.isClosed).toBe(false);
-					expect(link3.isClosed).toBe(true);
+					let a = link1.value;
+					expect(() => link3.value).toThrow();
+
 					link1.value = 5;
 					expect(link1.value).toBe(5);
 				});
@@ -178,28 +167,32 @@ describe("scalars", () => {
 	});
 
 	describe("member", () => {
-		baseTests(x => Rexes.var_({a : x}).member_('a'));
-		let link1 = Rexes.var_({a : 1});
-		let link2 = link1.member_('a');
-		beforeEach(() => {
-			link1 = Rexes.var_({a : 1});
-			link2 = link1.member_('a');
-		});
-		describe("consistency tests", () => {
-			it("change propagates forward", () => {
-				link2.changed.on(x => tally += x.value);
-				link1.value = {a : 2};
-				expect(tally).toBe("2");
+		let memberTest = (memberMaker : (bs : RexScalar<{a : number}>) => RexScalar<any>) => {
+			baseTests(x => memberMaker(Rexes.var_({a : x})));
+			let link1 = Rexes.var_({a : 1});
+			let link2 = memberMaker(link1);
+			beforeEach(() => {
+				link1 = Rexes.var_({a : 1});
+				link2 = memberMaker(link1);
 			});
+			describe("consistency tests", () => {
+				it("change propagates forward", () => {
+					link2.changed.on(x => tally += x.value);
+					link1.value = {a : 2};
+					expect(tally).toBe("2");
+				});
 
-			it("change propagates back", () => {
-				link1.value = {a: 1, b : 2} as any;
-				link1.changed.on(x => tally += x.value.a);
-				link2.value = 5;
-				expect(tally).toBe("5");
-				expect((link1.value as any).b).toBe(2);
+				it("change propagates back", () => {
+					link1.value = {a: 1, b : 2} as any;
+					link1.changed.on(x => tally += x.value.a);
+					link2.value = 5;
+					expect(tally).toBe("5");
+					expect((link1.value as any).b).toBe(2);
+				});
 			});
-		});
+		}
+		memberTest(sc => sc.member_('a'));
+		memberTest(sc => sc.member_(x => x.a))
 	});
 
 	describe("notify", () => {

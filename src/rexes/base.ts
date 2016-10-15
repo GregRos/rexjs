@@ -1,6 +1,7 @@
 
 import {RexEvent} from "../";
 import {Errors} from '../errors';
+import {DummyEvent} from "../events/dummy-event";
 /**
  * Created by Greg on 01/10/2016.
  */
@@ -14,20 +15,23 @@ export interface IRexInfo {
 
 export abstract class Rex<TChange> {
 	private _isClosed : boolean = false;
+
 	abstract info : IRexInfo;
 	meta = {} as any;
 	depends = {} as any;
-	closing : RexEvent<void> = new RexEvent<void>("onClosing");
-	changed : RexEvent<TChange> = new RexEvent<TChange>("onChanged");
+	changed : RexEvent<TChange>;
 
-	get isClosed() {
+	constructor() {
+		this.changed = new RexEvent<TChange>("changed");
+	}
+
+
+	protected get isClosed() {
 		return this._isClosed;
 	}
 
 	close() {
 		this.changed.clear();
-		this.closing.fire(undefined);
-		this.closing.clear();
 		this._isClosed = true;
 	}
 

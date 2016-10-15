@@ -10,13 +10,12 @@ var RexScalar = (function (_super) {
     function RexScalar() {
         _super.apply(this, arguments);
     }
-    RexScalar.prototype.notifyChange = function (prevValue) {
+    RexScalar.prototype.notifyChange = function () {
         var self = this;
         this.changed.fire({
             get value() {
                 return self.value;
-            },
-            oldValue: prevValue
+            }
         });
     };
     RexScalar.prototype.toString = function () {

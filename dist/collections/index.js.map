@@ -1,0 +1,1 @@
+{"version":3,"sources":["collections/index.ts"],"names":[],"mappings":";;;;AAAA;;GAEG;AACH,iBAAc,iBAAiB,CAAC,EAAA","file":"collections/index.js","sourcesContent":["/**\r\n * Created by Greg on 14/10/2016.\r\n */\r\nexport * from './semi-weak-map';"],"sourceRoot":"/src"}

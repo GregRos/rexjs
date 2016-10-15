@@ -13,10 +13,13 @@ export class RexSilence<T> extends RexScalar<T> {
 		functional : false
 	};
 	private _token : Subscription;
-	constructor(private parent : RexScalar<T>, criterion : (change : ScalarChange<T>) => boolean) {
+
+	constructor(private parent : RexScalar<T>, criterion ?: (change : ScalarChange<T>) => boolean) {
 		super();
 		this.depends.source = parent;
-		this._token = parent.changed.on(x => !criterion(x) ? this.changed.fire(x) : void 0);
+		if (criterion) {
+			this._token = parent.changed.on(x => !criterion(x) ? this.changed.fire(x) : void 0);
+		}
 	}
 
 	get value() {

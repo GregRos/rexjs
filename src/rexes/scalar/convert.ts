@@ -18,7 +18,6 @@ let missing = {} as any;
 
 export class RexConvert<TFrom, TTo> extends RexScalar<TTo> {
 	private _last : TTo = missing;
-	private _otherSubs : Subscription;
 	private _parentSub : Subscription;
 	info : IRexInfo = {
 		type : RexNames.Convert,
@@ -30,13 +29,12 @@ export class RexConvert<TFrom, TTo> extends RexScalar<TTo> {
 		private parent : RexScalar<TFrom>, private conversion : Conversion<TFrom, TTo>) {
 		super();
 		this.depends.source = parent;
+
 		this._parentSub = parent.changed.on(() => {
 			let lastVal = this._last;
 			this._last = missing;
-			this.notifyChange(lastVal);
+			this.notifyChange();
 		});
-		let parentClose = parent.closing.on(() => this.close());
-		this._otherSubs = parentClose;
 	}
 
 	get value() {
@@ -63,12 +61,11 @@ export class RexConvert<TFrom, TTo> extends RexScalar<TTo> {
 		this._last = val;
 		let newVal = this.conversion.from(val);
 		this._parentSub.freezeWhile(() => this.parent.value = newVal);
-		this.notifyChange(prevVal);
+		this.notifyChange();
 	}
 
 	close() {
 		if (this.isClosed) return;
-		this._otherSubs.close();
 		this._parentSub.close();
 		super.close();
 	}

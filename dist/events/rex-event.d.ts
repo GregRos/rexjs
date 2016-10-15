@@ -1,6 +1,7 @@
 import { Subscription } from './subscription';
 export declare class RexEvent<TParam> {
     private _name;
+    private _invocList;
     /**
      * Constructs a new instance of the @RexEvent.
      * @constructor
@@ -12,11 +13,11 @@ export declare class RexEvent<TParam> {
      * @returns {string}
      */
     readonly name: string;
-    private _invocationList;
     /**
      * Attaches a handler to this event or subscribes to it. When the event will fire it will also fire the handler.
      * If the handler is a function, it's called, and if it's an event, it's fired.
      * @param handler The handler, which can be another event or a function.
+     * @param strong Whether the handler is registered as a weak or strong handler.
      * @returns {Subscription} A token that supports a close() method, upon which this subscription is cancelled.
      */
     on<S extends TParam>(handler: ((arg: S) => void) | RexEvent<S>): Subscription;

@@ -15,10 +15,12 @@ export class RexComputed<T> extends RexScalar<T> {
 	}
 
 	get value() {
+		this.makeSureNotClosed();
 		return this.onRead();
 	}
 
 	set value(x : T) {
+		this.makeSureNotClosed();
 		if (this.onWrite) {
 			this.onWrite(x);
 		}

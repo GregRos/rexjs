@@ -27,10 +27,8 @@ var RexConvert = (function (_super) {
         this._parentSub = parent.changed.on(function () {
             var lastVal = _this._last;
             _this._last = missing;
-            _this.notifyChange(lastVal);
+            _this.notifyChange();
         });
-        var parentClose = parent.closing.on(function () { return _this.close(); });
-        this._otherSubs = parentClose;
     }
     Object.defineProperty(RexConvert.prototype, "value", {
         get: function () {
@@ -57,7 +55,7 @@ var RexConvert = (function (_super) {
             this._last = val;
             var newVal = this.conversion.from(val);
             this._parentSub.freezeWhile(function () { return _this.parent.value = newVal; });
-            this.notifyChange(prevVal);
+            this.notifyChange();
         },
         enumerable: true,
         configurable: true
@@ -65,7 +63,6 @@ var RexConvert = (function (_super) {
     RexConvert.prototype.close = function () {
         if (this.isClosed)
             return;
-        this._otherSubs.close();
         this._parentSub.close();
         _super.prototype.close.call(this);
     };

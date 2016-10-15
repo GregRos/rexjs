@@ -12,9 +12,9 @@ export declare abstract class Rex<TChange> {
     abstract info: IRexInfo;
     meta: any;
     depends: any;
-    closing: RexEvent<void>;
     changed: RexEvent<TChange>;
-    readonly isClosed: boolean;
+    constructor();
+    protected readonly isClosed: boolean;
     close(): void;
     protected makeSureNotClosed(): void;
 }

@@ -11,7 +11,6 @@ export declare class RexConvert<TFrom, TTo> extends RexScalar<TTo> {
     private parent;
     private conversion;
     private _last;
-    private _otherSubs;
     private _parentSub;
     info: IRexInfo;
     constructor(parent: RexScalar<TFrom>, conversion: Conversion<TFrom, TTo>);

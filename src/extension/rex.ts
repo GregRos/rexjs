@@ -16,7 +16,7 @@ export module Rexes {
 	 * @returns {RexVar<T>} The Var object.
 	 */
 	export function var_<T>(initial : T) : RexScalar<T> {
-		return new RexVar<T>(initial);
+		return new RexVar<T>(initial, true, true);
 	}
 
 	/**

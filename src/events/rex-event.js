@@ -6,7 +6,6 @@ var _ = require('lodash');
 var subscription_1 = require('./subscription');
 /**
  * An event primitive used in the rexjs library. Allows the ability to subscribe to notifications.
- *
  */
 var freezeKey = "rexjs:RexEvent-frozen";
 var RexEvent = (function () {

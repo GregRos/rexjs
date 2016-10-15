@@ -1,7 +1,33 @@
 # rexjs - framework-agnostic data binding
 `rexjs` is a javascript library for reactive programming, data-binding, and value propagation that can be used from any framework or library in any context on any platform.
 
-If you're wondering what that means exactly, read on.
+## What's that mean?
+Have a look at this code:
+
+	let obj_ = Rexes.var_({a : 1});
+	let num_ = obj_.member_(x => x.a).convert_({to: x => x + 1, from: x => x - 1});
+	 
+	expect(num_.value).toBe(2); //because that's obj_.value.a + 1
+	
+	num_.value = 5;
+	expect(obj_.value).toBe({a : 4}); //updating num_ went back and updated the source, obj_!
+	
+	obj_.value = {a : 10}; //we can even update the whole object
+	expect(num_.value).toBe(11);
+
+That's what `rexjs` is all about!
+
+In the above example, `obj_` is a `Rex`, a kind of smart variable. It has a dynamic `value` property (e.g. one with getter and setter). You can then apply transformations to it to get other smart variables that remember their connection to the original `Rex` and update it accordingly when they change.
+
+`rexjs` is kind of like the ultimate form of framework-agnostic data-binding. It's similar in concept to all kinds of things, and is rather influenced by the [Scala.rx](https://github.com/lihaoyi/scala.rx) library, but it's pretty unique in its power and capabilities.
+
+## The art and science of change propagation
+`rexjs` is all about *change propagation*. It's also about *data-binding*, but that's a somewhat different story that we'll get into later.
+
+`rexjs` is about synchronizing change between different parts of your application. It's a light and transparent layer that keeps your program together.
+
+In `rexjs`, we model change propagation as sequences of transformations (called *rex transformations* on *Rexes*). These transformations 
+
 
 ## The Problem
 A modern web application (or any application, really) is composed (or should be composed) of a tree of interlinked components (or, in some cases, a graph of them). This is true whether you're writing it in React, Angular, or some other well-organized framework. It is definitely a Good Thing(tm).

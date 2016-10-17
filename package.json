@@ -4,21 +4,23 @@
   "description": "A library for smart variables and change notification.",
   "directories": {
     "bin": "dist",
-    "test" :"__test__",
-    "lib" : "dist"
+    "test": "__test__",
+    "lib": "dist"
   },
-  "files" : [
+  "files": [
     "dist/",
     "src/",
     "__test__/"
   ],
   "main": "dist/index.js",
-  "repository" : "https://github.com/GregRos/rexjs",
+  "repository": "https://github.com/GregRos/rexjs",
   "dependencies": {
     "core-js": "^2.4.1",
     "lodash": "^4.16.2"
   },
   "devDependencies": {
+    "core-decorators": "^0.13.0",
+    "del": "^2.2.2",
     "gulp": "^3.9.1",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-typescript": "^3.0.2",
@@ -39,7 +41,7 @@
     "event",
     "events"
   ],
-  "typings" : "dist/index",
+  "typings": "dist/index",
   "author": "Greg Ros",
   "license": "MIT"
 }

@@ -13,4 +13,5 @@ export declare module Errors {
     function closed(name: string): ClosedError;
     function cannotWrite(name: string): AccessError;
     function cannotRead(name: string): AccessError;
+    function alreadyBound(): Error;
 }

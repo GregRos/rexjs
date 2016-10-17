@@ -42,5 +42,9 @@ var Errors;
         return new AccessError(name, "read");
     }
     Errors.cannotRead = cannotRead;
+    function alreadyBound() {
+        return new Error("This binding already has a target. Bindings cannot be unseated.");
+    }
+    Errors.alreadyBound = alreadyBound;
 })(Errors = exports.Errors || (exports.Errors = {}));
 //# sourceMappingURL=index.js.map

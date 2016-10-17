@@ -268,6 +268,7 @@ describe("scalars", () => {
 				link1.value = 6;
 				expect(tally).toBe("1");
 			});
-		})
+		});
+
 	})
 });

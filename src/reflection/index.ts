@@ -2,7 +2,7 @@
  * Created by Greg on 14/10/2016.
  */
 import _ = require('lodash');
-export module ReflectHelper {
+export namespace ReflectHelper {
 	const memberAccessRegex = /\.([^.;]+);?\s*}?$/;
 	export function getMemberName(memberAccessFunction : Function) : string {
 		if (!_.isFunction(memberAccessFunction)) {

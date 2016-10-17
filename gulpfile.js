@@ -4,10 +4,17 @@
 var gulp = require('gulp');
 var ts = require('gulp-typescript');
 var merge = require('merge2');
+var del = require('del');
 var tsFiles = ['typings/*.*', 'src/**/*.tsx', 'src/**/*.ts', '!typings/*/*.*'];
 var watchToo = ['tsconfig.json'];
 var tsProject = ts.createProject('tsconfig.json', {'sourceMap' : true, 'declaration' : true});
 var sourcemaps = require('gulp-sourcemaps');
+gulp.task('clean-dist', () => {
+	return del([
+		'dist/**/*.*'
+	]);
+});
+
 gulp.task('compile-ts', () => {
 
 	var tsResult =
@@ -21,6 +28,6 @@ gulp.task('compile-ts', () => {
 	]);
 });
 
-gulp.task('watch', ['compile-ts'], () => {
-	gulp.watch(tsFiles.concat(watchToo), ['compile-ts'])
+gulp.task('watch', ['clean-dist', 'compile-ts'], () => {
+	gulp.watch(tsFiles.concat(watchToo), ['clean-dist', 'compile-ts'])
 });

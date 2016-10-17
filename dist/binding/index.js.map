@@ -1,0 +1,1 @@
+{"version":3,"sources":["binding/index.ts"],"names":[],"mappings":";;;;AAAA;;GAEG;AACH,iBAAc,kBAAkB,CAAC,EAAA;AACjC,iBAAc,gBAAgB,CAAC,EAAA","file":"binding/index.js","sourcesContent":["/**\r\n * Created by Greg on 16/10/2016.\r\n */\r\nexport * from './scalar-binding';\r\nexport * from './base-binding';"],"sourceRoot":"/src"}

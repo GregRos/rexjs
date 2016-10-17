@@ -24,8 +24,7 @@ export abstract class Rex<TChange> {
 	constructor() {
 		this.changed = new RexEvent<TChange>("changed");
 	}
-
-
+	
 	protected get isClosed() {
 		return this._isClosed;
 	}

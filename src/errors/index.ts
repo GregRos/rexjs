@@ -27,5 +27,9 @@ export module Errors {
 	export function cannotRead(name : string) {
 		return new AccessError(name, "read");
 	}
+
+	export function alreadyBound() {
+		return new Error("This binding already has a target. Bindings cannot be unseated.")
+	}
 }
 

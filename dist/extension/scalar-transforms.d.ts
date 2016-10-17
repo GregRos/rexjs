@@ -4,7 +4,7 @@ import { Rectifier } from "../rexes/scalar/rectify";
 /**
  * This file contains "extension methods" for RexScalar objects.
  */
-declare module '../rexes/scalar' {
+declare module '../rexes/scalar/base' {
     interface RexScalar<T> {
         /**
          * Applies a forward and back conversion to this Rex, returning a Convert rex.
@@ -59,15 +59,5 @@ declare module '../rexes/scalar' {
          * @param listeners The listeners to attach.
          */
         listen_(...listeners: ((change: ScalarChange<T>) => void)[]): any;
-        /**
-         * Clones the value and applies a mutation on the clone, then updates the Rex with it.
-         * @param mutation The mutation.
-         */
-        mutate(mutation: (copy: T) => void): void;
-        /**
-         * Takes a function that updates the current value of the Rex to another value.
-         * @param reducer The reducer.
-         */
-        reduce(reducer: (current: T) => T): void;
     }
 }

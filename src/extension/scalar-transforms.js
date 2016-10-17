@@ -84,16 +84,7 @@ var RexScalarExtensions = (function (_super) {
         this.changed.on(allCallbacks);
         return this;
     };
-    RexScalarExtensions.prototype.mutate = function (mutation) {
-        var copy = _.cloneDeep(this.value);
-        mutation(copy);
-        this.value = copy;
-    };
-    RexScalarExtensions.prototype.reduce = function (reducer) {
-        this.value = reducer(this.value);
-    };
     return RexScalarExtensions;
 }(scalar_1.RexScalar));
 reflection_1.ReflectHelper.mixin(scalar_1.RexScalar, RexScalarExtensions);
-
-//# sourceMappingURL=scalar.js.map
+//# sourceMappingURL=scalar-transforms.js.map

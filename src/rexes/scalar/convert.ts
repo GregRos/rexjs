@@ -1,4 +1,4 @@
-import {IScalarChangeInfo, RexScalar} from "./";
+import {RexScalar} from "./";
 import {Rex, IRexInfo} from "../base";
 import {RexNames} from "../names";
 import {Errors} from '../../errors';

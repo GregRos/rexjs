@@ -17,7 +17,7 @@ import {RexListen} from "../rexes/scalar/listen";
  * This file contains "extension methods" for RexScalar objects.
  */
 
-declare module '../rexes/scalar' {
+declare module '../rexes/scalar/base' {
 	export interface RexScalar<T> {
 		/**
 		 * Applies a forward and back conversion to this Rex, returning a Convert rex.
@@ -82,17 +82,7 @@ declare module '../rexes/scalar' {
 		 */
 		listen_(...listeners : ((change : ScalarChange<T>) => void)[]);
 
-		/**
-		 * Clones the value and applies a mutation on the clone, then updates the Rex with it.
-		 * @param mutation The mutation.
-		 */
-		mutate(mutation : (copy : T) => void) : void;
 
-		/**
-		 * Takes a function that updates the current value of the Rex to another value.
-		 * @param reducer The reducer.
-		 */
-		reduce(reducer : (current : T) => T) : void;
 	}
 }
 
@@ -156,16 +146,6 @@ abstract class RexScalarExtensions<T> extends RexScalar<T> {
 		};
 		this.changed.on(allCallbacks);
 		return this;
-	}
-
-	mutate(mutation : (copy : T) => void) : void {
-		let copy = _.cloneDeep(this.value);
-		mutation(copy);
-		this.value = copy;
-	}
-
-	reduce( reducer : (current : T) => T) {
-		this.value = reducer(this.value);
 	}
 }
 

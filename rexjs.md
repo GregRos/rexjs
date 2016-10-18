@@ -1,6 +1,8 @@
 # rexjs - framework-agnostic data binding
 `rexjs` is a javascript library for reactive programming, data-binding, and value propagation that can be used from any framework or library in any context on any platform.
 
+The library is currently in a development version.
+
 ## What's that mean?
 Have a look at this code:
 
@@ -88,6 +90,10 @@ In order to detach a rex from any external object and allow it to be garbage col
 		newRex.close();
 	}
 
+In a different language, Rex objects might be linked using weak references, but proper weak references don't exist in JavaScript.
+
+There are also specific options that allow you to mitigate the risk of leaky rexes.
+
 
 #### Transformation
 A *rex transformation* is used to create another Rex (e.g. a projection) out of an existing one. One such transformation is `convert_`. A transformation is a function with the signature:
@@ -96,87 +102,33 @@ A *rex transformation* is used to create another Rex (e.g. a projection) out of 
 
 Where `TInRex` is the type of the input 
 
-#### Connection
-When you create a projection
+## Binding
+Rexes support data binding. Data binding is when you synchronize the values of two independent rexes, so that change in one results in change in the other.
 
-A rex is either a *value source* or else a *value projection*. A rex that is a value source doesn't depend on any other rex for its value. A projection depends 
+This is achieved using an appropriate `Binding` object that subscribes to the change notifications of both rexes.
 
-## Rexpressions
-Rexpressions are entire sets of rexes, when seen together as a tree or graph. 
+Although bindings can in theory exist separately from anything else, in order to maintain order and minimize rex leakage they are somewhat restricted.
 
+Each binding has an `origin` and a `target`. A binding can be the `target` of a single binding but the origin of any number of bindings. This is ensured by a `binding` attribute every rex object possesses, which specifies the binding that targets it.
 
+In order to establish a binding between two scalar rexes, you need to do the following:
 
-## The art and science of change propagation
-`rexjs` is all about *change propagation*. It's also about *data-binding*, but that's a somewhat different story that we'll get into later.
+	let var1_ = Rexes.var_(1);
+	let var2_ = Rexes.var_(2);
+	let binding = var1_.binding = var2_.toBinding({
+		//binding parameters
+	});
 
-`rexjs` is about synchronizing change between different parts of your application. It's a light and transparent layer that keeps your program together.
+---
+**Important:** The `Binding` object created by the `toBinding` method kicks in when the `binding` attribute of another rex is set, and it establishes that rex as the target. The binding object cannot be re-targted. So for example the following throws an error:
 
-In `rexjs`, we model change propagation as sequences of transformations (called *rex transformations* on *Rexes*). These transformations 
-
-
-## The Problem
-A modern web application (or any application, really) is composed (or should be composed) of a tree of interlinked components (or, in some cases, a graph of them). This is true whether you're writing it in React, Angular, or some other well-organized framework. It is definitely a Good Thing(tm).
-
-Each component is generally responsible for working with or displaying some subset of the data of the whole tree, such as a text editor responsible for editting and displaying some text and a more complex `EmployeeEditor` that lets you edit the details of a whole `Employee` object.
-
-	interface Employee {
-		id : number;
-		name : string;
-	}
-
-Value propagation, then, is the art of moving values from parent components to child components, and sometimes between sibling components (if those exist), and synchronizing them when one of the components instigates a change (e.g. due to user interaction).
-
-With the increasing complexity of web applications, value propagation and change notification requires an increasingly large amount of boilerplate, which can be a potential source of bugs and other issues. You can probably imagine how much of this boilerplate is required when confronted with a diagram like this:
-
-![Employee-Company schema](http://image.prntscr.com/image/ff1adb0b474444c7a829148d5870a801.png)
-
-One chain if propagation looks like this:
-
-![Company->string propagation](http://image.prntscr.com/image/f5c5da298e254bba97ef30b11cc78b26.png)
-
-`rexjs` makes value propagation and change notification a simple and elegant affair. It works using smart variables called Rexes that you can transform using special functions.
-
-### Data binding
-Data binding is when you take that final value in the above example (a string) and synchronize it with another existing object, like a textbox, so that the textbox and the string are identical. 
-
-This is similar to the parent-child relationship above, in that a change in one should cause a change in the other.
-
-Not all frameworks use data binding. React, for example, works very well without it, because every change in an input element causes the whole view to be invalidated. Instead of needed code to synchronize a textbox and an `Employee`'s name, the value is eventually passed down again.
-
-`rexjs` supports data binding, but it is very useful without it, as value propagation is an issue in React as well as in other frameworks.
-
-## Rexes
-`rexjs` uses smart variables called `Rex`es to help propagate a value. It lets you apply complex transformations on it while retaining the link to the original, so that when one component along the chain of dependencies causes a change, all the components are notified correctly.
-
-The most basic `Rex` is the `var_` type, which is backed by a variable. Here are some examples of how it can be used:
-
-	let var_ = Rex.var_(1);
-	var_.value = 5;
-	let x = var_.value;
-
-The only thing that sets `Var` apart is that it has no parents.
+	let var3_ = Rexes.var_(3);
+	var3_.binding = binding;
+---
 	
-Using `var_` as a base, you can apply Rex transformations on it by calling other methods ending with an underscore to get Rex objects that rely on it:
 
-	//creates a RexConvert that transforms the number into a string and back again.
-	let string_ = var_.convert_(x => x.toString(), x => Number.parseFloat(x));
+The `binding` object created above contains information about the binding and can be closed by invoking its `close` method. Calling this method causes it to subscribe from both of the rexes it binds and also nullifies the `binding` attribute of the target.
 
-Here we've created a chain of Rexes that looks like this:
+Before a binding is first established between two rexes, they will usually have different values. Before anything else happens, they have to be synchronized.
 
-	number_ <=> string_
-
-Now if we update either of the two, the other will also be updated automatically:
-
-	number_.value = 5;
-	expect(string_.value).toBe("5");
-	string_.value = "10";
-	expect(number_.value).toBe(10);
-
-We can construct more and more elaborate chains of Rexes, or even entire trees of them. We can add another Rex as a child of `number_`:
-
-	let doubled_ = number_.convert(x => x * 2, x => x / 2);
-	doubled_.value = 10;
-	expect(number_.value).toBe(5);
-	expect(string_.value).toBe("5");
-	
-	
+In all cases, the value of the binding target will be synchronized with the value of the origin. This is part of the rationale for a rex to be the target of only one binding -- being the target of a binding essentially means your value is set by something else, and for the sake of consistency only one thing should do that.

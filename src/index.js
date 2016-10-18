@@ -2,6 +2,7 @@
 /**
  * Created by Greg on 01/10/2016.
  */
+require('chai');
 var events_1 = require('./events');
 exports.RexEvent = events_1.RexEvent;
 exports.Subscription = events_1.Subscription;

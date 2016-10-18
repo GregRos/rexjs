@@ -1,4 +1,5 @@
 import { Rex } from "../rexes/base";
+import { BindingAttributes } from "./index";
 /**
  * Created by Greg on 16/10/2016.
  */
@@ -16,22 +17,11 @@ export declare abstract class BaseBinding<TChange, TRex extends Rex<TChange>> {
      */
     private _targetToken;
     /**
-     * Whether the binding is currently updating itself. Used to avoid infinite recursion.
-     * @type {boolean}
-     * @private
-     */
-    private _isUpdating;
-    /**
      * Whether the binding has been disposed.
      * @type {boolean}
      * @readonly
      */
     readonly isClosed: boolean;
-    /**
-     * Whether the binding prioritizes the source or the origin.
-     * @readonly
-     */
-    readonly priority: BindPriority;
     /**
      * The origin of the binding.
      * @readonly
@@ -42,7 +32,7 @@ export declare abstract class BaseBinding<TChange, TRex extends Rex<TChange>> {
      * @readonly
      */
     readonly target: TRex;
-    constructor(origin: TRex, priority: BindPriority);
+    constructor(origin: TRex, attrs: BindingAttributes);
     /**
      * Returns true if the binding has been initialized, i.e. if it has been assigned a target.
      * @returns {boolean}

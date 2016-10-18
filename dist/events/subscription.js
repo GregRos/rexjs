@@ -75,7 +75,7 @@ var Subscription = (function () {
         this._members.unfreeze.call(this);
     };
     /**
-     * Performs the cleanup specified for the token. Multiple calls to this method do nothing.
+     * Closes the subscription managed by this token.
      */
     Subscription.prototype.close = function () {
         if (this._members) {
@@ -83,6 +83,13 @@ var Subscription = (function () {
             this._members = null;
         }
     };
+    Object.defineProperty(Subscription.prototype, "isClosed", {
+        get: function () {
+            return !this._members;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return Subscription;
 }());
 exports.Subscription = Subscription;

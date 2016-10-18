@@ -1,15 +1,22 @@
 "use strict";
 var errors_1 = require('../errors');
+var Chai_1 = require("~chai/lib/Chai");
 var BaseBinding = (function () {
-    function BaseBinding(origin) {
+    function BaseBinding(origin, attrs) {
+        this.origin = origin;
+    }
+    Object.defineProperty(BaseBinding.prototype, "isClosed", {
         /**
          * Whether the binding has been disposed.
          * @type {boolean}
          * @readonly
          */
-        this.isClosed = false;
-        this.origin = origin;
-    }
+        get: function () {
+            return !this.origin;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(BaseBinding.prototype, "isInitialized", {
         /**
          * Returns true if the binding has been initialized, i.e. if it has been assigned a target.
@@ -23,6 +30,9 @@ var BaseBinding = (function () {
     });
     BaseBinding.prototype._initialize = function (target) {
         var _this = this;
+        Chai_1.assert.isOk(target);
+        Chai_1.assert.isNotOk(this._targetToken);
+        Chai_1.assert.isNotOk(this._originToken);
         var _a = this, origin = _a.origin, isInitialized = _a.isInitialized;
         if (isInitialized) {
             throw errors_1.Errors.alreadyBound();
@@ -47,10 +57,13 @@ var BaseBinding = (function () {
         }
     };
     BaseBinding.prototype.close = function () {
-        var _a = this, _targetToken = _a._targetToken, _originToken = _a._originToken, target = _a.target;
+        var _a = this, _targetToken = _a._targetToken, _originToken = _a._originToken, target = _a.target, isClosed = _a.isClosed;
+        if (isClosed) {
+            return;
+        }
+        Chai_1.assert.isTrue(_originToken);
         _originToken.close();
-        _targetToken.close();
-        this.isClosed = true;
+        _targetToken && _targetToken.close();
     };
     return BaseBinding;
 }());

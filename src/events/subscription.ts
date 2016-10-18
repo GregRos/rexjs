@@ -83,13 +83,17 @@ export class Subscription implements ISubscription {
 	}
 
 	/**
-	 * Performs the cleanup specified for the token. Multiple calls to this method do nothing.
+	 * Closes the subscription managed by this token.
 	 */
 	close() {
 		if (this._members) {
 			this._members.close.call(this);
 			this._members = null;
 		}
+	}
+
+	get isClosed() {
+		return !this._members;
 	}
 }
 

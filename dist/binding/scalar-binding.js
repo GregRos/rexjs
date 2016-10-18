@@ -39,6 +39,17 @@ var ScalarBinding = (function (_super) {
             throw ex;
         }
     };
+    ScalarBinding.prototype._justClose = function () {
+        _super.prototype.close.call(this);
+    };
+    /**
+     * Disposes of this binding, also resetting the `binding` property of its target to null.
+     */
+    ScalarBinding.prototype.close = function () {
+        var target = this.target;
+        target._resetBinding();
+        _super.prototype.close.call(this);
+    };
     return ScalarBinding;
 }(base_binding_1.BaseBinding));
 exports.ScalarBinding = ScalarBinding;

@@ -37,9 +37,10 @@ export declare class Subscription implements ISubscription {
      */
     unfreeze(): void;
     /**
-     * Performs the cleanup specified for the token. Multiple calls to this method do nothing.
+     * Closes the subscription managed by this token.
      */
     close(): void;
+    readonly isClosed: boolean;
 }
 export declare class MultiSubscription extends Subscription {
     private _disposalList;

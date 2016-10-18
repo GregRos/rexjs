@@ -4,6 +4,10 @@ import {ReflectHelper} from '../reflection';
 import {Errors} from '../errors';
 import {readonly} from 'core-decorators';
 import {Rex} from "../rexes/base";
+import {BindingAttributes} from "./index";
+import {assert} from "~chai/lib/Chai";
+
+
 /**
  * Created by Greg on 16/10/2016.
  */
@@ -29,7 +33,9 @@ export abstract class BaseBinding<TChange, TRex extends Rex<TChange>> {
 	 * @type {boolean}
 	 * @readonly
 	 */
-	readonly isClosed = false;
+	get isClosed() {
+		return !this.origin;
+	}
 	/**
 	 * The origin of the binding.
 	 * @readonly
@@ -41,7 +47,7 @@ export abstract class BaseBinding<TChange, TRex extends Rex<TChange>> {
 	 */
 	readonly target: TRex;
 
-	constructor(origin: TRex) {
+	constructor(origin: TRex, attrs : BindingAttributes) {
 		this.origin = origin;
 	}
 
@@ -54,6 +60,10 @@ export abstract class BaseBinding<TChange, TRex extends Rex<TChange>> {
 	}
 
 	protected _initialize(target: TRex) : void {
+		assert.isOk(target);
+		assert.isNotOk(this._targetToken);
+		assert.isNotOk(this._originToken);
+
 		let {origin, isInitialized} = this;
 		if (isInitialized) {
 			throw Errors.alreadyBound();
@@ -83,9 +93,13 @@ export abstract class BaseBinding<TChange, TRex extends Rex<TChange>> {
 	protected abstract _rectify(source : ChangeSource, data : TChange);
 
 	close() {
-		let {_targetToken, _originToken, target}= this;
+
+		let {_targetToken, _originToken, target, isClosed}= this;
+		if (isClosed) {
+			return;
+		}
+		assert.isTrue(_originToken);
 		_originToken.close();
-		_targetToken.close();
-		(this as any).isClosed = true;
+		_targetToken && _targetToken.close();
 	}
 }

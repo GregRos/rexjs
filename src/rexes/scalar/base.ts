@@ -1,5 +1,5 @@
 import {Rex} from "../base";
-import {ScalarBinding} from '../../binding';
+import {ScalarBinding, BindingAttributes} from '../../binding';
 import {BindPriority} from "../../binding/base-binding";
 /**
  * Created by Greg on 17/10/2016.
@@ -45,8 +45,8 @@ export abstract class RexScalar<T> extends Rex<ScalarChange<T>> {
 		}
 	}
 
-	toBinding() {
-		return new ScalarBinding<T>(this);
+	toBinding(attrs : BindingAttributes ) {
+		return new ScalarBinding<T>(this, attrs);
 	}
 
 	toString() {

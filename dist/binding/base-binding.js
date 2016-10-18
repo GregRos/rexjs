@@ -1,22 +1,22 @@
 "use strict";
 var errors_1 = require('../errors');
+var Chai_1 = require("~chai/lib/Chai");
 var BaseBinding = (function () {
-    function BaseBinding(origin, priority) {
-        /**
-         * Whether the binding is currently updating itself. Used to avoid infinite recursion.
-         * @type {boolean}
-         * @private
-         */
-        this._isUpdating = false;
+    function BaseBinding(origin, attrs) {
+        this.origin = origin;
+    }
+    Object.defineProperty(BaseBinding.prototype, "isClosed", {
         /**
          * Whether the binding has been disposed.
          * @type {boolean}
          * @readonly
          */
-        this.isClosed = false;
-        this.origin = origin;
-        this.priority = priority;
-    }
+        get: function () {
+            return !this.origin;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(BaseBinding.prototype, "isInitialized", {
         /**
          * Returns true if the binding has been initialized, i.e. if it has been assigned a target.
@@ -30,38 +30,40 @@ var BaseBinding = (function () {
     });
     BaseBinding.prototype._initialize = function (target) {
         var _this = this;
-        var _a = this, priority = _a.priority, origin = _a.origin, isInitialized = _a.isInitialized;
+        Chai_1.assert.isOk(target);
+        Chai_1.assert.isNotOk(this._targetToken);
+        Chai_1.assert.isNotOk(this._originToken);
+        var _a = this, origin = _a.origin, isInitialized = _a.isInitialized;
         if (isInitialized) {
             throw errors_1.Errors.alreadyBound();
         }
-        if (priority === "target") {
-            this._onChange(null, target);
-        }
-        else if (priority === "origin") {
-            this._onChange(null, origin);
-        }
+        this._onChange(null, origin);
         //force-assign to this fake readonly property
         this.target = target;
         this._targetToken = target.changed.on(function (data) { return _this._onChange(data, target); });
         this._originToken = origin.changed.on(function (data) { return _this._onChange(data, origin); });
     };
     BaseBinding.prototype._onChange = function (data, notifier) {
-        var _a = this, _isUpdating = _a._isUpdating, origin = _a.origin, target = _a.target, isInitialized = _a.isInitialized, priority = _a.priority;
+        var _a = this, origin = _a.origin, target = _a.target, isInitialized = _a.isInitialized, _targetToken = _a._targetToken, _originToken = _a._originToken;
         if (!isInitialized) {
             return;
         }
-        if (_isUpdating) {
-            return;
+        [_targetToken, _originToken].forEach(function (x) { return x.freeze(); });
+        try {
+            this._rectify(notifier === origin ? "origin" : "target", data);
         }
-        this._isUpdating = true;
-        this._rectify(notifier === origin ? "origin" : "target", data);
-        this._isUpdating = false;
+        finally {
+            [_targetToken, _originToken].forEach(function (x) { return x.unfreeze(); });
+        }
     };
     BaseBinding.prototype.close = function () {
-        var _a = this, _targetToken = _a._targetToken, _originToken = _a._originToken;
+        var _a = this, _targetToken = _a._targetToken, _originToken = _a._originToken, target = _a.target, isClosed = _a.isClosed;
+        if (isClosed) {
+            return;
+        }
+        Chai_1.assert.isTrue(_originToken);
         _originToken.close();
-        _targetToken.close();
-        this.isClosed = true;
+        _targetToken && _targetToken.close();
     };
     return BaseBinding;
 }());

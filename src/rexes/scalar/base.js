@@ -24,14 +24,28 @@ var RexScalar = (function (_super) {
             return this._binding;
         },
         set: function (binding) {
-            binding._initialize(this);
-            this._binding = binding;
+            var _binding = this._binding;
+            if (_binding === binding) {
+                //handle self-assignment gracefully :)
+                return;
+            }
+            if (_binding) {
+                _binding._justClose();
+            }
+            this._resetBinding();
+            if (binding) {
+                binding._initialize(this);
+                this._binding = binding;
+            }
         },
         enumerable: true,
         configurable: true
     });
-    RexScalar.prototype.toBinding = function () {
-        return new binding_1.ScalarBinding(this);
+    RexScalar.prototype._resetBinding = function () {
+        this._binding = null;
+    };
+    RexScalar.prototype.toBinding = function (attrs) {
+        return new binding_1.ScalarBinding(this, attrs);
     };
     RexScalar.prototype.toString = function () {
         return "[RexScalar " + this.info.type + " " + this.value + "]";

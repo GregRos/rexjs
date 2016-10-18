@@ -30,8 +30,8 @@ export abstract class RexScalar<T> extends Rex<ScalarChange<T>> {
 		this._binding = binding;
 	}
 
-	toBinding(priority : BindPriority = "origin") {
-		return new ScalarBinding<T>(this, priority);
+	toBinding() {
+		return new ScalarBinding<T>(this);
 	}
 
 	toString() {

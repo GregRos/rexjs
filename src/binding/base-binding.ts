@@ -23,12 +23,6 @@ export abstract class BaseBinding<TChange, TRex extends Rex<TChange>> {
 	 * @private
 	 */
 	private _targetToken: Subscription;
-	/**
-	 * Whether the binding is currently updating itself. Used to avoid infinite recursion.
-	 * @type {boolean}
-	 * @private
-	 */
-	private _isUpdating = false;
 
 	/**
 	 * Whether the binding has been disposed.
@@ -36,12 +30,6 @@ export abstract class BaseBinding<TChange, TRex extends Rex<TChange>> {
 	 * @readonly
 	 */
 	readonly isClosed = false;
-
-	/**
-	 * Whether the binding prioritizes the source or the origin.
-	 * @readonly
-	 */
-	readonly priority: BindPriority;
 	/**
 	 * The origin of the binding.
 	 * @readonly
@@ -53,9 +41,8 @@ export abstract class BaseBinding<TChange, TRex extends Rex<TChange>> {
 	 */
 	readonly target: TRex;
 
-	constructor(origin: TRex, priority: BindPriority) {
+	constructor(origin: TRex) {
 		this.origin = origin;
-		this.priority = priority;
 	}
 
 	/**
@@ -67,15 +54,11 @@ export abstract class BaseBinding<TChange, TRex extends Rex<TChange>> {
 	}
 
 	protected _initialize(target: TRex) : void {
-		let {priority, origin, isInitialized} = this;
+		let {origin, isInitialized} = this;
 		if (isInitialized) {
 			throw Errors.alreadyBound();
 		}
-		if (priority === "target") {
-			this._onChange(null, target);
-		} else if (priority === "origin") {
-			this._onChange(null, origin)
-		}
+		this._onChange(null, origin);
 		//force-assign to this fake readonly property
 		(this as any).target = target;
 
@@ -83,17 +66,18 @@ export abstract class BaseBinding<TChange, TRex extends Rex<TChange>> {
 		this._originToken = origin.changed.on(data => this._onChange(data, origin));
 	}
 
-	private _onChange(data: TChange, notifier: TRex) {
-		let {_isUpdating, origin, target, isInitialized, priority} = this;
+	private _onChange(data: TChange, notifier: TRex) : void {
+		let {origin, target, isInitialized, _targetToken, _originToken} = this;
 		if (!isInitialized) {
 			return;
 		}
-		if (_isUpdating) {
-			return;
+		[_targetToken, _originToken].forEach(x => x.freeze());
+		try {
+			this._rectify(notifier === origin ? "origin" : "target", data);
 		}
-		this._isUpdating = true;
-		this._rectify(notifier === origin ? "origin" : "target", data);
-		this._isUpdating = false;
+		finally {
+			[_targetToken, _originToken].forEach(x => x.unfreeze());
+		}
 	}
 
 	protected abstract _rectify(source : ChangeSource, data : TChange);

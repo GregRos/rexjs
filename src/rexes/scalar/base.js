@@ -30,9 +30,8 @@ var RexScalar = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    RexScalar.prototype.toBinding = function (priority) {
-        if (priority === void 0) { priority = "origin"; }
-        return new binding_1.ScalarBinding(this, priority);
+    RexScalar.prototype.toBinding = function () {
+        return new binding_1.ScalarBinding(this);
     };
     RexScalar.prototype.toString = function () {
         return "[RexScalar " + this.info.type + " " + this.value + "]";

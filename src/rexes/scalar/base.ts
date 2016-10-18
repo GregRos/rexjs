@@ -9,8 +9,8 @@ export interface ScalarChange<T> {
 }
 
 export abstract class RexScalar<T> extends Rex<ScalarChange<T>> {
-	value : T;
-	_binding : ScalarBinding<T>;
+	abstract value : T;
+	private _binding : ScalarBinding<T>;
 
 	protected notifyChange() {
 		let self = this;
@@ -25,9 +25,24 @@ export abstract class RexScalar<T> extends Rex<ScalarChange<T>> {
 		return this._binding;
 	}
 
+	private _resetBinding() {
+		this._binding = null;
+	}
+
 	set binding(binding : ScalarBinding<T>) {
-		(binding as any)._initialize(this);
-		this._binding = binding;
+		let {_binding} = this;
+		if (_binding === binding) {
+			//handle self-assignment gracefully :)
+			return;
+		}
+		if (_binding) {
+			(_binding as any)._justClose();
+		}
+		this._resetBinding();
+		if (binding) {
+			(binding as any)._initialize(this);
+			this._binding = binding;
+		}
 	}
 
 	toBinding() {

@@ -29,4 +29,18 @@ export class ScalarBinding<T> extends BaseBinding<ScalarChange<T>, RexScalar<T>>
 			throw ex;
 		}
 	}
+
+	private _justClose() {
+		super.close();
+	}
+
+	/**
+	 * Disposes of this binding, also resetting the `binding` property of its target to null.
+	 */
+	close() {
+		let {target} = this;
+		(target as any)._resetBinding();
+		super.close();
+
+	}
 }

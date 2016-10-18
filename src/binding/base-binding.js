@@ -47,7 +47,7 @@ var BaseBinding = (function () {
         }
     };
     BaseBinding.prototype.close = function () {
-        var _a = this, _targetToken = _a._targetToken, _originToken = _a._originToken;
+        var _a = this, _targetToken = _a._targetToken, _originToken = _a._originToken, target = _a.target;
         _originToken.close();
         _targetToken.close();
         this.isClosed = true;

@@ -28,8 +28,6 @@ let baseTests = (ctor : <T>(init : T) => RexScalar<T>) => {
 			expect(Var.value).toBe(1);
 		});
 
-
-
 		it("notifies change", () => {
 			Var.changed.on(x => tally += "a");
 			Var.value = 1;
@@ -37,7 +35,6 @@ let baseTests = (ctor : <T>(init : T) => RexScalar<T>) => {
 		});
 
 		describe("does not notify change when set to current value", () => {
-
 			it("for numbers", () => {
 				let num_ = ctor(0);
 				num_.value = 0;

@@ -83,7 +83,7 @@ export abstract class BaseBinding<TChange, TRex extends Rex<TChange>> {
 	protected abstract _rectify(source : ChangeSource, data : TChange);
 
 	close() {
-		let {_targetToken, _originToken}= this;
+		let {_targetToken, _originToken, target}= this;
 		_originToken.close();
 		_targetToken.close();
 		(this as any).isClosed = true;

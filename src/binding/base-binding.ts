@@ -5,7 +5,7 @@ import {Errors} from '../errors';
 import {readonly} from 'core-decorators';
 import {Rex} from "../rexes/base";
 import {BindingAttributes} from "./index";
-import {assert} from "~chai/lib/Chai";
+import {assert} from "chai";
 
 
 /**

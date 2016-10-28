@@ -12,20 +12,20 @@ var tally = "";
 beforeEach(function () { return tally = ""; });
 var baseTests = function (ctor) {
     describe("basic tests", function () {
-        var Var = ctor(0);
+        var rex;
         beforeEach(function () {
-            Var = ctor(0);
+            rex = ctor(0);
         });
         it("can read", function () {
-            expect(Var.value).toBe(0);
+            expect(rex.value).toBe(0);
         });
         it("can write", function () {
-            Var.value = 1;
-            expect(Var.value).toBe(1);
+            rex.value = 1;
+            expect(rex.value).toBe(1);
         });
         it("notifies change", function () {
-            Var.changed.on(function (x) { return tally += "a"; });
-            Var.value = 1;
+            rex.changed.on(function (x) { return tally += "a"; });
+            rex.value = 1;
             expect(tally).toBe("a");
         });
         describe("does not notify change when set to current value", function () {
@@ -42,14 +42,14 @@ var baseTests = function (ctor) {
             });
         });
         describe("operations on closed", function () {
-            beforeEach(function () { return Var.close(); });
-            it("can close again", function () { return Var.close(); });
-            it("throws on read", function () { return throwsClosed(function () { return Var.value; }); });
-            it("throws on write", function () { return throwsClosed(function () { return Var.value = 1; }); });
+            beforeEach(function () { return rex.close(); });
+            it("can close again", function () { return rex.close(); });
+            it("throws on read", function () { return throwsClosed(function () { return rex.value; }); });
+            it("throws on write", function () { return throwsClosed(function () { return rex.value = 1; }); });
             it("can access passive props", function () {
-                Var.meta.name = "hi";
-                var x = Var.info.type;
-                var a = Var.depends;
+                rex.meta.name = "hi";
+                var x = rex.info.type;
+                var a = rex.depends;
             });
         });
         describe("special write operations", function () {
@@ -82,8 +82,8 @@ describe("scalars", function () {
     });
     describe("convert", function () {
         baseTests(function (x) { return src_1.Rexes.var_(x).convert_(function (x) { return x; }, function (x) { return x; }); });
-        var link1 = src_1.Rexes.var_(1);
-        var link2 = link1.convert_(function (x) { return x * 2; }, function (x) { return x / 2; });
+        var link1;
+        var link2;
         beforeEach(function () {
             link1 = src_1.Rexes.var_(1);
             link2 = link1.convert_(function (x) { return x * 2; }, function (x) { return x / 2; });
@@ -107,7 +107,7 @@ describe("scalars", function () {
             });
             it("link2 invalid when link1 is closed", function () {
                 link1.close();
-                expect(function () { return link2.value; }).toThrow();
+                expect(function () { return link2.value; }).toThrowError(index_1.ClosedError);
             });
             it("when link2 is closed, link1 works", function () {
                 link2.close();
@@ -119,7 +119,7 @@ describe("scalars", function () {
                 expect(link2.depends.source).toBe(link1);
             });
             describe("3 links", function () {
-                var link3 = link2.convert_(function (x) { return x * 2; }, function (x) { return x / 2; });
+                var link3;
                 beforeEach(function () {
                     link3 = link2.convert_(function (x) { return x * 2; }, function (x) { return x / 2; });
                 });
@@ -164,9 +164,47 @@ describe("scalars", function () {
                     expect(link1.value.b).toBe(2);
                 });
             });
+            describe("invalid definitions", function () {
+                it("throws when defining using a bad function", function () {
+                    expect(function () { return link1.member_(function (x) { return 5; }); }).toThrowError(TypeError);
+                });
+            });
         };
-        memberTest(function (sc) { return sc.member_('a'); });
-        memberTest(function (sc) { return sc.member_(function (x) { return x.a; }); });
+        baseTests(function (x) { return src_1.Rexes.var_({ a: x }).member_(function (x) { return x.a; }); });
+        var link1;
+        var link2;
+        beforeEach(function () {
+            link1 = src_1.Rexes.var_({ a: 1 });
+            link2 = link1.member_(function (x) { return x.a; });
+        });
+        describe("consistency tests", function () {
+            it("change propagates forward", function () {
+                link2.changed.on(function (x) { return tally += x.value; });
+                link1.value = { a: 2 };
+                expect(tally).toBe("2");
+            });
+            it("change propagates back", function () {
+                link1.value = { a: 1, b: 2 };
+                link1.changed.on(function (x) { return tally += x.value.a; });
+                link2.value = 5;
+                expect(tally).toBe("5");
+                expect(link1.value.b).toBe(2);
+            });
+        });
+        describe("throws errors correctly", function () {
+            it("throws when trying to pull undefined member", function () {
+                link1.value = { b: 1 };
+                expect(function () { return link2.value; }).toThrowError(TypeError);
+            });
+            it("throws when trying to push undefined member", function () {
+                link1.value = { b: 1 };
+                expect(function () { return link2.value = 2; }).toThrowError(TypeError);
+            });
+            it("works fine when member exists but equals undefined", function () {
+                link1.value = { a: undefined };
+                expect(link2.value).toBe(undefined);
+            });
+        });
     });
     describe("notify", function () {
         var notifier = new src_2.RexEvent();

@@ -1,6 +1,6 @@
 "use strict";
 var errors_1 = require('../errors');
-var Chai_1 = require("~chai/lib/Chai");
+var chai_1 = require("chai");
 var BaseBinding = (function () {
     function BaseBinding(origin, attrs) {
         this.origin = origin;
@@ -30,9 +30,9 @@ var BaseBinding = (function () {
     });
     BaseBinding.prototype._initialize = function (target) {
         var _this = this;
-        Chai_1.assert.isOk(target);
-        Chai_1.assert.isNotOk(this._targetToken);
-        Chai_1.assert.isNotOk(this._originToken);
+        chai_1.assert.isOk(target);
+        chai_1.assert.isNotOk(this._targetToken);
+        chai_1.assert.isNotOk(this._originToken);
         var _a = this, origin = _a.origin, isInitialized = _a.isInitialized;
         if (isInitialized) {
             throw errors_1.Errors.alreadyBound();
@@ -61,7 +61,7 @@ var BaseBinding = (function () {
         if (isClosed) {
             return;
         }
-        Chai_1.assert.isTrue(_originToken);
+        chai_1.assert.isTrue(_originToken);
         _originToken.close();
         _targetToken && _targetToken.close();
     };

@@ -1,4 +1,5 @@
 import {RexEvent, ISubscription} from "../src";
+import {Subscription} from "../src/events/subscription";
 /**
  * Created by Greg on 02/10/2016.
  */
@@ -7,47 +8,64 @@ import {RexEvent, ISubscription} from "../src";
 describe("events", () => {
 	let event = new RexEvent<number>();
 	let tally = "";
+	let sub : Subscription;
 	beforeEach(() => {
 		event.clear();
 		tally = "";
 	});
 
-	describe("basic subscribe/unsubscribe support", () => {
+	describe("empty event", () => {
+		it("should fire", () => {
+			event.fire(1);
+		});
+	});
 
+	describe("simple subscription", () => {
+		beforeEach(() => sub = event.on(x => tally += x));
 		it("should basic subscribe", () => {
-			event.on(x => tally += x);
 			event.fire(1);
 			expect(tally).toBe("1");
 		});
 
-		it("should subscribe multiple times", () => {
-			event.on(x => tally += x);
+		it("should subscribe twice", () => {
 			event.on(x => tally += -x);
 			event.fire(1);
 			expect(tally).toBe("1-1");
 		});
 
-		it("should unsubscribe correctly", () => {
-			let token = event.on(x => tally += x);
-			event.fire(1);
-			expect(tally).toBe("1");
-			token.close();
-			event.fire(1);
-			expect(tally).toBe("1");
-		});
+		describe("freezing", () => {
+			let sub2 : Subscription;
+			beforeEach(() => {
+				sub2 = event.on(x => tally += -x);
+			});
 
-		it("should unsubscribe correctly xN", () => {
-			let toks: ISubscription[] = [];
-			for (let i = 0; i < 10; i++) {
-				toks.push(event.on(x => tally += i));
-			}
-			event.fire(0);
-			expect(tally).toBe("0123456789");
-			tally = "";
-			toks[5].close();
-			event.fire(0);
-			expect(tally).toBe("012346789");
+			it("should freeze", () => {
+				sub2.freeze();
+				event.fire(1);
+				expect(tally).toBe("1");
+			});
 
+			it("freezing twice does nothing", () => {
+				sub2.freeze();
+				sub2.freeze();
+				event.fire(1);
+				expect(tally).toBe("1");
+			});
+
+			it("it should unfreeze", () => {
+				sub2.freeze();
+				event.fire(1);
+				sub2.unfreeze();
+				event.fire(1);
+				expect(tally).toBe("11-1");
+			});
+
+			it("unfreeze on unfrozen does nothing", () => {
+				sub.unfreeze();
+				sub.unfreeze();
+				event.fire(1);
+				expect(tally).toBe("1-1");
+			});
 		});
 	});
 

@@ -6,13 +6,25 @@
  */
 
 import _ = require("lodash");
+import {Errors, ClosedError} from '../errors';
 /**
  * Interface for abstracting over disposal tokens.
  */
 export interface ISubscription {
+	/**
+	 * Called when the subscription is closed. Will not be called on a closed subscription.
+	 */
 	close() : void;
-	freeze : () => void;
-	unfreeze : () => void;
+	/**
+	 * Called to freeze the subscription. While a subscription is frozen, the behavior is activates is disabled.
+	 * If called on a frozen subscription, should do nothing.
+	 */
+	freeze() : void;
+	/**
+	 * Called to unfreeze the subscription.
+	 * If called on an unfrozen subscription, should do nothing.
+	 */
+	unfreeze() : void;
 }
 
 /**
@@ -26,7 +38,6 @@ export class Subscription implements ISubscription {
 	 * Constructs a new subscription token.
 	 * @param members The actions this Subscription supports or just the Close action.
 	 */
-
 	constructor(members : ISubscription | (() => void)) {
 		if (_.isFunction(members)) {
 			this._members = {
@@ -50,7 +61,7 @@ export class Subscription implements ISubscription {
 
 	/**
 	 * Freezes this subscription, executes the action, and unfreezes it.
-	 * @param action
+	 * @param action An action to do while the subscription is frozen.
 	 */
 	freezeWhile(action : () => void) : void {
 		if (this._members) {
@@ -67,23 +78,28 @@ export class Subscription implements ISubscription {
 		let flat = _.flatten(arr);
 		return new MultiSubscription(flat);
 	}
-
 	/**
-	 * Freezes this subscription until it is unfrozen or closed.
+	 * Freezes this subscription until it is unfrozen or closed. Does nothing if the subscription is frozen or closed.
 	 */
 	freeze() : void{
+		if (this.isClosed) {
+			return;
+		}
 		this._members.freeze.call(this);
 	}
 
 	/**
-	 * Unfreezes the subscription if it's frozen.
+	 * Unfreezes the subscription if it's frozen. Does nothing if the subscription is not frozen or has been closed.
 	 */
 	unfreeze() {
+		if (this.isClosed) {
+			return;
+		}
 		this._members.unfreeze.call(this);
 	}
 
 	/**
-	 * Closes the subscription managed by this token.
+	 * Closes the subscription managed by this token. If called on a closed subscription, does nothing.
 	 */
 	close() {
 		if (this._members) {
@@ -92,6 +108,10 @@ export class Subscription implements ISubscription {
 		}
 	}
 
+	/**
+	 * Whether this subscription has been closed.
+	 * @returns {boolean}
+	 */
 	get isClosed() {
 		return !this._members;
 	}
@@ -104,12 +124,8 @@ export class MultiSubscription extends Subscription {
 		let close = () => list.forEach(x => x.close());
 		let freeze : () => void;
 		let unfreeze : () => void;
-		if (list.length === 0) {
-			freeze = unfreeze = () => {};
-		} else if (list.length === 1) {
-			freeze = () => list.forEach(x => x.freeze());
-			unfreeze = () => list.forEach(x => x.unfreeze());
-		}
+		freeze = () => list.forEach(x => x.freeze());
+		unfreeze = () => list.forEach(x => x.unfreeze());
 		super({
 			freeze : freeze,
 			unfreeze : unfreeze,

@@ -31,5 +31,10 @@ export module Errors {
 	export function alreadyBound() {
 		return new Error("This binding already has a target. Bindings cannot be unseated.")
 	}
+
+	export function memberNotFound(name : string, obj : any) {
+		return new TypeError(`The member ${name} does not exist in object ${obj}.`);
+	}
+
 }
 

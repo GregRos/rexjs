@@ -45,7 +45,7 @@ var Subscription = (function () {
     };
     /**
      * Freezes this subscription, executes the action, and unfreezes it.
-     * @param action
+     * @param action An action to do while the subscription is frozen.
      */
     Subscription.prototype.freezeWhile = function (action) {
         if (this._members) {
@@ -63,19 +63,25 @@ var Subscription = (function () {
         return new MultiSubscription(flat);
     };
     /**
-     * Freezes this subscription until it is unfrozen or closed.
+     * Freezes this subscription until it is unfrozen or closed. Does nothing if the subscription is frozen or closed.
      */
     Subscription.prototype.freeze = function () {
+        if (this.isClosed) {
+            return;
+        }
         this._members.freeze.call(this);
     };
     /**
-     * Unfreezes the subscription if it's frozen.
+     * Unfreezes the subscription if it's frozen. Does nothing if the subscription is not frozen or has been closed.
      */
     Subscription.prototype.unfreeze = function () {
+        if (this.isClosed) {
+            return;
+        }
         this._members.unfreeze.call(this);
     };
     /**
-     * Closes the subscription managed by this token.
+     * Closes the subscription managed by this token. If called on a closed subscription, does nothing.
      */
     Subscription.prototype.close = function () {
         if (this._members) {
@@ -84,6 +90,10 @@ var Subscription = (function () {
         }
     };
     Object.defineProperty(Subscription.prototype, "isClosed", {
+        /**
+         * Whether this subscription has been closed.
+         * @returns {boolean}
+         */
         get: function () {
             return !this._members;
         },
@@ -99,13 +109,8 @@ var MultiSubscription = (function (_super) {
         var close = function () { return list.forEach(function (x) { return x.close(); }); };
         var freeze;
         var unfreeze;
-        if (list.length === 0) {
-            freeze = unfreeze = function () { };
-        }
-        else if (list.length === 1) {
-            freeze = function () { return list.forEach(function (x) { return x.freeze(); }); };
-            unfreeze = function () { return list.forEach(function (x) { return x.unfreeze(); }); };
-        }
+        freeze = function () { return list.forEach(function (x) { return x.freeze(); }); };
+        unfreeze = function () { return list.forEach(function (x) { return x.unfreeze(); }); };
         _super.call(this, {
             freeze: freeze,
             unfreeze: unfreeze,

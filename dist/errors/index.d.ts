@@ -14,4 +14,5 @@ export declare module Errors {
     function cannotWrite(name: string): AccessError;
     function cannotRead(name: string): AccessError;
     function alreadyBound(): Error;
+    function memberNotFound(name: string, obj: any): TypeError;
 }

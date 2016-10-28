@@ -6,44 +6,56 @@ var src_1 = require("../src");
 describe("events", function () {
     var event = new src_1.RexEvent();
     var tally = "";
+    var sub;
     beforeEach(function () {
         event.clear();
         tally = "";
     });
-    describe("basic subscribe/unsubscribe support", function () {
+    describe("empty event", function () {
+        it("should fire", function () {
+            event.fire(1);
+        });
+    });
+    describe("simple subscription", function () {
+        beforeEach(function () { return sub = event.on(function (x) { return tally += x; }); });
         it("should basic subscribe", function () {
-            event.on(function (x) { return tally += x; });
             event.fire(1);
             expect(tally).toBe("1");
         });
-        it("should subscribe multiple times", function () {
-            event.on(function (x) { return tally += x; });
+        it("should subscribe twice", function () {
             event.on(function (x) { return tally += -x; });
             event.fire(1);
             expect(tally).toBe("1-1");
         });
-        it("should unsubscribe correctly", function () {
-            var token = event.on(function (x) { return tally += x; });
-            event.fire(1);
-            expect(tally).toBe("1");
-            token.close();
-            event.fire(1);
-            expect(tally).toBe("1");
-        });
-        it("should unsubscribe correctly xN", function () {
-            var toks = [];
-            var _loop_1 = function(i) {
-                toks.push(event.on(function (x) { return tally += i; }));
-            };
-            for (var i = 0; i < 10; i++) {
-                _loop_1(i);
-            }
-            event.fire(0);
-            expect(tally).toBe("0123456789");
-            tally = "";
-            toks[5].close();
-            event.fire(0);
-            expect(tally).toBe("012346789");
+        describe("freezing", function () {
+            var sub2;
+            beforeEach(function () {
+                sub2 = event.on(function (x) { return tally += -x; });
+            });
+            it("should freeze", function () {
+                sub2.freeze();
+                event.fire(1);
+                expect(tally).toBe("1");
+            });
+            it("freezing twice does nothing", function () {
+                sub2.freeze();
+                sub2.freeze();
+                event.fire(1);
+                expect(tally).toBe("1");
+            });
+            it("it should unfreeze", function () {
+                sub2.freeze();
+                event.fire(1);
+                sub2.unfreeze();
+                event.fire(1);
+                expect(tally).toBe("11-1");
+            });
+            it("unfreeze on unfrozen does nothing", function () {
+                sub.unfreeze();
+                sub.unfreeze();
+                event.fire(1);
+                expect(tally).toBe("1-1");
+            });
         });
     });
     describe("event subscribe/unsubscribe support", function () {

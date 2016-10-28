@@ -13,24 +13,24 @@ let tally = "";
 beforeEach(() => tally = "");
 let baseTests = (ctor : <T>(init : T) => RexScalar<T>) => {
 	describe("basic tests", () => {
-		let Var = ctor(0);
+		let rex : RexScalar<number>;
 
 		beforeEach(() => {
-			Var = ctor(0)
+			rex = ctor(0)
 		});
 
 		it("can read", () => {
-			expect(Var.value).toBe(0);
+			expect(rex.value).toBe(0);
 		});
 
 		it("can write", () => {
-			Var.value = 1;
-			expect(Var.value).toBe(1);
+			rex.value = 1;
+			expect(rex.value).toBe(1);
 		});
 
 		it("notifies change", () => {
-			Var.changed.on(x => tally += "a");
-			Var.value = 1;
+			rex.changed.on(x => tally += "a");
+			rex.value = 1;
 			expect(tally).toBe("a");
 		});
 
@@ -49,14 +49,14 @@ let baseTests = (ctor : <T>(init : T) => RexScalar<T>) => {
 		});
 
 		describe("operations on closed", () => {
-			beforeEach(() => Var.close());
-			it("can close again", () => Var.close());
-			it("throws on read", () => throwsClosed(() => Var.value));
-			it("throws on write", () => throwsClosed(() => Var.value = 1));
+			beforeEach(() => rex.close());
+			it("can close again", () => rex.close());
+			it("throws on read", () => throwsClosed(() => rex.value));
+			it("throws on write", () => throwsClosed(() => rex.value = 1));
 			it("can access passive props", () => {
-				Var.meta.name = "hi";
-				let x = Var.info.type;
-				let a = Var.depends;
+				rex.meta.name = "hi";
+				let x = rex.info.type;
+				let a = rex.depends;
 			});
 		});
 
@@ -92,8 +92,8 @@ describe("scalars", () => {
 
 	describe("convert", () => {
 		baseTests(x => Rexes.var_(x).convert_(x => x, x => x));
-		let link1 = Rexes.var_(1);
-		let link2 = link1.convert_(x => x * 2, x => x / 2);
+		let link1 : RexScalar<number>;
+		let link2 : RexScalar<number>
 
 		beforeEach(() => {
 			link1 = Rexes.var_(1);
@@ -121,12 +121,11 @@ describe("scalars", () => {
 
 			it("link2 invalid when link1 is closed", () => {
 				link1.close();
-				expect(() => link2.value).toThrow();
+				expect(() => link2.value).toThrowError(ClosedError);
 			});
 
 			it("when link2 is closed, link1 works", () => {
 				link2.close();
-
 				link1.value = -1;
 				expect(link1.value).toBe(-1);
 				throwsClosed(() => link2.value);
@@ -137,7 +136,7 @@ describe("scalars", () => {
 			});
 
 			describe("3 links", () => {
-				let link3 = link2.convert_(x => x * 2, x => x / 2);
+				let link3 : RexScalar<number>;
 				beforeEach(() => {
 					link3 = link2.convert_(x => x * 2, x => x / 2);
 				});
@@ -187,9 +186,54 @@ describe("scalars", () => {
 					expect((link1.value as any).b).toBe(2);
 				});
 			});
-		}
-		memberTest(sc => sc.member_('a'));
-		memberTest(sc => sc.member_(x => x.a))
+
+			describe("invalid definitions", () => {
+				it("throws when defining using a bad function", () => {
+					expect(() => link1.member_(x => 5)).toThrowError(TypeError);
+				})
+			})
+		};
+
+		baseTests(x => Rexes.var_({a : x}).member_(x => x.a));
+		let link1 : RexScalar<{a : number}>;
+		let link2 : RexScalar<number>;
+		beforeEach(() => {
+			link1 = Rexes.var_({a : 1});
+			link2 = link1.member_(x => x.a);
+		});
+
+		describe("consistency tests", () => {
+			it("change propagates forward", () => {
+				link2.changed.on(x => tally += x.value);
+				link1.value = {a : 2};
+				expect(tally).toBe("2");
+			});
+
+			it("change propagates back", () => {
+				link1.value = {a: 1, b : 2} as any;
+				link1.changed.on(x => tally += x.value.a);
+				link2.value = 5;
+				expect(tally).toBe("5");
+				expect((link1.value as any).b).toBe(2);
+			});
+		});
+
+		describe("throws errors correctly", () => {
+			it("throws when trying to pull undefined member", () => {
+				link1.value = {b : 1} as any;
+				expect(() => link2.value).toThrowError(TypeError);
+			});
+
+			it("throws when trying to push undefined member", () => {
+				link1.value = {b : 1} as any;
+				expect(() => link2.value = 2).toThrowError(TypeError);
+			});
+
+			it("works fine when member exists but equals undefined", () => {
+				link1.value = {a : undefined};
+				expect(link2.value).toBe(undefined);
+			});
+		});
 	});
 
 	describe("notify", () => {

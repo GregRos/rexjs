@@ -46,6 +46,10 @@ var Errors;
         return new Error("This binding already has a target. Bindings cannot be unseated.");
     }
     Errors.alreadyBound = alreadyBound;
+    function memberNotFound(name, obj) {
+        return new TypeError("The member " + name + " does not exist in object " + obj + ".");
+    }
+    Errors.memberNotFound = memberNotFound;
 })(Errors = exports.Errors || (exports.Errors = {}));
 
 //# sourceMappingURL=index.js.map
